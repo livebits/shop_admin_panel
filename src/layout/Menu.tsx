@@ -14,6 +14,8 @@ import categories from '../categories';
 import reviews from '../reviews';
 import SubMenu from './SubMenu';
 import { AppState } from '../types';
+import { getResources } from 'react-admin';
+import DefaultIcon from '@material-ui/icons/ViewList';
 
 type MenuName = 'menuCatalog' | 'menuSales' | 'menuCustomers';
 
@@ -29,6 +31,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         menuSales: false,
         menuCustomers: false,
     });
+    const resources:any = useSelector(getResources);
     const translate = useTranslate();
     const isXSmall = useMediaQuery((theme: Theme) =>
         theme.breakpoints.down('xs')
@@ -43,8 +46,23 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
     return (
         <div>
             {' '}
-            <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
-            <SubMenu
+            {/* <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} /> */}
+            {resources.map((resource:any) => (
+                <MenuItemLink
+                    key={resource.name}
+                    to={`/${resource.name}`}
+                    primaryText={
+                        (resource.options && resource.options.label) ||
+                        resource.name
+                    }
+                    leftIcon={
+                        resource.icon ? <resource.icon /> : <DefaultIcon />
+                    }
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                />
+            ))}
+            {/* <SubMenu
                 handleToggle={() => handleToggle('menuSales')}
                 isOpen={state.menuSales}
                 sidebarIsOpen={open}
@@ -140,7 +158,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 onClick={onMenuClick}
                 sidebarIsOpen={open}
                 dense={dense}
-            />
+            /> */}
             {isXSmall && (
                 <MenuItemLink
                     to="/configuration"

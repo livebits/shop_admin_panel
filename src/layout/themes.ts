@@ -1,4 +1,5 @@
 export const darkTheme = {
+    direction: 'rtl',
     palette: {
         primary: {
             main: '#90caf9',
@@ -8,6 +9,7 @@ export const darkTheme = {
 };
 
 export const lightTheme = {
+    direction: 'rtl',
     palette: {
         primary: {
             main: '#4f3cc9',
@@ -24,6 +26,14 @@ export const lightTheme = {
     },
     shape: {
         borderRadius: 10,
+    },
+    typography: {
+        fontFamily: [
+            'IRANSans',
+            'Arial',
+            '"Segoe UI"',
+            'sans-serif',
+        ].join(','),
     },
     overrides: {
         RaMenuItemLink: {

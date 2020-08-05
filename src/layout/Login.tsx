@@ -16,7 +16,6 @@ import LockIcon from '@material-ui/icons/Lock';
 
 import { Notification } from 'react-admin';
 import { useTranslate, useLogin, useNotify } from 'ra-core';
-import { lightTheme } from './themes';
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -25,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         minHeight: '100vh',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        background: 'url(https://source.unsplash.com/random/1600x900)',
+        // background: 'url(https://source.unsplash.com/random/1600x900)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
@@ -188,7 +187,66 @@ Login.propTypes = {
 // Because otherwise the useStyles() hook used in Login won't get
 // the right theme
 const LoginWithTheme = (props: any) => (
-    <ThemeProvider theme={createMuiTheme(lightTheme)}>
+    <ThemeProvider theme={createMuiTheme({
+        direction: 'rtl',
+        palette: {
+            primary: {
+                main: '#4f3cc9',
+            },
+            secondary: {
+                light: '#5f5fc4',
+                main: '#283593',
+                dark: '#001064',
+                contrastText: '#fff',
+            },
+            background: {
+                default: '#fcfcfe',
+            },
+        },
+        shape: {
+            borderRadius: 10,
+        },
+        overrides: {
+            MuiPaper: {
+                elevation1: {
+                    boxShadow: 'none',
+                },
+                root: {
+                    border: '1px solid #e0e0e3',
+                    backgroundClip: 'padding-box',
+                },
+            },
+            MuiButton: {
+                contained: {
+                    backgroundColor: '#fff',
+                    color: '#4f3cc9',
+                    boxShadow: 'none',
+                },
+            },
+            MuiAppBar: {
+                colorSecondary: {
+                    color: '#808080',
+                    backgroundColor: '#fff',
+                },
+            },
+            MuiLinearProgress: {
+                colorPrimary: {
+                    backgroundColor: '#f5f5f5',
+                },
+                barColorPrimary: {
+                    backgroundColor: '#d7d7d7',
+                },
+            },
+            MuiFilledInput: {
+                root: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    '&$disabled': {
+                        backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    },
+                },
+            },
+        },
+    })}>
         <Login {...props} />
     </ThemeProvider>
 );
