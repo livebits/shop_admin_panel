@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { fetchUtils, Admin, Resource, ListGuesser } from 'react-admin';
+import { fetchUtils, Admin, Resource, ListGuesser, EditGuesser } from 'react-admin';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 
 import './App.css';
@@ -11,19 +11,27 @@ import { Login, Layout } from './layout';
 import { Dashboard } from './dashboard';
 import customRoutes from './routes';
 
+import managers from './components/managers';
 import visitors from './visitors';
 import orders from './orders';
 import products from './products';
 import invoices from './invoices';
-import categories from './categories';
+// import categories from './categories';
 import reviews from './reviews';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
-import crudProvider from '@fusionworks/ra-data-nest-crud'
 
 import dataProviderFactory from './dataProvider';
 import farsiMessages from 'ra-language-farsi';
+import customers from './components/customers';
+import tenants from './components/tenants';
+import roles from './components/roles';
+import actions from './components/actions';
+import brands from './components/brands';
+import categories from './components/categories';
+import departments from './components/departments';
+import discounts from './components/discounts';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'en') {
@@ -39,7 +47,6 @@ const i18nProvider = polyglotI18nProvider(locale => {
 
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
-console.log(process.env);
 
 export const API_URL = process.env.REACT_APP_SERVER_ADDRESS
 
@@ -86,7 +93,17 @@ const App = () => {
                 layout={Layout}
                 i18nProvider={i18nProvider}
             >
-                <Resource name="users" list={ListGuesser} />
+                <Resource name="managers" label="Managers" {...managers} />
+                <Resource name="customers" label="Customers" {...customers} />
+                <Resource name="tenants" label="Tenants" {...tenants} />
+                <Resource name="roles" label="Roles" {...roles} />
+                <Resource name="actions" label="Actions" {...actions} />
+                <Resource name="brands" label="Brands" {...brands} />
+                <Resource name="categories" label="Categories" {...categories} />
+                <Resource name="departments" label="Departments" {...departments} />
+                <Resource name="discounts" label="Discounts" {...discounts} />
+                <Resource name="messages" list={ListGuesser} edit={EditGuesser} />
+                {/* <Resource name="roles" list={ListGuesser} /> */}
                 {/* <Resource name="customers" {...visitors} />
                 <Resource
                     name="commands"

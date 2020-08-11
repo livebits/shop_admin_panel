@@ -24,7 +24,7 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
     return filter;
   };
 
-  const convertDataRequestToHTTP = (type:any, resource:any, params:any) => {
+  const convertDataRequestToHTTP = (type:any, resource:string, params:any) => {
     let url = '';
     const options:any = {};
     switch (type) {
@@ -110,8 +110,8 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
     return { url, options };
   };
 
-  const convertHTTPResponse = (response:any, type:any, resource:any, params:any) => {
-    const { headers, json } = response;
+  const convertHTTPResponse = (response:any, type:any, resource:string, params:any) => {
+    const { headers, json } = response;    
     switch (type) {
       case reactAdmin.GET_LIST:
       case reactAdmin.GET_MANY_REFERENCE:
@@ -121,12 +121,20 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
         };
       case reactAdmin.CREATE:
         return { data: { ...params.data, id: json.id } };
+      case reactAdmin.DELETE:
+        return { data: { id: params.id } };
       default:
         return { data: json };
     }
   };
 
-  return (type:any, resource:any, params:any) => {
+  return (type:any, resource:string, params:any) => {
+
+    // Translate resources
+    if (resource === 'managers' || resource === 'customers') {
+      resource = 'users';
+    }
+
     if (type === reactAdmin.UPDATE_MANY) {
       return Promise.all(
         params.ids.map((id:any) => httpClient(`${apiUrl}/${resource}/${id}`, {

@@ -22,6 +22,8 @@ export interface AppState extends ReduxState {
 
 export interface Category extends Record {
     name: string;
+    description: string;
+    logo: string;
 }
 
 export interface Product extends Record {
