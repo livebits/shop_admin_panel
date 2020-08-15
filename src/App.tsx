@@ -14,7 +14,7 @@ import customRoutes from './routes';
 import managers from './components/managers';
 import visitors from './visitors';
 import orders from './orders';
-import products from './products';
+// import products from './products';
 import invoices from './invoices';
 // import categories from './categories';
 import reviews from './reviews';
@@ -32,6 +32,9 @@ import brands from './components/brands';
 import categories from './components/categories';
 import departments from './components/departments';
 import discounts from './components/discounts';
+import messages from './components/messages';
+import productFields from './components/productFields';
+import products from './components/products';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'en') {
@@ -102,8 +105,10 @@ const App = () => {
                 <Resource name="categories" label="Categories" {...categories} />
                 <Resource name="departments" label="Departments" {...departments} />
                 <Resource name="discounts" label="Discounts" {...discounts} />
-                <Resource name="messages" list={ListGuesser} edit={EditGuesser} />
-                {/* <Resource name="roles" list={ListGuesser} /> */}
+                <Resource name="messages" label="Messages" {...messages} />
+                {/* <Resource name="tenant-product-fields" label="ProductFields" {...productFields} /> */}
+                <Resource name="products" label="Products" {...products} />
+                {/* <Resource name="roles" list={ListGuesser} edit={EditGuesser} /> */}
                 {/* <Resource name="customers" {...visitors} />
                 <Resource
                     name="commands"
@@ -113,6 +118,8 @@ const App = () => {
                 <Resource name="products" {...products} />
                 <Resource name="categories" {...categories} />
                 <Resource name="reviews" {...reviews} /> */}
+
+                <Resource name="category-fields" />
             </Admin>
         </StylesProvider>
     );

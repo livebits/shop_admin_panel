@@ -11,6 +11,8 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
     }
 
     const flatFilter = reactAdmin.fetchUtils.flattenObject(paramsFilter);
+    console.log('>>>', flatFilter);
+    
     const filter = Object.keys(flatFilter).map(key => {
       const splitKey = key.split('||');
       const ops = splitKey[1] ? splitKey[1] : 'cont';
@@ -42,6 +44,12 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
           .query();
 
         url = `${apiUrl}/${resource}?${query}`;
+
+        if (resource === 'category-fields') {
+          console.log('param:', params);
+          
+          url = `${apiUrl}/category/${params.categoryId}/category-fields`;
+        } 
 
         break;
       }
@@ -111,7 +119,7 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
   };
 
   const convertHTTPResponse = (response:any, type:any, resource:string, params:any) => {
-    const { headers, json } = response;    
+    const { headers, json } = response;
     switch (type) {
       case reactAdmin.GET_LIST:
       case reactAdmin.GET_MANY_REFERENCE:
@@ -123,6 +131,31 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
         return { data: { ...params.data, id: json.id } };
       case reactAdmin.DELETE:
         return { data: { id: params.id } };
+      case reactAdmin.GET_ONE:
+        if (resource === 'products') {
+
+          if (json.prosAndCons !== null && json.prosAndCons !== undefined) {
+            json['pros'] = json.prosAndCons.pros.map((pro:string) => (
+              {
+                value: pro
+              }
+            ))
+  
+            json['cons'] = json.prosAndCons.cons.map((con:string) => (
+              {
+                value: con
+              }
+            ))
+          }
+
+          if (json.productCategoryFields !== null && json.productCategoryFields !== undefined) {
+            json.productCategoryFields.forEach((pcf:any) => {
+              json['cf_' + pcf.categoryFieldId] = pcf.value
+            })
+          }
+          
+        }
+        return { data: json };
       default:
         return { data: json };
     }
