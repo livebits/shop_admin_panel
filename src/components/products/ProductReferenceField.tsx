@@ -8,16 +8,16 @@ const ProductReferenceField: FC<
 > = props => (
     <ReferenceField
         label="Product"
-        source="product_id"
+        source="productId"
         reference="products"
         {...props}
     >
-        <TextField source="reference" />
+        <TextField source="id" />
     </ReferenceField>
 );
 
 ProductReferenceField.defaultProps = {
-    source: 'product_id',
+    source: 'productId',
     addLabel: true,
 };
 

@@ -2,7 +2,7 @@ import green from '@material-ui/core/colors/green';
 import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
 import { Theme } from '@material-ui/core';
-import { Review } from './../types';
+import { Review } from './../../types';
 import { Identifier } from 'ra-core';
 
 const rowStyle = (selectedRow: Identifier, theme: Theme) => (

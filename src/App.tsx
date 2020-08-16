@@ -17,7 +17,7 @@ import orders from './orders';
 // import products from './products';
 import invoices from './invoices';
 // import categories from './categories';
-import reviews from './reviews';
+
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
@@ -35,6 +35,7 @@ import discounts from './components/discounts';
 import messages from './components/messages';
 import productFields from './components/productFields';
 import products from './components/products';
+import reviews from './components/reviews';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'en') {
@@ -107,6 +108,7 @@ const App = () => {
                 <Resource name="discounts" label="Discounts" {...discounts} />
                 <Resource name="messages" label="Messages" {...messages} />
                 <Resource name="products" label="Products" {...products} />
+                <Resource name="product-comments" {...reviews} />
                 {/* <Resource name="roles" list={ListGuesser} edit={EditGuesser} /> */}
                 {/* <Resource name="customers" {...visitors} />
                 <Resource

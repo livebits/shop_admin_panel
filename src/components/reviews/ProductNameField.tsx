@@ -3,7 +3,8 @@ import { FC, memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import AvatarField from './AvatarField';
-import { FieldProps, Customer } from '../types';
+import { FieldProps, Customer } from '../../types';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,23 +23,20 @@ interface Props extends FieldProps<Customer> {
     size?: string;
 }
 
-const FullNameField: FC<Props> = ({ record, size }) => {
+const ProductNameField: FC<Props> = ({ record, size }) => {
     const classes = useStyles();
     return record ? (
         <div className={classes.root}>
-            <AvatarField
-                className={classes.avatar}
-                record={record}
-                size={size}
-            />
-            {record.firstName} {record.lastName}
+            {/* <Link to={`/products/${record.id}`}> */}
+                {record.name}
+            {/* </Link> */}
         </div>
     ) : null;
 };
 
-FullNameField.defaultProps = {
-    source: 'last_name',
+ProductNameField.defaultProps = {
+    source: 'lastName',
     label: 'resources.customers.fields.name',
 };
 
-export default memo<Props>(FullNameField);
+export default memo<Props>(ProductNameField);

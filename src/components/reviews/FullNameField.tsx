@@ -3,7 +3,8 @@ import { FC, memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import AvatarField from './AvatarField';
-import { FieldProps, Customer } from '../types';
+import { FieldProps, Customer } from '../../types';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,13 +32,15 @@ const FullNameField: FC<Props> = ({ record, size }) => {
                 record={record}
                 size={size}
             />
-            {record.firstName} {record.lastName}
+            {/* <Link to={`/customers/${record.id}`}> */}
+                {record.firstName} {record.lastName}
+            {/* </Link> */}
         </div>
     ) : null;
 };
 
 FullNameField.defaultProps = {
-    source: 'last_name',
+    source: 'lastName',
     label: 'resources.customers.fields.name',
 };
 

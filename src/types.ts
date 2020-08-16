@@ -91,7 +91,7 @@ export interface ReferenceFieldProps<T extends Record = Record>
     sortBy?: string;
 }
 
-export type ReviewStatus = 'accepted' | 'pending' | 'rejected';
+export type ReviewStatus = 'pending' | 'approved' | 'rejected';
 
 export interface Review extends Record {
     date: Date;
