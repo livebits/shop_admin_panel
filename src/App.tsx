@@ -106,19 +106,19 @@ const App = () => {
                 <Resource name="departments" label="Departments" {...departments} />
                 <Resource name="discounts" label="Discounts" {...discounts} />
                 <Resource name="messages" label="Messages" {...messages} />
-                {/* <Resource name="tenant-product-fields" label="ProductFields" {...productFields} /> */}
                 <Resource name="products" label="Products" {...products} />
                 {/* <Resource name="roles" list={ListGuesser} edit={EditGuesser} /> */}
                 {/* <Resource name="customers" {...visitors} />
                 <Resource
-                    name="commands"
-                    {...orders}
-                    options={{ label: 'Orders' }}
+                name="commands"
+                {...orders}
+                options={{ label: 'Orders' }}
                 />
                 <Resource name="products" {...products} />
                 <Resource name="categories" {...categories} />
-                <Resource name="reviews" {...reviews} /> */}
+            <Resource name="reviews" {...reviews} /> */}
 
+                <Resource name="user-addresses"/>
                 <Resource name="category-fields" />
             </Admin>
         </StylesProvider>

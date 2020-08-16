@@ -167,6 +167,18 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
     if (resource === 'managers' || resource === 'customers') {
       resource = 'users';
     }
+    else if (resource === 'user-addresses') {
+      console.log(params);
+      
+      if (type === reactAdmin.CREATE || type === reactAdmin.UPDATE) {
+        resource = `users/${params.data.userId}/user-addresses`;
+      } else if (type === reactAdmin.DELETE) {
+        resource = `users/${params.previousData.userId}/user-addresses`;
+      } else if (type === reactAdmin.GET_LIST || type === reactAdmin.GET_MANY_REFERENCE) {
+        resource = `users/${params.filter.userId}/user-addresses`;
+        params.filter = {};
+      }      
+    }
 
     if (type === reactAdmin.UPDATE_MANY) {
       return Promise.all(
