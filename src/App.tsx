@@ -13,10 +13,7 @@ import customRoutes from './routes';
 
 import managers from './components/managers';
 import visitors from './visitors';
-import orders from './orders';
-// import products from './products';
 import invoices from './invoices';
-// import categories from './categories';
 
 import { create } from 'jss';
 import rtl from 'jss-rtl';
@@ -36,6 +33,7 @@ import messages from './components/messages';
 import productFields from './components/productFields';
 import products from './components/products';
 import reviews from './components/reviews';
+import orders from './components/orders';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'en') {
@@ -109,6 +107,11 @@ const App = () => {
                 <Resource name="messages" label="Messages" {...messages} />
                 <Resource name="products" label="Products" {...products} />
                 <Resource name="product-comments" {...reviews} />
+                <Resource
+                    name="orders"
+                    {...orders}
+                    options={{ label: 'Orders' }}
+                />
                 {/* <Resource name="roles" list={ListGuesser} edit={EditGuesser} /> */}
                 {/* <Resource name="customers" {...visitors} />
                 <Resource
@@ -122,6 +125,7 @@ const App = () => {
 
                 <Resource name="user-addresses"/>
                 <Resource name="category-fields" />
+                <Resource name="user-tenants" />
             </Admin>
         </StylesProvider>
     );

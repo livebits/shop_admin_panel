@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Link, useTranslate, useQueryWithStore } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
-import { FieldProps, AppState, Order, Product } from '../types';
+import { FieldProps, AppState, Order, Product } from '../../types';
 
 const useStyles = makeStyles({
     container: { minWidth: '35em', marginLeft: '1em' },
@@ -22,39 +22,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
     const classes = useStyles();
     const translate = useTranslate();
 
-    const { loaded, data: products } = useQueryWithStore(
-        {
-            type: 'getMany',
-            resource: 'products',
-            payload: {
-                ids: record ? record.basket.map(item => item.productId) : [],
-            },
-        },
-        {},
-        (state: AppState) => {
-            const productIds = record
-                ? record.basket.map(item => item.productId)
-                : [];
-
-            return productIds
-                .map<Product>(
-                    productId =>
-                        state.admin.resources.products.data[
-                            productId
-                        ] as Product
-                )
-                .filter(r => typeof r !== 'undefined')
-                .reduce(
-                    (prev, next) => {
-                        prev[next.id] = next;
-                        return prev;
-                    },
-                    {} as { [key: string]: Product }
-                );
-        }
-    );
-
-    if (!loaded || !record) return null;
+    if (!record) return null;
 
     return (
         <Paper className={classes.container} elevation={2}>
@@ -62,48 +30,37 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                 <TableHead>
                     <TableRow>
                         <TableCell>
-                            {translate(
-                                'resources.commands.fields.basket.reference'
-                            )}
+                            نام کالا
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {translate(
-                                'resources.commands.fields.basket.unit_price'
-                            )}
+                            قیمت واحد
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {translate(
-                                'resources.commands.fields.basket.quantity'
-                            )}
+                            تعداد
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {translate(
-                                'resources.commands.fields.basket.total'
-                            )}
+                            جمع
                         </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {record.basket.map(
+                    {record.orderProducts.map(
                         (item: any) =>
-                            products[item.productId] && (
+                            item.product && (
                                 <TableRow key={item.productId}>
                                     <TableCell>
                                         <Link
-                                            to={`/products/${item.productId}`}
+                                            to={`/products/${item.product.id}`}
                                         >
                                             {
-                                                products[item.productId]
-                                                    .reference
+                                                item.product.name
                                             }
                                         </Link>
                                     </TableCell>
                                     <TableCell
                                         className={classes.rightAlignedCell}
                                     >
-                                        {products[
-                                            item.productId
-                                        ].price.toLocaleString(undefined, {
+                                        {item.productPrice.price.toLocaleString(undefined, {
                                             style: 'currency',
                                             currency: 'USD',
                                         })}
@@ -117,7 +74,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                                         className={classes.rightAlignedCell}
                                     >
                                         {(
-                                            products[item.productId].price *
+                                            item.productPrice.price *
                                             item.quantity
                                         ).toLocaleString(undefined, {
                                             style: 'currency',
@@ -130,10 +87,10 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                     <TableRow>
                         <TableCell colSpan={2} />
                         <TableCell>
-                            {translate('resources.commands.fields.basket.sum')}
+                            مجموع
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {record.total_ex_taxes.toLocaleString(undefined, {
+                            {record.factor && record.factor.totalTaxPrice.toLocaleString(undefined, {
                                 style: 'currency',
                                 currency: 'USD',
                             })}
@@ -142,18 +99,16 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                     <TableRow>
                         <TableCell colSpan={2} />
                         <TableCell>
-                            {translate(
-                                'resources.commands.fields.basket.delivery'
-                            )}
+                            هزینه ارسال
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {record.delivery_fees.toLocaleString(undefined, {
+                            {record.factor && record.factor.deliveryPrice.toLocaleString(undefined, {
                                 style: 'currency',
                                 currency: 'USD',
                             })}
                         </TableCell>
                     </TableRow>
-                    <TableRow>
+                    {/* <TableRow>
                         <TableCell colSpan={2} />
                         <TableCell>
                             {translate(
@@ -165,13 +120,11 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                                 style: 'percent',
                             })}
                         </TableCell>
-                    </TableRow>
+                    </TableRow> */}
                     <TableRow>
                         <TableCell colSpan={2} />
                         <TableCell className={classes.boldCell}>
-                            {translate(
-                                'resources.commands.fields.basket.total'
-                            )}
+                            کلی
                         </TableCell>
                         <TableCell
                             className={classnames(
@@ -179,7 +132,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                                 classes.rightAlignedCell
                             )}
                         >
-                            {record.total.toLocaleString(undefined, {
+                            {record.factor && record.factor.orderPrice.toLocaleString(undefined, {
                                 style: 'currency',
                                 currency: 'USD',
                             })}
