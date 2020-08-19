@@ -10,6 +10,7 @@ import { NumberField } from 'react-admin';
 import { Link } from 'react-router-dom';
 import { DatagridProps, Product } from '../../types';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
+import { API_URL } from '../../App';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -89,7 +90,7 @@ const LoadedGridList: FC<GridProps> = ({ ids, data, basePath, width }) => {
                         key={id}
                         to={linkToRecord(basePath, data[id].id)}
                     >
-                        <img src={data[id].thumbnail} alt="" />
+                        <img src={`${API_URL}/public/products/${data[id].thumbnail}`} alt="" />
                         <GridListTileBar
                             className={classes.tileBar}
                             title={data[id].name}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
     Datagrid,
     DateField,
@@ -17,17 +17,24 @@ import {
     ArrayInput,
     SimpleFormIterator,
     FormDataConsumer,
+    ImageInput,
+    ImageField,
 } from 'react-admin';
-import { InputAdornment } from '@material-ui/core';
+import { InputAdornment, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RichTextInput from 'ra-input-rich-text';
 
-import CustomerReferenceField from '../../visitors/CustomerReferenceField';
-import StarRatingField from '../../reviews/StarRatingField';
-import Poster from './Poster';
+import {
+    SaveButton,
+    DeleteButton
+} from 'react-admin';
 import { styles as createStyles } from './ProductCreate';
 import { Product, EditComponentProps } from '../../types';
 import { ProductCategoryFields } from './ProductCategoryFields';
+import { useNotify, useRefresh, useRedirect, fetchStart, fetchEnd } from 'react-admin';
+import { useDispatch } from 'react-redux';
+import { API_URL } from '../../App';
+
 
 interface ProductTitleProps {
     record?: Product;
@@ -52,9 +59,15 @@ const useStyles = makeStyles({
 
 const ProductEdit: FC<EditComponentProps> = props => {
     const classes = useStyles();
+    const notify = useNotify();
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+
+    const [ id, setId ] = useState(Number(props.match.params.id));
 
     const transform = (data:any) => {
-        
         let catFields:any[] = []
         Object.keys(data).forEach(element => {
             if (element.includes("cf_")) {
@@ -81,12 +94,147 @@ const ProductEdit: FC<EditComponentProps> = props => {
         delete requestBody.cons;
         delete requestBody.brand;
         delete requestBody.category;
+        delete requestBody.thumbnail;
 
         return requestBody;
     };
 
+    ///////////////////    thumbnail     ///////////////////
+
+    const onRemoveThumbnail = () => {
+        setLoading(true);
+        dispatch(fetchStart()); // start the global loading indicator 
+        
+        const token = localStorage.getItem('token');
+        fetch(`${API_URL}/products/${id}/thumbnail`, 
+            { 
+                method: 'DELETE',
+                headers: { 
+                    'Authorization': `Bearer ${token}`
+                } 
+            })
+            .then(() => {
+                notify('product_image_deleted');
+            })
+            .catch((e) => {
+                notify('product_thumbnail_not_deleted', 'warning')
+            })
+
+        setLoading(false);
+        dispatch(fetchEnd());
+    }
+
+    const onDropThumbnail = (file:any) => {
+
+        setLoading(true);
+        dispatch(fetchStart()); // start the global loading indicator 
+        
+        const token = localStorage.getItem('token');
+        const formData  = new FormData();
+        formData.append('file', file[0]);
+
+        fetch(`${API_URL}/products/${id}/thumbnail`, 
+            { 
+                method: 'POST', 
+                body: formData,
+                headers: { 
+                    'Authorization': `Bearer ${token}`
+                } 
+            })
+            .then(() => {
+                notify('product_image_updated');
+            })
+            .catch((e) => {
+                notify('product_thumbnail_not_uploaded', 'warning')
+            })
+
+        setLoading(false);
+        dispatch(fetchEnd());
+    }
+
+    ////////////////////////////////////////////////////////////
+
+    ///////////////////    Attchments     ///////////////////
+
+    const onRemoveAttachments = (data:any) => {
+        setLoading(true);
+        dispatch(fetchStart()); // start the global loading indicator 
+        
+        const token = localStorage.getItem('token');
+        fetch(`${API_URL}/products/${id}/product-attachments/${data.id}`, 
+            { 
+                method: 'DELETE',
+                headers: { 
+                    'Authorization': `Bearer ${token}`
+                } 
+            })
+            .then(() => {
+                notify('product_image_deleted');
+            })
+            .catch((e) => {
+                notify('product_image_not_deleted', 'warning')
+            })
+
+        setLoading(false);
+        dispatch(fetchEnd());
+    }
+
+    const onDropAttachment = (file:any) => {        
+        setLoading(true);
+        dispatch(fetchStart()); // start the global loading indicator 
+        
+        const token = localStorage.getItem('token');
+        const formData  = new FormData();
+        formData.append('file', file[0]);
+        formData.append('description', file[0].name);
+
+        fetch(`${API_URL}/products/${id}/product-attachments`, 
+            { 
+                method: 'POST', 
+                body: formData,
+                headers: { 
+                    'Authorization': `Bearer ${token}`
+                } 
+            })
+            .then(() => {
+                notify('product_image_updated');
+            })
+            .catch((e) => {
+                notify('product_thumbnail_not_uploaded', 'warning')
+            })
+
+        setLoading(false);
+        dispatch(fetchEnd());
+        refresh();
+    }
+
+    ////////////////////////////////////////////////////////////
+
+
+    const PreviewImage = (record:any) => {
+        if (typeof record.record === 'string') {
+            return <img width={150} src={`${API_URL}/public/products/${record.record}`} alt="Avatar" />
+        } else {
+            return <img width={150} src={`${record.record.undefined}`} alt="Avatar" />
+        }
+    };
+
+    const PreviewImages = (record:any) => {
+        if (record.record.fileName !== undefined) {
+            return <img width={150} style={{padding: 5}} src={`${API_URL}/public/products/${record.record.fileName}`} alt="Avatar" />
+        } else {
+            return <img width={150} style={{padding: 5}} src={`${record.record.undefined}`} alt="Avatar" />
+        }
+    };
+
     return (
-        <Edit {...props} title={<ProductTitle />} transform={transform}>
+        <Edit 
+            {...props} 
+            undoable={false} 
+            // onSuccess={onSuccess}
+            title={<ProductTitle />} 
+            transform={transform}
+        >
             <TabbedForm>
                 <FormTab label="مشخصات محصول">
                     <TextInput
@@ -98,14 +246,26 @@ const ProductEdit: FC<EditComponentProps> = props => {
                         source="secondName"
                         fullWidth
                     />
+                    <ImageInput 
+                        source="thumbnail" 
+                        label="تصویر محصول" 
+                        accept="image/*" 
+                        maxSize="2000000" 
+                        multiple={false}
+                        options={{ onRemove:onRemoveThumbnail, onDrop:onDropThumbnail }}
+                    >
+                        {/* <ImageField source="thumbnail" src="thumbnail" /> */}
+                        <PreviewImage /> 
+                    </ImageInput>
 
-                    <SelectInput 
+                    <SelectInput
                         source="status"
+                        label="وضعیت"
                         validate={required()}
                         choices={[
                             { id: 'available', name: 'موجود' },
                             { id: 'not_available', name: 'ناموجود' },
-                        ]} 
+                        ]}
                     />
                     
                     <ReferenceInput
@@ -183,6 +343,21 @@ const ProductEdit: FC<EditComponentProps> = props => {
                             ]} />
                         </SimpleFormIterator>
                     </ArrayInput>
+                </FormTab>
+                <FormTab
+                    label="سایر"
+                >
+                    <ImageInput 
+                        source="attachments" 
+                        label="تصاویر" 
+                        accept="image/*" 
+                        maxSize="2000000" 
+                        multiple={true}
+                        options={{ onRemove:onRemoveAttachments, onDrop:onDropAttachment }}
+                    >
+                        {/* <ImageField source="thumbnail" src="thumbnail" /> */}
+                        <PreviewImages /> 
+                    </ImageInput>
                 </FormTab>
             </TabbedForm>
         </Edit>

@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import LinkToRelatedUsers from './LinkToRelatedUsers';
 import { Category } from '../../types';
+import { API_URL } from '../../App';
 
 const useStyles = makeStyles({
     root: {
@@ -43,7 +44,7 @@ const CategoryGrid: FC<ListControllerProps<Category>> = props => {
                 <Grid key={id} xs={12} sm={6} md={4} lg={3} xl={2} item>
                     <Card>
                         <CardMedia
-                            image={`https://marmelab.com/posters/people-2.jpeg`}
+                            image={`${API_URL}/public/departments/${data[id].logo}`}
                             className={classes.media}
                         />
                         <CardContent className={classes.title}>
