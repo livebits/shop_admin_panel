@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { usePermissions, Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
 import { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import { BulkDeleteButton } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 // import ResetViewsButton from './ResetViewsButton';
 
 const BulkActionButtons = (props: any) => (
@@ -13,8 +15,14 @@ const BulkActionButtons = (props: any) => (
     </Fragment>
 );
 
-const UserList = (props: any) => (
-    <List
+const UserList = (props: any) => {
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
         filter={{ 'type||eq': 'customer' }}
@@ -35,10 +43,16 @@ const UserList = (props: any) => (
                 render={(record:any) => record.status === 'active' ? 'فعال' : 'غیرفعال'}
             />
             <TextField source="lastLogin" />
-            <EditButton />
-            <DeleteButton />
+            {
+                hasPermissions(permissions, [{ resource: 'user', action: 'update' }]) && 
+                <EditButton />
+            } 
+            {
+                hasPermissions(permissions, [{ resource: 'user', action: 'delete' }]) && 
+                <DeleteButton />
+            }
         </Datagrid>
     </List>
-);
+}
 
 export default UserList;

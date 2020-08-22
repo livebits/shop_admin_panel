@@ -6,11 +6,12 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { WithWidth } from '@material-ui/core/withWidth';
 import { linkToRecord } from 'ra-core';
-import { NumberField } from 'react-admin';
+import { usePermissions } from 'react-admin';
 import { Link } from 'react-router-dom';
 import { DatagridProps, Product } from '../../types';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
 import { API_URL } from '../../App';
+import { hasPermissions } from '../../authProvider';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -72,6 +73,7 @@ const LoadingGridList: FC<GridProps & { nbItems?: number }> = ({
 };
 
 const LoadedGridList: FC<GridProps> = ({ ids, data, basePath, width }) => {
+    const { permissions } = usePermissions();
     const classes = useStyles();
 
     if (!ids || !data) return null;

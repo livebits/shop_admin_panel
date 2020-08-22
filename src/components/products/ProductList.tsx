@@ -6,7 +6,7 @@ import { InputProps } from 'ra-core';
 import {
     Filter,
     List,
-    NumberInput,
+    usePermissions,
     Pagination,
     ReferenceInput,
     SearchInput,
@@ -15,6 +15,8 @@ import {
 } from 'react-admin';
 import { FilterProps, ListComponentProps } from '../../types';
 import GridList from './GridList';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const useQuickFilterStyles = makeStyles(theme => ({
     root: {
@@ -63,8 +65,14 @@ export const ProductFilter: FC<FilterProps<FilterParams>> = props => (
     </Filter>
 );
 
-const ProductList: FC<ListComponentProps> = props => (
-    <List
+const ProductList: FC<ListComponentProps> = props => {
+    const { permissions } = usePermissions();
+    const hasPerm = hasPermissions(permissions, [{ resource: 'product', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <List
         {...props}
         filters={<ProductFilter />}
         perPage={20}
@@ -73,6 +81,6 @@ const ProductList: FC<ListComponentProps> = props => (
     >
         <GridList />
     </List>
-);
+}
 
 export default ProductList;

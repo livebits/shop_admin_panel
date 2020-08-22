@@ -13,17 +13,24 @@ import {
     SimpleFormIterator,
 } from 'react-admin';
 import { useDispatch } from 'react-redux';
-import { useNotify, useRedirect, fetchStart, fetchEnd, useRefresh } from 'react-admin';
+import { useNotify, useRedirect, fetchStart, fetchEnd, useRefresh, usePermissions } from 'react-admin';
 import { API_URL } from '../../App';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const DepartmentEdit = (props: any) => {
-
+    const { permissions } = usePermissions();
     const notify = useNotify();
     const refresh = useRefresh();
     const redirect = useRedirect();
     const dispatch = useDispatch();
     const [loading, setLoading] = React.useState(false);
     const [ id, setId ] = React.useState(Number(props.match.params.id));
+
+    const hasPerm = hasPermissions(permissions, [{ resource: 'department', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
 
     const transform = (data:any) => {
         let requestBody = {

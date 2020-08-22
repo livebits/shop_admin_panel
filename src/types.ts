@@ -26,6 +26,21 @@ export interface Category extends Record {
     logo: string;
 }
 
+export interface Role {
+    name: string;
+}
+
+export interface Permission {
+    resource: string;
+    action: string,
+    possession?: any,
+}
+
+export interface UserPermissions {
+    roles: Role[],
+    permissions: Permission[]
+}
+
 export interface Product extends Record {
     category_id: Identifier;
     description: string;

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     Create,
     SimpleForm,
-    NumberInput,
+    usePermissions,
     ReferenceInput,
     SelectInput,
     DateInput,
@@ -11,10 +11,17 @@ import {
     AutocompleteInput,
     FormDataConsumer,
 } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const optionRenderer = (choice:any) => `${choice.firstName} ${choice.lastName}`;
 
 const MessageCreate = (props:any) => {
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'message', action: 'create' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
     
     return (
         <Create {...props}>

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Datagrid, TextField, ReferenceField, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, usePermissions, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const translateType = (type: string) => {
     switch (type) {
@@ -23,8 +25,14 @@ const translateReceiverType = (type: string) => {
     }
 }
 
-const MessageList = (props: any) => (
-    <List
+const MessageList = (props: any) => {
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'message', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+    
+    return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
         perPage={20}
@@ -47,10 +55,16 @@ const MessageList = (props: any) => (
                 label="دریافت کننده"
                 render={(record:any) => record.receiver ? `${record.receiver.user.firstName} ${record.receiver.user.lastName}` : ''}
             />
-            <EditButton />
-            <DeleteButton />
+            {
+                hasPermissions(permissions, [{ resource: 'user', action: 'update' }]) && 
+                <EditButton />
+            } 
+            {
+                hasPermissions(permissions, [{ resource: 'user', action: 'delete' }]) && 
+                <DeleteButton />
+            }
         </Datagrid>
     </List>
-);
+}
 
 export default MessageList;

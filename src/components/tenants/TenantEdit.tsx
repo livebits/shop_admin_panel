@@ -8,10 +8,18 @@ import {
     SelectInput,
     SimpleForm,
     TextInput,
-    useTranslate,
+    usePermissions,
 } from 'react-admin';
-const TenantEdit = (props: any) => (
-    <Edit title="ویرایش شرکت" {...props}>
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
+const TenantEdit = (props: any) => {
+    const { permissions } = usePermissions();
+    const hasPerm = hasPermissions(permissions, [{ resource: 'tenant', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <Edit title="ویرایش شرکت" {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
             <TextInput source="name" />
@@ -31,6 +39,6 @@ const TenantEdit = (props: any) => (
             <TextInput source="zip" />
         </SimpleForm>
     </Edit>
-);
+}
 
 export default TenantEdit;

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Datagrid, TextField, NumberField, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, NumberField, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const translateType = (type: string) => {
     switch (type) {
@@ -12,8 +14,14 @@ const translateType = (type: string) => {
     }
 }
 
-const DiscountList = (props: any) => (
-    <List
+const DiscountList = (props: any) => {
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'discount', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
         perPage={20}
@@ -27,10 +35,16 @@ const DiscountList = (props: any) => (
             />
             <TextField source="code" />
             <NumberField source="value" />
-            <EditButton />
-            <DeleteButton />
+            {
+                hasPermissions(permissions, [{ resource: 'discount', action: 'update' }]) && 
+                <EditButton />
+            } 
+            {
+                hasPermissions(permissions, [{ resource: 'discount', action: 'delete' }]) && 
+                <DeleteButton />
+            }
         </Datagrid>
     </List>
-);
+}
 
 export default DiscountList;

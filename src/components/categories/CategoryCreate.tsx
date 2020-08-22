@@ -9,9 +9,12 @@ import {
     SimpleFormIterator,
     TextInput,
     NumberInput,
+    usePermissions,
     BooleanInput,
 } from 'react-admin';
 import { SaveButton, Toolbar } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const CreateToolbar = (props: any) => (
     <Toolbar {...props} >
@@ -30,7 +33,11 @@ const CreateToolbar = (props: any) => (
 );
 
 const CategoryCreate = (props:any) => {
-    
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'category', action: 'create' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
     return (
         <Create {...props}>
             <SimpleForm toolbar={<CreateToolbar />} redirect="list">

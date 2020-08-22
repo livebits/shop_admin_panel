@@ -4,7 +4,7 @@ import {
     Datagrid,
     Edit,
     EditButton,
-    DateInput,
+    usePermissions,
     SelectInput,
     SimpleForm,
     TextInput,
@@ -13,15 +13,23 @@ import {
 import { useDispatch } from 'react-redux';
 import { useNotify, useRedirect, fetchStart, fetchEnd, useRefresh } from 'react-admin';
 import { API_URL } from '../../App';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const ManagerEdit = (props: any) => {
-
+    const { permissions } = usePermissions();
+    
     const notify = useNotify();
     const refresh = useRefresh();
     const redirect = useRedirect();
     const dispatch = useDispatch();
     const [loading, setLoading] = React.useState(false);
     const [ id, setId ] = React.useState(Number(props.match.params.id));
+    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
 
     const transform = (data:any) => {
         let requestBody = {

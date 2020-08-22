@@ -8,13 +8,20 @@ import {
     SelectInput,
     TabbedForm,
     TextInput,
-    required,
+    usePermissions,
 } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const defaultValue = { type: 'customer' };
 
 const UserCreate = (props:any) => {
-    
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'create' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
     return (
         <Create {...props} title="ثبت مشتری جدید">
             <SimpleForm initialValues={defaultValue} >

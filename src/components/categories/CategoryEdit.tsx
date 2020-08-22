@@ -10,19 +10,29 @@ import {
     TextInput,
     ImageInput,
     ArrayInput,
+    usePermissions,
     SimpleFormIterator,
 } from 'react-admin';
 import { useNotify, useRefresh, useRedirect, fetchStart, fetchEnd } from 'react-admin';
 import { useDispatch } from 'react-redux';
 import { API_URL } from '../../App';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const CategoryEdit = (props: any) => {
+
+    const { permissions } = usePermissions();
     const notify = useNotify();
     const refresh = useRefresh();
     const redirect = useRedirect();
     const dispatch = useDispatch();
     const [loading, setLoading] = React.useState(false);
     const [ id, setId ] = React.useState(Number(props.match.params.id));
+
+    const hasPerm = hasPermissions(permissions, [{ resource: 'category', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
 
     const transform = (data:any) => {
         let requestBody = {

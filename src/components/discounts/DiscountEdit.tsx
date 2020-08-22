@@ -8,10 +8,18 @@ import {
     SelectInput,
     SimpleForm,
     TextInput,
-    useTranslate,
+    usePermissions,
 } from 'react-admin';
-const DiscountEdit = (props: any) => (
-    <Edit title="ویرایش  تخفیف" {...props}>
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
+const DiscountEdit = (props: any) => {
+    const { permissions } = usePermissions();
+    const hasPerm = hasPermissions(permissions, [{ resource: 'discount', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <Edit title="ویرایش  تخفیف" {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
             <TextInput source="code" />
@@ -22,6 +30,6 @@ const DiscountEdit = (props: any) => (
             <NumberInput source="value" />
         </SimpleForm>
     </Edit>
-);
+}
 
 export default DiscountEdit;

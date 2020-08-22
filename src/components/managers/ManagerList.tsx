@@ -1,8 +1,17 @@
 import * as React from 'react';
-import { Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton, usePermissions } from 'react-admin';
+import { UserPermissions } from '../../types';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
-const ManagerList = (props: any) => (
-    <List
+const ManagerList = (props:any) => {
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
         filter={{ 'type||eq': 'manager' }}
@@ -22,10 +31,16 @@ const ManagerList = (props: any) => (
                 render={(record:any) => record.status === 'active' ? 'فعال' : 'غیرفعال'}
             />
             <TextField source="lastLogin" />
-            <EditButton />
-            <DeleteButton />
+            {
+                hasPermissions(permissions, [{ resource: 'user', action: 'update' }]) && 
+                <EditButton />
+            } 
+            {
+                hasPermissions(permissions, [{ resource: 'user', action: 'delete' }]) && 
+                <DeleteButton />
+            }
         </Datagrid>
     </List>
-);
+};
 
 export default ManagerList;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FC } from 'react';
-import { EditButton, DeleteWithConfirmButton, List } from 'react-admin';
+import { EditButton, DeleteWithConfirmButton, List, usePermissions } from 'react-admin';
 import { ListControllerProps } from 'ra-core';
 import inflection from 'inflection';
 import {
@@ -17,6 +17,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import LinkToRelatedProducts from './LinkToRelatedProducts';
 import { Category } from '../../types';
 import { API_URL } from '../../App';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const useStyles = makeStyles({
     root: {
@@ -35,6 +37,7 @@ const useStyles = makeStyles({
 });
 
 const CategoryGrid: FC<ListControllerProps<Category>> = props => {
+    const { permissions } = usePermissions();
     const classes = useStyles(props);
     const { data, ids } = props;
     
@@ -60,15 +63,21 @@ const CategoryGrid: FC<ListControllerProps<Category>> = props => {
                             classes={{ spacing: classes.actionSpacer }}
                         >
                             <LinkToRelatedProducts record={data[id]} />
-                            <EditButton
-                                basePath="/categories"
-                                record={data[id]}
-                            />
-                            <DeleteWithConfirmButton
-                                resource="categories"
-                                basePath="/categories"
-                                record={data[id]}
-                            />
+                            {
+                                hasPermissions(permissions, [{ resource: 'category', action: 'update' }]) && 
+                                <EditButton
+                                    basePath="/categories"
+                                    record={data[id]}
+                                />
+                            } 
+                            {
+                                hasPermissions(permissions, [{ resource: 'category', action: 'delete' }]) && 
+                                <DeleteWithConfirmButton
+                                    resource="categories"
+                                    basePath="/categories"
+                                    record={data[id]}
+                                />
+                            }
                         </CardActions>
                     </Card>
                 </Grid>
@@ -77,8 +86,14 @@ const CategoryGrid: FC<ListControllerProps<Category>> = props => {
     ) : null;
 };
 
-const CategoryList = (props: any) => (
-    <List
+const CategoryList = (props: any) => {
+    const { permissions } = usePermissions();
+    const hasPerm = hasPermissions(permissions, [{ resource: 'category', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
         perPage={20}
@@ -89,6 +104,6 @@ const CategoryList = (props: any) => (
         // @ts-ignore */}
         <CategoryGrid />
     </List>
-);
+}
 
 export default CategoryList;

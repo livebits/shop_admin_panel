@@ -8,12 +8,20 @@ import {
     SelectInput,
     SimpleForm,
     TextInput,
-    useTranslate,
+    usePermissions,
     ArrayInput,
     SimpleFormIterator,
 } from 'react-admin';
-const RoleEdit = (props: any) => (
-    <Edit title="ویرایش نقش" {...props}>
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
+const RoleEdit = (props: any) => {
+    const { permissions } = usePermissions();
+    const hasPerm = hasPermissions(permissions, [{ resource: 'role', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <Edit title="ویرایش نقش" {...props}>
         <SimpleForm>
             <TextInput disabled source="id" label="کد"/>
             <TextInput source="name" label="نام نقش"/>
@@ -30,6 +38,6 @@ const RoleEdit = (props: any) => (
             </ArrayInput>
         </SimpleForm>
     </Edit>
-);
+}
 
 export default RoleEdit;

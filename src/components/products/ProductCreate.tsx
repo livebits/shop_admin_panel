@@ -12,12 +12,15 @@ import {
     ArrayInput,
     SimpleFormIterator,
     FormDataConsumer,
+    usePermissions,
 } from 'react-admin';
 import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RichTextInput from 'ra-input-rich-text';
 import { CreateComponentProps } from '../../types';
 import { ProductCategoryFields } from './ProductCategoryFields';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 export const styles = {
     price: { width: '7em' },
@@ -32,6 +35,11 @@ const useStyles = makeStyles(styles);
 
 const ProductCreate: FC<CreateComponentProps> = props => {
     const classes = useStyles();
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'product', action: 'create' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
 
     const transform = (data:any) => {
         

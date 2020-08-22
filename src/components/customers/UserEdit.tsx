@@ -8,7 +8,7 @@ import {
     SelectInput,
     TabbedForm,
     TextInput,
-    useTranslate,
+    usePermissions,
     ReferenceManyField,
     ImageInput,
     TextField,
@@ -25,6 +25,8 @@ import EditAddress from './EditAddress';
 import { useDispatch } from 'react-redux';
 import { useNotify, useRedirect, fetchStart, fetchEnd } from 'react-admin';
 import { API_URL } from '../../App';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const useStyles = makeStyles((theme:any) => ({
     listWithDrawer: {
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme:any) => ({
 }));
 
 const UserEdit = (props: any) => {
-
+    const { permissions } = usePermissions();
     const [drawer, setDrawer] = React.useState(false)
     const [editDrawer, setEditDrawer] = React.useState(false)
     const [selectedId, setSelectedId] = React.useState(null)
@@ -50,6 +52,11 @@ const UserEdit = (props: any) => {
 
     const redirect = useRedirect();
     const [ id, setId ] = React.useState(Number(props.match.params.id));
+
+    const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
 
     const transform = (data:any) => {
         let requestBody = {

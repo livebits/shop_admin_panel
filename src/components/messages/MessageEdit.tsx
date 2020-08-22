@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FC } from 'react';
 import {
-    Datagrid,
+    usePermissions,
     Edit,
     DateInput,
     ReferenceInput,
@@ -11,10 +11,18 @@ import {
     AutocompleteInput,
     FormDataConsumer,
 } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const optionRenderer = (choice:any) => `${choice.firstName} ${choice.lastName}`;
 
 const MessageEdit = (props: any) => {
+    const { permissions } = usePermissions();
+    const hasPerm = hasPermissions(permissions, [{ resource: 'message', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
     const transform = (data:any) => {
         delete data.receiver
         delete data.tenantId

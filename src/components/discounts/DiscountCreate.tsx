@@ -8,11 +8,17 @@ import {
     SelectInput,
     TabbedForm,
     TextInput,
-    required,
+    usePermissions,
 } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const DiscountCreate = (props:any) => {
-    
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'discount', action: 'create' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
     return (
         <Create {...props}>
             <SimpleForm >

@@ -8,12 +8,15 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleForm,
+    usePermissions,
     useTranslate,
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 import { Order, Customer, EditComponentProps } from '../../types';
 
 import Basket from './Basket';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 interface OrderTitleProps {
     record?: Order;
@@ -36,6 +39,11 @@ const useEditStyles = makeStyles({
 
 const OrderEdit: FC<EditComponentProps> = props => {
     const classes = useEditStyles();
+    const { permissions } = usePermissions();
+    const hasPerm = hasPermissions(permissions, [{ resource: 'order', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
     return (
         <Edit
             title={<OrderTitle />}

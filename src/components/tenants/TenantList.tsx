@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, usePermissions, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const translateStatus = (status: string) => {
     switch (status) {
@@ -16,8 +18,14 @@ const translateStatus = (status: string) => {
     }
 }
 
-const TenantList = (props: any) => (
-    <List
+const TenantList = (props: any) => {
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'tenant', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+    
+    return <List
         {...props}
         sort={{ field: 'createdAt', order: 'DESC' }}
         perPage={20}
@@ -41,10 +49,16 @@ const TenantList = (props: any) => (
             <TextField source="city" />
             <TextField source="state" />
             <TextField source="zip" />
-            <EditButton />
-            <DeleteButton />
+            {
+                hasPermissions(permissions, [{ resource: 'tenant', action: 'update' }]) && 
+                <EditButton />
+            } 
+            {
+                hasPermissions(permissions, [{ resource: 'tenant', action: 'delete' }]) && 
+                <DeleteButton />
+            }
         </Datagrid>
     </List>
-);
+}
 
 export default TenantList;

@@ -8,12 +8,19 @@ import {
     SelectInput,
     TabbedForm,
     TextInput,
-    required,
+    usePermissions,
 } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const defaultValue = { type: 'manager' };
 
 const ManagerCreate = (props:any) => {
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'create' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
     
     return (
         <Create {...props}>

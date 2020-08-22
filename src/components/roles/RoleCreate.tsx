@@ -8,9 +8,11 @@ import {
     SelectInput,
     SimpleFormIterator,
     TextInput,
-    required,
+    usePermissions,
 } from 'react-admin';
 import { SaveButton, Toolbar } from 'react-admin';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const CreateToolbar = (props: any) => (
     <Toolbar {...props} >
@@ -29,6 +31,11 @@ const CreateToolbar = (props: any) => (
 );
 
 const RoleCreate = (props:any) => {
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'role', action: 'create' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
     
     return (
         <Create {...props}>

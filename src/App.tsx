@@ -34,6 +34,7 @@ import productFields from './components/productFields';
 import products from './components/products';
 import reviews from './components/reviews';
 import orders from './components/orders';
+import { UserPermissions } from './types';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'en') {
@@ -95,37 +96,29 @@ const App = () => {
                 layout={Layout}
                 i18nProvider={i18nProvider}
             >
-                <Resource name="managers" label="Managers" {...managers} />
-                <Resource name="customers" label="Customers" {...customers} />
-                <Resource name="tenants" label="Tenants" {...tenants} />
-                <Resource name="roles" label="Roles" {...roles} />
-                <Resource name="actions" label="Actions" {...actions} />
-                <Resource name="brands" label="Brands" {...brands} />
-                <Resource name="categories" label="Categories" {...categories} />
-                <Resource name="departments" label="Departments" {...departments} />
-                <Resource name="discounts" label="Discounts" {...discounts} />
-                <Resource name="messages" label="Messages" {...messages} />
-                <Resource name="products" label="Products" {...products} />
-                <Resource name="product-comments" {...reviews} />
-                <Resource
-                    name="orders"
-                    {...orders}
-                    options={{ label: 'Orders' }}
-                />
-                {/* <Resource name="roles" list={ListGuesser} edit={EditGuesser} /> */}
-                {/* <Resource name="customers" {...visitors} />
-                <Resource
-                name="commands"
-                {...orders}
-                options={{ label: 'Orders' }}
-                />
-                <Resource name="products" {...products} />
-                <Resource name="categories" {...categories} />
-            <Resource name="reviews" {...reviews} /> */}
-
-                <Resource name="user-addresses"/>
-                <Resource name="category-fields" />
-                <Resource name="user-tenants" />
+                { (permissions: UserPermissions) => [
+                    <Resource name="managers" label="Managers" {...managers} />,
+                    <Resource name="customers" label="Customers" {...customers} />,
+                    <Resource name="tenants" label="Tenants" {...tenants} />,
+                    <Resource name="roles" label="Roles" {...roles} />,
+                    <Resource name="permissions" label="Permissions" {...actions} />,
+                    <Resource name="brands" label="Brands" {...brands} />,
+                    <Resource name="categories" label="Categories" {...categories} />,
+                    <Resource name="departments" label="Departments" {...departments} />,
+                    <Resource name="discounts" label="Discounts" {...discounts} />,
+                    <Resource name="messages" label="Messages" {...messages} />,
+                    <Resource name="products" label="Products" {...products} />,
+                    <Resource name="product-comments" {...reviews} />,
+                    <Resource
+                        name="orders"
+                        {...orders}
+                        options={{ label: 'Orders' }}
+                    />,
+                    <Resource name="user-addresses"/>,
+                    <Resource name="category-fields" />,
+                    <Resource name="user-tenants" />,
+                ]}
+                
             </Admin>
         </StylesProvider>
     );

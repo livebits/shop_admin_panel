@@ -25,7 +25,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import RichTextInput from 'ra-input-rich-text';
 
 import {
-    SaveButton,
+    usePermissions,
     DeleteButton
 } from 'react-admin';
 import { styles as createStyles } from './ProductCreate';
@@ -34,6 +34,8 @@ import { ProductCategoryFields } from './ProductCategoryFields';
 import { useNotify, useRefresh, useRedirect, fetchStart, fetchEnd } from 'react-admin';
 import { useDispatch } from 'react-redux';
 import { API_URL } from '../../App';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 
 interface ProductTitleProps {
@@ -58,6 +60,7 @@ const useStyles = makeStyles({
 });
 
 const ProductEdit: FC<EditComponentProps> = props => {
+    const { permissions } = usePermissions();
     const classes = useStyles();
     const notify = useNotify();
     const refresh = useRefresh();
@@ -66,6 +69,11 @@ const ProductEdit: FC<EditComponentProps> = props => {
     const [loading, setLoading] = useState(false);
 
     const [ id, setId ] = useState(Number(props.match.params.id));
+
+    const hasPerm = hasPermissions(permissions, [{ resource: 'product', action: 'update' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
 
     const transform = (data:any) => {
         let catFields:any[] = []

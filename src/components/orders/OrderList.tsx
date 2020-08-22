@@ -14,7 +14,7 @@ import {
     SearchInput,
     TextField,
     FunctionField,
-    BooleanInput,
+    usePermissions,
     TextInput,
 } from 'react-admin';
 import { useMediaQuery, Divider, Tabs, Tab, Theme } from '@material-ui/core';
@@ -33,6 +33,8 @@ import {
 } from '../../types';
 import { Identifier } from 'ra-core';
 import FullNameField from '../reviews/FullNameField';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 interface FilterParams {
     q?: string;
@@ -83,6 +85,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
     displayedFilters,
     ...rest
 }) => {
+    const { permissions } = usePermissions();
     const classes = useDatagridStyles();
     const isXSmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('xs')
@@ -223,8 +226,14 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
     );
 };
 
-const OrderList: FC<ListComponentProps> = props => (
-    <List
+const OrderList: FC<ListComponentProps> = props => {
+    const { permissions } = usePermissions();
+    const hasPerm = hasPermissions(permissions, [{ resource: 'order', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
+
+    return <List
         {...props}
         filterDefaultValues={{ 'status||eq': 'ordered' }}
         sort={{ field: 'id', order: 'DESC' }}
@@ -233,6 +242,6 @@ const OrderList: FC<ListComponentProps> = props => (
     >
         <TabbedDatagrid />
     </List>
-);
+}
 
 export default OrderList;

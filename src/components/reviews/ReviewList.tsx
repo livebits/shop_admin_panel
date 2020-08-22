@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Fragment, useCallback, FC } from 'react';
 import classnames from 'classnames';
-import { BulkDeleteButton, List } from 'react-admin';
+import { BulkDeleteButton, List, usePermissions } from 'react-admin';
 import { Route, RouteChildrenProps, useHistory } from 'react-router-dom';
 import { Drawer, useMediaQuery, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,8 @@ import ReviewListDesktop from './ReviewListDesktop';
 import ReviewFilter from './ReviewFilter';
 import ReviewEdit from './ReviewEdit';
 import { BulkActionProps, ListComponentProps } from '../../types';
+import { hasPermissions } from '../../authProvider';
+import ACLError from '../../layout/ACLError';
 
 const ReviewsBulkActionButtons: FC<BulkActionProps> = props => (
     <Fragment>
@@ -49,6 +51,11 @@ const ReviewList: FC<ListComponentProps<{ id: string }>> = props => {
     const handleClose = useCallback(() => {
         history.push('/product-comments');
     }, [history]);
+    const { permissions } = usePermissions();    
+    const hasPerm = hasPermissions(permissions, [{ resource: 'comment', action: 'read' }])
+    if (!hasPerm) {
+        return <ACLError />
+    }
 
     return (
         <div className={classes.root}>
