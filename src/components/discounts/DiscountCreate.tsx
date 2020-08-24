@@ -6,7 +6,7 @@ import {
     NumberInput,
     ReferenceInput,
     SelectInput,
-    TabbedForm,
+    useTranslate,
     TextInput,
     usePermissions,
 } from 'react-admin';
@@ -14,7 +14,8 @@ import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 
 const DiscountCreate = (props:any) => {
-    const { permissions } = usePermissions();    
+    const { permissions } = usePermissions();
+    const translate = useTranslate();
     const hasPerm = hasPermissions(permissions, [{ resource: 'discount', action: 'create' }])
     if (!hasPerm) {
         return <ACLError />
@@ -24,8 +25,8 @@ const DiscountCreate = (props:any) => {
             <SimpleForm >
                 <TextInput source="code" />
                 <SelectInput source="type" choices={[
-                    { id: 'constant', name: 'ثابت' },
-                    { id: 'percent', name: 'درصدی' },
+                    { id: 'constant', name: translate('pos.discountType.constant') },
+                    { id: 'percent', name: translate('pos.discountType.percent') },
                 ]} />
                 <NumberInput source="value" />
             </SimpleForm>

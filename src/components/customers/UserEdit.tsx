@@ -13,6 +13,7 @@ import {
     ImageInput,
     TextField,
     FunctionField,
+    useTranslate,
     useRefresh,
 } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme:any) => ({
 }));
 
 const UserEdit = (props: any) => {
+    const translate = useTranslate();
     const { permissions } = usePermissions();
     const [drawer, setDrawer] = React.useState(false)
     const [editDrawer, setEditDrawer] = React.useState(false)
@@ -161,15 +163,14 @@ const UserEdit = (props: any) => {
             });
     }
     
-    return <Edit title="ویرایش مشتری" transform={transform} undoable={false} {...props}>
+    return <Edit transform={transform} undoable={false} {...props}>
         <TabbedForm>
-            <FormTab label="مشخصات عمومی" >
+            <FormTab label="resources.customers.tabs.publicInfo" >
                 <TextInput disabled source="id" />
                 <TextInput source="firstName" />
                 <TextInput source="lastName" />
                 <ImageInput 
                     source="avatar" 
-                    label="تصویر کاربر" 
                     accept="image/*" 
                     maxSize="2000000" 
                     multiple={false}
@@ -180,35 +181,37 @@ const UserEdit = (props: any) => {
                 <TextInput source="username" />
                 <TextInput source="email" />
                 <SelectInput source="status" choices={[
-                    { id: 'active', name: 'فعال' },
-                    { id: 'inactive', name: 'غیرفعال' },
+                    { id: 'active', name: 'pos.status.active' },
+                    { id: 'inactive', name: 'pos.status.inactive' },
                 ]} />
             </FormTab>
-            <FormTab label=" آدرس های کاربر">
+            <FormTab label="resources.customers.tabs.addresses">
                 <Button 
                     color="primary"
                     onClick={e => setDrawer(true)}
                     style={{width: 150}}
                 >
                     <AddCircleIcon />
-                    افزودن آدرس جدید
+                    {
+                        translate('resources.customers.page.addAddress')
+                    }
                 </Button>
                 <ReferenceManyField 
-                    label="آدرس های ثبت شده"
+                    label="resources.customers.page.savedAddresses"
                     reference="user-addresses"
                     target="userId"
                     filter={{userId: props.match.params.id}}
                     perPage={100}
                 >
                     <Datagrid>
-                        <TextField source="id" label="کد" />
-                        <TextField source="name" label="نام آدرس" />
-                        <TextField source="address" label="آدرس" />
-                        <TextField source="mobile" label="موبایل" />
-                        <TextField source="phone" label="تلفن" />
-                        <TextField source="city" label="شهر" />
-                        <TextField source="state" label="استان" />
-                        <TextField source="zip" label="کدپستی" />
+                        <TextField source="id" />
+                        <TextField source="name" />
+                        <TextField source="address" />
+                        <TextField source="mobile" />
+                        <TextField source="phone"/>
+                        <TextField source="city" />
+                        <TextField source="state" />
+                        <TextField source="zip" />
                         <FunctionField render={(record: any) => 
                             <div>
                                 <Button
@@ -216,20 +219,21 @@ const UserEdit = (props: any) => {
                                     onClick={e => onEditAddress(record)}
                                 >
                                     <EditIcon />
-                                    ویرایش
+                                    {
+                                        translate('ra.action.edit')
+                                    }
                                 </Button>
                                 <Button
                                     style={{color: 'red'}}
                                     onClick={e => onDeleteAddress(record)}
                                 >
                                     <DeleteIcon />
-                                    حذف
+                                    {
+                                        translate('ra.action.remove')
+                                    }
                                 </Button>
                             </div>
                         } />
-
-                        {/* <EditButton />
-                        <DeleteButton /> */}
                     </Datagrid>
                 </ReferenceManyField>
             </FormTab>

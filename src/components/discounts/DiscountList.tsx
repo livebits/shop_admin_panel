@@ -1,21 +1,23 @@
 import * as React from 'react';
-import { Datagrid, TextField, NumberField, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, NumberField, useTranslate, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 
-const translateType = (type: string) => {
+const translateType = (type: string, translate:any) => {
+
     switch (type) {
         case 'percent':
-            return 'درصدی';
+            return translate('pos.discountType.percent');
         case 'constant':
-            return 'ثابت';
+            return translate('pos.discountType.constant');
         default:
             return '';
     }
 }
 
 const DiscountList = (props: any) => {
-    const { permissions } = usePermissions();    
+    const { permissions } = usePermissions();
+    const translate = useTranslate();
     const hasPerm = hasPermissions(permissions, [{ resource: 'discount', action: 'read' }])
     if (!hasPerm) {
         return <ACLError />
@@ -24,14 +26,13 @@ const DiscountList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
-        perPage={20}
-        title="تخفیفات"
+        perPage={25}
     >
         <Datagrid rowClick="edit">
             <TextField source="id" />
             <FunctionField
-                label="نوع تخفیف"
-                render={(record:any) => translateType(record.type)}
+                source="type"
+                render={(record:any) => translateType(record.type, translate)}
             />
             <TextField source="code" />
             <NumberField source="value" />

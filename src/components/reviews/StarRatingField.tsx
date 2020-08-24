@@ -47,7 +47,7 @@ const StarRatingField: FC<FieldProps & OwnProps> = ({
 };
 
 StarRatingField.defaultProps = {
-    label: 'امتیاز',
+    // label: '',
     source: 'rate',
     addLabel: true,
 };

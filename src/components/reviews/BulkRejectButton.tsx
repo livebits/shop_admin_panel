@@ -26,7 +26,7 @@ const BulkRejectButton: FC<BulkActionProps> = ({ selectedIds }) => {
             undoable: true,
             onSuccess: () => {
                 notify(
-                    'resources.reviews.notification.approved_success',
+                    'resources.product-comments.notification.approved_success',
                     'info',
                     {},
                     true
@@ -36,7 +36,7 @@ const BulkRejectButton: FC<BulkActionProps> = ({ selectedIds }) => {
             },
             onFailure: () => {
                 notify(
-                    'resources.reviews.notification.approved_error',
+                    'resources.product-comments.notification.approved_error',
                     'warning'
                 );
             },
@@ -45,7 +45,7 @@ const BulkRejectButton: FC<BulkActionProps> = ({ selectedIds }) => {
 
     return (
         <Button
-            label="Reject"
+            label="resources.product-comments.action.reject"
             onClick={reject}
             disabled={loading}
         >

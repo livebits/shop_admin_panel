@@ -23,7 +23,7 @@ const UserCreate = (props:any) => {
     }
 
     return (
-        <Create {...props} title="ثبت مشتری جدید">
+        <Create {...props} title="resources.customers.page.add">
             <SimpleForm initialValues={defaultValue} >
                 <TextInput source="firstName" />
                 <TextInput source="lastName" />
@@ -31,8 +31,8 @@ const UserCreate = (props:any) => {
                 <PasswordInput source="password" />
                 <TextInput source="email" />
                 <SelectInput source="status" choices={[
-                    { id: 'active', name: 'فعال' },
-                    { id: 'inactive', name: 'غیرفعال' },
+                    { id: 'active', name: 'pos.status.active' },
+                    { id: 'inactive', name: 'pos.status.inactive' },
                 ]} />
             </SimpleForm>
         </Create>

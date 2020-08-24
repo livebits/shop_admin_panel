@@ -104,14 +104,13 @@ const DepartmentEdit = (props: any) => {
 
     ////////////////////////////////////////////////////////////
 
-    return <Edit title="ویرایش واحد" transform={transform} undoable={false} {...props}>
+    return <Edit transform={transform} undoable={false} {...props}>
         <SimpleForm>
-            <TextInput disabled source="id" label="کد" />
-            <TextInput source="name" label="نام" />
-            <TextInput source="description" fullWidth label="توضیحات" />
+            <TextInput disabled source="id" />
+            <TextInput source="name" />
+            <TextInput source="description" fullWidth />
             <ImageInput 
                 source="logo" 
-                label="لوگو" 
                 accept="image/*" 
                 maxSize="2000000" 
                 multiple={false}

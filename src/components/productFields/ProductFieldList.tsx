@@ -5,7 +5,7 @@ const ProductFieldList = (props: any) => (
     <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
-        perPage={20}
+        perPage={25}
         title="فیلدهای محصولات"
     >
         <Datagrid rowClick="edit">

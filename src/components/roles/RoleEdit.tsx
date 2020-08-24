@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     ReferenceInput,
     Edit,
-    EditButton,
+    useTranslate,
     DateInput,
     SelectInput,
     SimpleForm,
@@ -15,24 +15,25 @@ import {
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 const RoleEdit = (props: any) => {
+    const translate = useTranslate();
     const { permissions } = usePermissions();
     const hasPerm = hasPermissions(permissions, [{ resource: 'role', action: 'update' }])
     if (!hasPerm) {
         return <ACLError />
     }
 
-    return <Edit title="ویرایش نقش" {...props}>
+    return <Edit {...props}>
         <SimpleForm>
-            <TextInput disabled source="id" label="کد"/>
-            <TextInput source="name" label="نام نقش"/>
-            <ArrayInput source="rolePermissions" label="دسترسی ها">
+            <TextInput disabled source="id" />
+            <TextInput source="name" />
+            <ArrayInput source="rolePermissions">
                 <SimpleFormIterator>
-                    <ReferenceInput source="permissionId" reference="permissions" label="دسترسی" perPage={100}>
+                    <ReferenceInput source="permissionId" reference="permissions" perPage={100}>
                         <SelectInput optionText={ (choice:any) => choice.description ? choice.description : `${choice.resource}-${choice.action}` }/>
                     </ReferenceInput>
-                    <SelectInput source="status" label="وضعیت" choices={[
-                        { id: 'allow', name: 'مجاز' },
-                        { id: 'deny', name: 'غیرمجاز' },
+                    <SelectInput source="status" choices={[
+                        { id: 'allow', name: translate('pos.permissionStatus.allow') },
+                        { id: 'deny', name: translate('pos.permissionStatus.deny') },
                     ]} />
                 </SimpleFormIterator>
             </ArrayInput>

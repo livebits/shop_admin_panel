@@ -13,8 +13,7 @@ const RoleList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
-        perPage={20}
-        title="نقش ها"
+        perPage={25}
     >
         <Datagrid rowClick="edit">
             <TextField source="id" />

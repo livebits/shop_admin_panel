@@ -1,24 +1,25 @@
 import * as React from 'react';
-import { Datagrid, TextField, usePermissions, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { useTranslate, Datagrid, TextField, usePermissions, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 
-const translateStatus = (status: string) => {
+const translateStatus = (status: string, translate: any) => {
     switch (status) {
         case 'active':
-            return 'فعال';
+            return translate('pos.tenantStatus.active');
         case 'inactive':
-            return 'غیرفعال';
+            return translate('pos.tenantStatus.inactive');
         case 'pending_confirmation':
-            return 'در حال بررسی';
+            return translate('pos.tenantStatus.pending_confirmation');
         case 'expired':
-            return 'منقضی شده';
+            return translate('pos.tenantStatus.expired');
         default:
             return '';
     }
 }
 
 const TenantList = (props: any) => {
+    const translate = useTranslate();
     const { permissions } = usePermissions();    
     const hasPerm = hasPermissions(permissions, [{ resource: 'tenant', action: 'read' }])
     if (!hasPerm) {
@@ -28,8 +29,7 @@ const TenantList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'createdAt', order: 'DESC' }}
-        perPage={20}
-        title="شرکت ها"
+        perPage={25}
     >
         <Datagrid rowClick="edit">
             <TextField source="id" />
@@ -40,15 +40,15 @@ const TenantList = (props: any) => {
             <TextField source="mobile" />
             <TextField source="logo" />
             <FunctionField
-                label="وضعیت"
-                render={(record:any) => translateStatus(record.status)}
+                source="status"
+                render={(record:any) => translateStatus(record.status, translate)}
             />
             <TextField source="type" />
             <TextField source="address" />
-            <TextField source="country" />
+            {/* <TextField source="country" />
             <TextField source="city" />
             <TextField source="state" />
-            <TextField source="zip" />
+            <TextField source="zip" /> */}
             {
                 hasPermissions(permissions, [{ resource: 'tenant', action: 'update' }]) && 
                 <EditButton />

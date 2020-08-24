@@ -96,7 +96,7 @@ const CategoryList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
-        perPage={20}
+        perPage={25}
         component="div"
         // actions={false}
     >

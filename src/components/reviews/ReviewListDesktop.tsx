@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FC } from 'react';
-import { Datagrid, DateField, TextField, FunctionField } from 'react-admin';
+import { Datagrid, DateField, TextField, FunctionField, useTranslate } from 'react-admin';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import ProductReferenceField from '../products/ProductReferenceField';
@@ -41,6 +41,7 @@ const ReviewListDesktop: FC<ReviewListDesktopProps> = ({
     selectedRow,
     ...props
 }) => {
+    const translate = useTranslate();
     const classes = useListStyles();
     const theme = useTheme();
     return (
@@ -55,21 +56,25 @@ const ReviewListDesktop: FC<ReviewListDesktopProps> = ({
             optimized
             {...props}
         >
-            <DateField source="createdAt" label="تاریخ ثبت" />
+            <DateField source="createdAt" />
 
             <FunctionField
-                label="کاربر"
+                source="userTenant"
                 render={(record:any) => <FullNameField record={record.userTenant.user} />}
             />
 
             <FunctionField
-                label="کالا"
+                source="product"
                 render={(record:any) => <ProductNameField record={record.product} />}
             />
 
             <StarRatingField size="small" />
-            <TextField source="comment" label="نظر" cellClassName={classes.comment} />
-            <TextField source="status" label="وضعیت" />
+            <TextField source="comment" cellClassName={classes.comment} />
+            <TextField source="status" />
+            <FunctionField
+                source="status"
+                render={(record:any) => translate(`resources.product-comments.status.${record.status}`)}
+            />
         </Datagrid>
     );
 };

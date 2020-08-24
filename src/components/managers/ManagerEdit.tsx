@@ -107,15 +107,14 @@ const ManagerEdit = (props: any) => {
 
     ////////////////////////////////////////////////////////////
 
-    return <Edit title="ویرایش کاربر" transform={transform} undoable={false} {...props}>
+    return <Edit transform={transform} undoable={false} {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
             <TextInput source="firstName" />
             <TextInput source="lastName" />
             <TextInput source="username" />
             <ImageInput 
-                source="avatar" 
-                label="تصویر کاربر" 
+                source="avatar"
                 accept="image/*" 
                 maxSize="2000000" 
                 multiple={false}
@@ -125,11 +124,10 @@ const ManagerEdit = (props: any) => {
             </ImageInput>
             <TextInput source="email" />
             <SelectInput source="status" choices={[
-                { id: 'active', name: 'فعال' },
-                { id: 'inactive', name: 'غیرفعال' },
+                { id: 'active', name: 'pos.status.active' },
+                { id: 'inactive', name: 'pos.status.inactive' },
             ]} />
             <ReferenceArrayInput
-                label="نقش"
                 source="roles"
                 reference="roles"
                 filterToQuery={(searchText:string) => (searchText ? { name: searchText } : null)}>

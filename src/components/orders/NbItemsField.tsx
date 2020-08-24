@@ -14,7 +14,7 @@ const NbItemsField: FC<NbItemsFieldProps> = props => (
 );
 
 NbItemsField.defaultProps = {
-    label: 'سبد خرید',
+    label: 'resources.orders.fields.basketCount',
     textAlign: 'right',
 };
 

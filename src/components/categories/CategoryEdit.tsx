@@ -106,43 +106,40 @@ const CategoryEdit = (props: any) => {
 
     ////////////////////////////////////////////////////////////
 
-    return <Edit title="ویرایش دسته بندی" transform={transform} undoable={false} {...props}>
+    return <Edit transform={transform} undoable={false} {...props}>
         <SimpleForm>
-            <TextInput disabled source="id" label="کد" />
-            <TextInput source="name" label="نام" />
-            <TextInput source="description" fullWidth label="توضیحات" />
-            {/* <TextInput source="logo" /> */}
-            <ReferenceInput source="parentId" reference="categories" label="والد">
+            <TextInput disabled source="id" />
+            <TextInput source="name" />
+            <TextInput source="description" fullWidth />
+            <ReferenceInput source="parentId" reference="categories">
                 <SelectInput optionText="name" />
             </ReferenceInput>
             <ImageInput 
-                source="avatar" 
-                label="تصویر دسته بندی" 
+                source="avatar"
                 accept="image/*" 
-                maxSize="2000000" 
+                maxSize={2000000} 
                 multiple={false}
                 options={{ onRemove:onRemoveAvatar, onDrop:onDropAvatar }}
             >
                 <PreviewImage /> 
             </ImageInput>
             <ArrayInput 
-                source="categoryFields" 
-                label="فیلدهای دسته بندی"
+                source="categoryFields"
                 sort={{ field: 'priority', order: 'ASC' }}
             >
                 <SimpleFormIterator>
-                    <TextInput source="name" label="نام"/>
-                    <NumberInput source="priority" label="اولویت"/>
-                    <TextInput source="hint" label="راهنما" fullWidth/>
-                    <SelectInput source="dataType" label="نوع فیلد" choices={[
-                        { id: 'number', name: 'عددی' },
-                        { id: 'string', name: 'متن' },
-                        { id: 'text', name: 'رشته' },
-                        { id: 'date', name: 'تاریخ' },
-                        { id: 'option', name: 'انتخابی' },
+                <TextInput source="name"/>
+                    <NumberInput source="priority"/>
+                    <TextInput source="hint" fullWidth/>
+                    <SelectInput source="dataType" choices={[
+                        { id: 'number', name: 'pos.dataType.number' },
+                        { id: 'string', name: 'pos.dataType.string' },
+                        { id: 'text', name: 'pos.dataType.text' },
+                        { id: 'date', name: 'pos.dataType.date' },
+                        { id: 'option', name: 'pos.dataType.option' },
                     ]} />
-                    <TextInput source="defaultValue" label="مقدار پیشفرض"/>
-                    <BooleanInput source="isRequired" label="اجباری؟"/>
+                    <TextInput source="defaultValue"/>
+                    <BooleanInput source="isRequired"/>
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>

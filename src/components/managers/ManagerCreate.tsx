@@ -33,11 +33,10 @@ const ManagerCreate = (props:any) => {
                 <PasswordInput source="password" />
                 <TextInput source="email" />
                 <SelectInput source="status" choices={[
-                    { id: 'active', name: 'فعال' },
-                    { id: 'inactive', name: 'غیرفعال' },
+                    { id: 'active', name: 'pos.status.active' },
+                    { id: 'inactive', name: 'pos.status.inactive' },
                 ]} />
                 <ReferenceArrayInput
-                    label="نقش"
                     source="roles"
                     reference="roles"
                     filterToQuery={(searchText:string) => (searchText ? { name: searchText } : null)}>

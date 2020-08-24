@@ -15,7 +15,7 @@ import {
     TextField,
     FunctionField,
     usePermissions,
-    TextInput,
+    useTranslate,
 } from 'react-admin';
 import { useMediaQuery, Divider, Tabs, Tab, Theme } from '@material-ui/core';
 
@@ -58,9 +58,9 @@ const OrderFilter: FC<FilterProps<FilterParams>> = props => (
                 }
             />
         </ReferenceInput>
-        <DateInput source="date_gte" />
+        {/* <DateInput source="date_gte" />
         <DateInput source="date_lte" />
-        <TextInput source="total_gte" />
+        <TextInput source="total_gte" /> */}
         <NullableBooleanInput source="returned" />
     </Filter>
 );
@@ -70,10 +70,10 @@ const useDatagridStyles = makeStyles({
 });
 
 const tabs = [
-    { id: 'ordered', name: 'ordered' },
-    { id: 'paid', name: 'paid' },
-    { id: 'delivered', name: 'delivered' },
-    { id: 'cancelled', name: 'cancelled' },
+    { id: 'ordered', name: 'resources.orders.tabs.ordered' },
+    { id: 'paid', name: 'resources.orders.tabs.paid' },
+    { id: 'delivered', name: 'resources.orders.tabs.delivered' },
+    { id: 'cancelled', name: 'resources.orders.tabs.cancelled' },
 ];
 
 interface TabbedDatagridProps extends DatagridProps<Order> {}
@@ -85,6 +85,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
     displayedFilters,
     ...rest
 }) => {
+    const translate = useTranslate();
     const { permissions } = usePermissions();
     const classes = useDatagridStyles();
     const isXSmall = useMediaQuery<Theme>(theme =>
@@ -147,7 +148,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                 {tabs.map(choice => (
                     <Tab
                         key={choice.id}
-                        label={choice.name}
+                        label={translate(choice.name)}
                         value={choice.id}
                     />
                 ))}
@@ -165,7 +166,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <DateField source="createdAt" showTime />
                             <TextField source="id" />
                             <FunctionField
-                                label="کاربر"
+                                source="customer"
                                 render={(record:any) => <FullNameField record={record.userTenant.user} />}
                             />
                             <NbItemsField />
@@ -184,7 +185,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <DateField source="createdAt" showTime />
                             <TextField source="id" />
                             <FunctionField
-                                label="کاربر"
+                                source="customer"
                                 render={(record:any) => <FullNameField record={record.userTenant.user} />}
                             />
                             <NbItemsField />
@@ -205,7 +206,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <DateField source="createdAt" showTime />
                             <TextField source="id" />
                             <FunctionField
-                                label="کاربر"
+                                source="customer"
                                 render={(record:any) => <FullNameField record={record.userTenant.user} />}
                             />
                             <NbItemsField />

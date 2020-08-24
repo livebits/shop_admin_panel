@@ -10,7 +10,7 @@ const ACLError = ({
     const translate = useTranslate();
     return (
         <div style={{ textAlign: 'center' }}>
-            <Title title="Error" />
+            <Title title="pos.error.aclError" />
             <h2>
                 <ErrorIcon color="error" />
                 دسترسی غیرمجاز

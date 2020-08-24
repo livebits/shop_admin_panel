@@ -48,9 +48,6 @@ export const SaveAndUploadButton = (props:any) => {
     let thumbnail = requestBody.thumbnail
     delete requestBody.thumbnail;
 
-    console.log('thumb:', thumbnail);
-    
-
     const [save, { loading }] = useUpdate(
         'products',
         record.id,

@@ -1,32 +1,33 @@
 import * as React from 'react';
-import { Datagrid, TextField, usePermissions, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { useTranslate, Datagrid, TextField, usePermissions, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 
-const translateType = (type: string) => {
+const translateType = (type: string, translate: any) => {
     switch (type) {
         case 'SMS':
-            return 'پیامک';
+            return translate('pos.messageType.sms');
         case 'NOTIFICATION':
-            return 'اعلان';
+            return translate('pos.messageType.notification');
         default:
             return '';
     }
 }
 
-const translateReceiverType = (type: string) => {
+const translateReceiverType = (type: string, translate: any) => {
     switch (type) {
         case 'SINGLE_USER':
-            return 'کاربر خاص';
+            return translate('pos.receiverType.single_user');
         case 'ALL_USERS':
-            return 'همه کاربران';
+            return translate('pos.receiverType.all_users');
         default:
             return '';
     }
 }
 
 const MessageList = (props: any) => {
-    const { permissions } = usePermissions();    
+    const { permissions } = usePermissions();
+    const translate = useTranslate();
     const hasPerm = hasPermissions(permissions, [{ resource: 'message', action: 'read' }])
     if (!hasPerm) {
         return <ACLError />
@@ -35,24 +36,23 @@ const MessageList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
-        perPage={20}
-        title="پیام ها"
+        perPage={25}
     >
         <Datagrid rowClick="edit">
             <TextField source="id" />
             <DateField source="createdAt" />
             <TextField source="title" />
             <FunctionField
-                label="نوع پیام"
-                render={(record:any) => translateType(record.type)}
+                source="type"
+                render={(record:any) => translateType(record.type, translate)}
             />
             <DateField source="expiredAt" />
             <FunctionField
-                label="دریافت کنندگان"
-                render={(record:any) => translateReceiverType(record.receiversType)}
+                source="receivers"
+                render={(record:any) => translateReceiverType(record.receiversType, translate)}
             />
             <FunctionField
-                label="دریافت کننده"
+                source="receiver"
                 render={(record:any) => record.receiver ? `${record.receiver.user.firstName} ${record.receiver.user.lastName}` : ''}
             />
             {

@@ -26,8 +26,8 @@ const OrderTitle: FC<OrderTitleProps> = ({ record }) => {
     const translate = useTranslate();
     return record ? (
         <span>
-            {translate('resources.commands.title', {
-                reference: record.id,
+            {translate('resources.orders.title', {
+                id: record.id,
             })}
         </span>
     ) : null;
@@ -38,6 +38,7 @@ const useEditStyles = makeStyles({
 });
 
 const OrderEdit: FC<EditComponentProps> = props => {
+    const translate = useTranslate();
     const classes = useEditStyles();
     const { permissions } = usePermissions();
     const hasPerm = hasPermissions(permissions, [{ resource: 'order', action: 'update' }])
@@ -63,13 +64,13 @@ const OrderEdit: FC<EditComponentProps> = props => {
                 <SelectInput
                     source="status"
                     choices={[
-                        { id: 'delivered', name: 'delivered' },
-                        { id: 'ordered', name: 'ordered' },
-                        { id: 'paid', name: 'paid' },
-                        { id: 'cancelled', name: 'cancelled' },
+                        { id: 'delivered', name: translate('pos.orderStatus.delivered') },
+                        { id: 'ordered', name: translate('pos.orderStatus.ordered') },
+                        { id: 'paid', name: translate('pos.orderStatus.paid') },
+                        { id: 'cancelled', name: translate('pos.orderStatus.cancelled') },
                         {
                             id: 'unknown',
-                            name: 'unknown',
+                            name: translate('pos.orderStatus.unknown'),
                             disabled: true,
                         },
                     ]}

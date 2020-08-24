@@ -61,7 +61,7 @@ const ReviewEdit: FC<Props> = ({ onCancel, ...props }) => {
         <div className={classes.root}>
             <div className={classes.title}>
                 <Typography variant="h6">
-                    {translate('resources.reviews.detail')}
+                    {translate('resources.product-comments.detail')}
                 </Typography>
                 <IconButton onClick={onCancel}>
                     <CloseIcon />
@@ -78,15 +78,15 @@ const ReviewEdit: FC<Props> = ({ onCancel, ...props }) => {
                 toolbar={<ReviewEditToolbar />}
             >
                 <FunctionField
-                    label="کاربر"
+                    source="userTenant"
                     render={(record:any) => <FullNameField record={record.userTenant.user} />}
                 />
 
                 <FunctionField
-                    label="کالا"
+                    source="product"
                     render={(record:any) => <ProductNameField record={record.product} />}
                 />
-                <DateField source="date" formClassName={classes.inlineField} />
+                <DateField source="createdAt" formClassName={classes.inlineField} />
                 <StarRatingField formClassName={classes.inlineField} />
                 <TextInput source="comment" rowsMax={15} multiline fullWidth />
             </SimpleForm>

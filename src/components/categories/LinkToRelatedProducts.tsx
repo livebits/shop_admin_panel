@@ -39,7 +39,7 @@ const LinkToRelatedProducts: FC<FieldProps<Category>> = ({ record }) => {
         >
             {/* <products.icon className={classes.icon} /> */}
             {/* {translate('resources.categories.fields.products')} */}
-            محصولات
+            {translate('resources.categories.fields.products')}
         </Button>
     ) : null;
 };

@@ -32,7 +32,6 @@ const ReviewFilter: FC<FilterProps<FilterParams>> = props => {
             <SearchInput source="q" alwaysOn />
             <SelectInput
                 source="status||eq"
-                label="وضعیت"
                 choices={[
                     { id: 'approved', name: 'Approved' },
                     { id: 'pending', name: 'Pending' },
@@ -40,14 +39,14 @@ const ReviewFilter: FC<FilterProps<FilterParams>> = props => {
                 ]}
                 className={classes.status}
             />
-            <ReferenceInput source="customerId||eq" reference="customers" label="کاربر">
+            <ReferenceInput source="customerId||eq" reference="customers">
                 <AutocompleteInput
                     optionText={(choice: Customer) =>
                         `${choice.firstName} ${choice.lastName}`
                     }
                 />
             </ReferenceInput>
-            <ReferenceInput source="productId||eq" reference="products" label="کالا">
+            <ReferenceInput source="productId||eq" reference="products">
                 <AutocompleteInput optionText="name" />
             </ReferenceInput>
             {/* <DateInput source="date_gte" />

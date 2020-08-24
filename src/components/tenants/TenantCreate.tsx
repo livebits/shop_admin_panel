@@ -4,7 +4,7 @@ import {
     Create,
     SimpleForm,
     PasswordInput,
-    ReferenceInput,
+    useTranslate,
     SelectInput,
     TabbedForm,
     TextInput,
@@ -15,6 +15,7 @@ import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 
 const TenantCreate = (props:any) => {
+    const translate = useTranslate();
     const { permissions } = usePermissions();    
     const hasPerm = hasPermissions(permissions, [{ resource: 'tenant', action: 'create' }])
     if (!hasPerm) {
@@ -29,10 +30,10 @@ const TenantCreate = (props:any) => {
                 <TextInput source="phone" />
                 <TextInput source="mobile" />
                 <SelectInput source="status" choices={[
-                    { id: 'active', name: 'فعال' },
-                    { id: 'inactive', name: 'غیرفعال' },
-                    { id: 'pending_confirmation', name: 'در حال بررسی' },
-                    { id: 'expired', name: 'منقضی شده' },
+                    { id: 'active', name: translate('pos.tenantStatus.active') },
+                    { id: 'inactive', name: translate('pos.tenantStatus.inactive') },
+                    { id: 'pending_confirmation', name: translate('pos.tenantStatus.pending_confirmation') },
+                    { id: 'expired', name: translate('pos.tenantStatus.expired') },
                 ]} />
                 <TextInput source="address" />
                 <TextInput source="country" />

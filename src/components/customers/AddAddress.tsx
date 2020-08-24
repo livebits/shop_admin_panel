@@ -69,7 +69,9 @@ const AddAddress: FC<Props> = ({ onCancel, onRefresh, ...props }) => {
         <div className={classes.root}>
             <div className={classes.title}>
                 <Typography variant="h6">
-                    ثبت آدرس جدید
+                    {
+                        translate('resources.customers.page.addAddress')
+                    }
                 </Typography>
                 <IconButton onClick={onCancel}>
                     <CloseIcon />
@@ -86,13 +88,13 @@ const AddAddress: FC<Props> = ({ onCancel, onRefresh, ...props }) => {
                 initialValues={{ userId: props.match.params.id }}
                 // toolbar={<AddAddressToolbar />}
             >
-                <TextInput source="name" label="نام آدرس" validate={required()} />
-                <TextInput source="address" label="آدرس" multiline fullWidth validate={required()}/>
-                <TextInput source="mobile" label="موبایل" validate={required()}/>
-                <TextInput source="phone" label="تلفن" />
-                <TextInput source="city" label="شهر" validate={required()}/>
-                <TextInput source="state" label="استان" validate={required()} />
-                <TextInput source="zip" label="کدپستی" validate={required()} />
+                <TextInput source="name" validate={required()} />
+                <TextInput source="address" multiline fullWidth validate={required()}/>
+                <TextInput source="mobile" validate={required()}/>
+                <TextInput source="phone" />
+                <TextInput source="city" validate={required()}/>
+                <TextInput source="state" validate={required()} />
+                <TextInput source="zip" validate={required()} />
             </SimpleForm>
         </div>
     );

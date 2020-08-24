@@ -19,12 +19,11 @@ import ACLError from '../../layout/ACLError';
 const CreateToolbar = (props: any) => (
     <Toolbar {...props} >
         <SaveButton
-            label="ذخیره"
             redirect="list"
             submitOnEnter={true}
         />
         <SaveButton
-            label="ذخیره و جدید"
+            label="ra.action.saveAndNew"
             redirect={false}
             submitOnEnter={false}
             variant="text"
@@ -42,9 +41,8 @@ const DepartmentCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm toolbar={<CreateToolbar />} redirect="list">
-                <TextInput source="name" label="نام" />
-                <TextInput source="description" fullWidth label="توضیحات" />
-                {/* <TextInput source="logo" /> */}
+                <TextInput source="name"/>
+                <TextInput source="description" fullWidth />
             </SimpleForm>
         </Create>
     );

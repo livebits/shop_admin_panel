@@ -30,16 +30,24 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                 <TableHead>
                     <TableRow>
                         <TableCell>
-                            نام کالا
+                            {translate(
+                                'resources.orders.fields.factor.productName'
+                            )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            قیمت واحد
+                            {translate(
+                                'resources.orders.fields.factor.unitPrice'
+                            )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            تعداد
+                            {translate(
+                                'resources.orders.fields.factor.quantity'
+                            )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            جمع
+                            {translate(
+                                'resources.orders.fields.factor.sum'
+                            )}
                         </TableCell>
                     </TableRow>
                 </TableHead>
@@ -87,7 +95,9 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                     <TableRow>
                         <TableCell colSpan={2} />
                         <TableCell>
-                            مجموع
+                            {translate(
+                                'resources.orders.fields.factor.productsPrice'
+                            )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
                             {record.factor && record.factor.totalTaxPrice.toLocaleString(undefined, {
@@ -99,7 +109,9 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                     <TableRow>
                         <TableCell colSpan={2} />
                         <TableCell>
-                            هزینه ارسال
+                            {translate(
+                                'resources.orders.fields.factor.discountPrice'
+                            )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
                             {record.factor && record.factor.deliveryPrice.toLocaleString(undefined, {
@@ -108,23 +120,23 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                             })}
                         </TableCell>
                     </TableRow>
-                    {/* <TableRow>
+                    <TableRow>
                         <TableCell colSpan={2} />
                         <TableCell>
                             {translate(
-                                'resources.commands.fields.basket.tax_rate'
+                                'resources.orders.fields.factor.deliveryPrice'
                             )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {record.tax_rate.toLocaleString(undefined, {
-                                style: 'percent',
-                            })}
+                            0
                         </TableCell>
-                    </TableRow> */}
+                    </TableRow>
                     <TableRow>
                         <TableCell colSpan={2} />
                         <TableCell className={classes.boldCell}>
-                            کلی
+                            {translate(
+                                'resources.orders.fields.factor.total'
+                            )}
                         </TableCell>
                         <TableCell
                             className={classnames(

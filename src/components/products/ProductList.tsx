@@ -44,7 +44,7 @@ export const ProductFilter: FC<FilterProps<FilterParams>> = props => (
     <Filter {...props}>
         <SearchInput source="name" alwaysOn />
         <ReferenceInput
-            label="دسته بندی"
+            label="resources.products.filters.category"
             source="categoryId||eq"
             reference="categories"
             alwaysOn
@@ -75,8 +75,8 @@ const ProductList: FC<ListComponentProps> = props => {
     return <List
         {...props}
         filters={<ProductFilter />}
-        perPage={20}
-        pagination={<Pagination rowsPerPageOptions={[10, 20, 40]} />}
+        perPage={25}
+        pagination={<Pagination rowsPerPageOptions={[10, 25, 40]} />}
         sort={{ field: 'id', order: 'DESC' }}
     >
         <GridList />

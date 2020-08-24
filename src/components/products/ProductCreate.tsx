@@ -13,6 +13,7 @@ import {
     SimpleFormIterator,
     FormDataConsumer,
     usePermissions,
+    useTranslate,
 } from 'react-admin';
 import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,6 +35,7 @@ export const styles = {
 const useStyles = makeStyles(styles);
 
 const ProductCreate: FC<CreateComponentProps> = props => {
+    const translate = useTranslate();
     const classes = useStyles();
     const { permissions } = usePermissions();    
     const hasPerm = hasPermissions(permissions, [{ resource: 'product', action: 'create' }])
@@ -71,7 +73,7 @@ const ProductCreate: FC<CreateComponentProps> = props => {
     return (
         <Create {...props} transform={transform}>
             <TabbedForm>
-                <FormTab label="مشخصات محصول">
+                <FormTab label="resources.products.tabs.public">
                     <TextInput
                         autoFocus
                         source="name"
@@ -82,13 +84,13 @@ const ProductCreate: FC<CreateComponentProps> = props => {
                         fullWidth
                     />
 
-                    <SelectInput 
+                    <SelectInput
                         source="status"
                         validate={required()}
                         choices={[
-                            { id: 'available', name: 'موجود' },
-                            { id: 'not_available', name: 'ناموجود' },
-                        ]} 
+                            { id: 'available', name: translate('pos.productStatus.available') },
+                            { id: 'not_available', name: translate('pos.productStatus.not_available') },
+                        ]}
                     />
                     
                     <ReferenceInput
@@ -100,47 +102,46 @@ const ProductCreate: FC<CreateComponentProps> = props => {
                     </ReferenceInput>
                 </FormTab>
                 <FormTab
-                    label="توضیحات"
+                    label="resources.products.tabs.description"
                     path="description"
                 >
-                    <RichTextInput source="analysis" label="توضیحات فنی" />
+                    <RichTextInput source="analysis" />
                 </FormTab>
                 <FormTab
-                    label="معایب/مزایا"
-                    // path="description"
+                    label="resources.products.tabs.proscons"
+                    path="proscons"
                 >
                     <ArrayInput
-                        source="pros" 
-                        label="مزایا"
+                        source="pros"
                     >
                         <SimpleFormIterator>
-                            <TextInput source="value" label="عنوان مزایا" fullWidth/>
+                            <TextInput source="value" label="resources.products.fields.prosValue" fullWidth/>
                         </SimpleFormIterator>
                     </ArrayInput>
                     <ArrayInput
                         source="cons" 
-                        label="معایب"
                     >
                         <SimpleFormIterator>
-                            <TextInput source="value" label="عنوان عیب" fullWidth/>
+                            <TextInput source="value" label="resources.products.fields.consValue" fullWidth/>
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>
                 <FormTab
-                    label="فیلدهای اختصاصی"
+                    label="resources.products.tabs.productFields"
+                    path="productFields"
                 >
                     <ArrayInput
-                        source="productFields" 
-                        label="فیلد"
+                        source="productFields"
                     >
                         <SimpleFormIterator>
-                            <TextInput source="key" label="نام"/>
-                            <TextInput source="value" label="مقدار" fullWidth/>
+                            <TextInput source="key" label="resources.products.fields.fieldKey"/>
+                            <TextInput source="value" label="resources.products.fields.fieldValue" fullWidth/>
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>
                 <FormTab
-                    label="فیلدهای دسته بندی"
+                    label="resources.products.tabs.category"
+                    path="category"
                 >
                     <FormDataConsumer>
                         {(formDataProps:any) => (
@@ -149,21 +150,20 @@ const ProductCreate: FC<CreateComponentProps> = props => {
                     </FormDataConsumer>
                 </FormTab>
                 <FormTab
-                    label="قیمت ها"
+                    label="resources.products.tabs.prices"
+                    path="prices"
                 >
                     <ArrayInput
-                        source="prices" 
-                        label="قیمت های محصول"
+                        source="prices"
                     >
                         <SimpleFormIterator>
-                            <TextInput source="name" label="نام" />
-                            <TextInput source="color" label="رنگ" />
-                            <NumberInput source="quantity" label="تعداد" />
-                            <NumberInput source="price" label="قیمت" />
-                            <SelectInput source="status" label="وضعیت" choices={[
-                                { id: 'available', name: 'موجود' },
-                                { id: 'not_available', name: 'ناموجود' },
-                            ]} />
+                            <TextInput source="name" label="resources.products.fields.priceFields.name" />
+                            <TextInput source="color" label="resources.products.fields.priceFields.color" />
+                            <NumberInput source="quantity" label="resources.products.fields.priceFields.quantity" />
+                            <NumberInput source="price" label="resources.products.fields.priceFields.price" />
+                            <SelectInput source="status" label="resources.products.fields.priceFields.status" choices={[
+                                { id: 'available', name: translate('pos.productStatus.available') },
+                                { id: 'not_available', name: translate('pos.productStatus.not_available') },                            ]} />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>

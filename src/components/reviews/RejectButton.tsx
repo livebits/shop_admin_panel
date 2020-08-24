@@ -23,7 +23,7 @@ const RejectButton: FC<{ record: Review }> = ({ record }) => {
             undoable: true,
             onSuccess: () => {
                 notify(
-                    'resources.reviews.notification.rejected_success',
+                    'resources.product-comments.notification.rejected_success',
                     'info',
                     {},
                     true
@@ -32,7 +32,7 @@ const RejectButton: FC<{ record: Review }> = ({ record }) => {
             },
             onFailure: () => {
                 notify(
-                    'resources.reviews.notification.rejected_error',
+                    'resources.product-comments.notification.rejected_error',
                     'warning'
                 );
             },
@@ -51,8 +51,7 @@ const RejectButton: FC<{ record: Review }> = ({ record }) => {
                 color="primary"
                 style={{ paddingRight: '0.5em', color: 'red' }}
             />
-            {/* {translate('resources.reviews.action.reject')} */}
-            Reject
+            {translate('resources.product-comments.action.reject')}
         </Button>
     ) : (
         <span />

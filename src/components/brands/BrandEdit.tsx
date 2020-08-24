@@ -5,7 +5,7 @@ import {
     Edit,
     EditButton,
     DateInput,
-    SelectInput,
+    ImageInput,
     SimpleForm,
     TextInput,
     usePermissions,
@@ -19,11 +19,20 @@ const BrandEdit = (props: any) => {
         return <ACLError />
     }
 
-    return <Edit title="ویرایش برند" {...props}>
+    return <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
             <TextInput source="name" />
             <TextInput source="description" fullWidth />
+            <ImageInput 
+                source="logo"
+                accept="image/*" 
+                maxSize="2000000" 
+                multiple={false}
+                // options={{ onRemove:onRemoveAvatar, onDrop:onDropAvatar }}
+            >
+                {/* <PreviewImage />  */}
+            </ImageInput>
         </SimpleForm>
     </Edit>
 }

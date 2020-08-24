@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { usePermissions, Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { usePermissions, Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton, useTranslate, } from 'react-admin';
 import { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import { BulkDeleteButton } from 'react-admin';
@@ -16,6 +16,7 @@ const BulkActionButtons = (props: any) => (
 );
 
 const UserList = (props: any) => {
+    const translate = useTranslate();
     const { permissions } = usePermissions();    
     const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'read' }])
     if (!hasPerm) {
@@ -26,9 +27,9 @@ const UserList = (props: any) => {
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
         filter={{ 'type||eq': 'customer' }}
-        perPage={20}
+        perPage={25}
         // actions={false}
-        title="مشتریان"
+        // title="مشتریان"
         bulkActionButtons={<BulkActionButtons />}
     >
         <Datagrid rowClick="edit">
@@ -39,8 +40,8 @@ const UserList = (props: any) => {
             <TextField source="username" />
             <EmailField source="email" />
             <FunctionField
-                label="وضعیت"
-                render={(record:any) => record.status === 'active' ? 'فعال' : 'غیرفعال'}
+                source="status"
+                render={(record:any) => record.status === 'active' ? translate('pos.status.active') : translate('pos.status.inactive')}
             />
             <TextField source="lastLogin" />
             {

@@ -62,7 +62,7 @@ const CategoryGrid: FC<ListControllerProps<Category>> = props => {
                         <CardActions
                             classes={{ spacing: classes.actionSpacer }}
                         >
-                            <LinkToRelatedUsers record={data[id]} />
+                            {/* <LinkToRelatedUsers record={data[id]} /> */}
                             {
                                 hasPermissions(permissions, [{ resource: 'department', action: 'update' }]) && 
                                 <EditButton
@@ -96,7 +96,7 @@ const DepartmentList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
-        perPage={20}
+        perPage={25}
         component="div"
         // actions={false}
     >

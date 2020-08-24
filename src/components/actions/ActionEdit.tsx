@@ -19,7 +19,7 @@ const ActionEdit = (props: any) => {
         return <ACLError />
     }
 
-    return <Edit title="ویرایش مجوز" {...props}>
+    return <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
             <TextInput source="resource" />

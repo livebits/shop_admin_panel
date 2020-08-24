@@ -33,7 +33,7 @@ const CategoryEdit = (props: any) => (
                 reference="products"
                 target="category_id"
                 label="resources.categories.fields.products"
-                perPage={20}
+                perPage={25}
                 fullWidth
             >
                 <Datagrid>

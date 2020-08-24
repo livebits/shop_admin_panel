@@ -39,7 +39,6 @@ const LinkToRelatedUsers: FC<FieldProps<Category>> = ({ record }) => {
         >
             {/* <products.icon className={classes.icon} /> */}
             {/* {translate('resources.categories.fields.products')} */}
-            کاربران
         </Button>
     ) : null;
 };

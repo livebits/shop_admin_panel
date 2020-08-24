@@ -23,7 +23,7 @@ const AcceptButton: FC<{ record: Review }> = ({ record }) => {
             undoable: true,
             onSuccess: () => {
                 notify(
-                    'resources.reviews.notification.approved_success',
+                    'resources.product-comments.notification.approved_success',
                     'info',
                     {},
                     true
@@ -32,7 +32,7 @@ const AcceptButton: FC<{ record: Review }> = ({ record }) => {
             },
             onFailure: () => {
                 notify(
-                    'resources.reviews.notification.approved_error',
+                    'resources.product-comments.notification.approved_error',
                     'warning'
                 );
             },
@@ -50,8 +50,7 @@ const AcceptButton: FC<{ record: Review }> = ({ record }) => {
                 color="primary"
                 style={{ paddingRight: '0.5em', color: 'green' }}
             />
-            {/* {translate('resources.reviews.action.accept')} */}
-            Approve
+            {translate('resources.product-comments.action.accept')}
         </Button>
     ) : (
         <span />

@@ -19,12 +19,11 @@ import ACLError from '../../layout/ACLError';
 const CreateToolbar = (props: any) => (
     <Toolbar {...props} >
         <SaveButton
-            label="ذخیره"
             redirect="list"
             submitOnEnter={true}
         />
         <SaveButton
-            label="ذخیره و جدید"
+            label="ra.action.saveAndNew"
             redirect={false}
             submitOnEnter={false}
             variant="text"
@@ -41,30 +40,28 @@ const CategoryCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm toolbar={<CreateToolbar />} redirect="list">
-                <TextInput source="name" label="نام" />
-                <TextInput source="description" fullWidth label="توضیحات" />
-                {/* <TextInput source="logo" /> */}
-                <ReferenceInput source="parentId" reference="categories" label="والد">
+                <TextInput source="name" />
+                <TextInput source="description" fullWidth/>
+                <ReferenceInput source="parentId" reference="categories">
                     <SelectInput optionText="name" />
                 </ReferenceInput>
                 <ArrayInput 
                     source="categoryFields" 
-                    label="فیلدهای دسته بندی"
                     sort={{ field: 'priority', order: 'ASC' }}
                 >
                     <SimpleFormIterator>
-                        <TextInput source="name" label="نام"/>
-                        <NumberInput source="priority" label="اولویت"/>
-                        <TextInput source="hint" label="راهنما" fullWidth/>
-                        <SelectInput source="dataType" label="نوع فیلد" choices={[
-                            { id: 'number', name: 'عددی' },
-                            { id: 'string', name: 'متن' },
-                            { id: 'text', name: 'رشته' },
-                            { id: 'date', name: 'تاریخ' },
-                            { id: 'option', name: 'انتخابی' },
+                        <TextInput source="name"/>
+                        <NumberInput source="priority"/>
+                        <TextInput source="hint" fullWidth/>
+                        <SelectInput source="dataType" choices={[
+                            { id: 'number', name: 'pos.dataType.number' },
+                            { id: 'string', name: 'pos.dataType.string' },
+                            { id: 'text', name: 'pos.dataType.text' },
+                            { id: 'date', name: 'pos.dataType.date' },
+                            { id: 'option', name: 'pos.dataType.option' },
                         ]} />
-                        <TextInput source="defaultValue" label="مقدار پیشفرض"/>
-                        <BooleanInput source="isRequired" label="اجباری؟"/>
+                        <TextInput source="defaultValue"/>
+                        <BooleanInput source="isRequired"/>
                     </SimpleFormIterator>
                 </ArrayInput>
             </SimpleForm>

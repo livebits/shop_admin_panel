@@ -64,7 +64,7 @@ const ProductList: FC<ListComponentProps> = props => (
     <List
         {...props}
         filters={<ProductFilter />}
-        perPage={20}
+        perPage={25}
         pagination={<Pagination rowsPerPageOptions={[10, 20, 40]} />}
         sort={{ field: 'reference', order: 'ASC' }}
     >

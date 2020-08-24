@@ -1,5 +1,5 @@
 import { TranslationMessages } from 'ra-core';
-import farsiMessages from 'ra-language-farsi';
+import farsiMessages from './farsiMessages';
 
 const customFarsiMessages: TranslationMessages = {
     ...farsiMessages,
@@ -36,69 +36,316 @@ const customFarsiMessages: TranslationMessages = {
             catalog: 'Catalog',
             customers: 'Customers',
         },
+        status: {
+            active: 'فعال',
+            inactive: 'غیرفعال',
+        },
+        dataType: {
+            number: 'عددی',
+            string: 'متنی',
+            text: 'رشته ای',
+            date: 'تاریخ',
+            option: 'انتخابی',
+        },
+        discountType: {
+            percent: 'درصدی',
+            constant: 'ثابت',
+        },
+        messageType: {
+            sms: 'پیامک',
+            notification: 'اعلان',
+        },
+        receiverType: {
+            single_user: 'کاربرخاص',
+            all_users: 'همه کاربران',
+        },
+        orderStatus: {
+            delivered: 'تحویل داده شده',
+            ordered: 'بررسی نشده',
+            paid: 'پرداخت شده',
+            cancelled: 'کنسل شده',
+            unknown: 'نامشخص',
+        },
+        productStatus: {
+            available: 'موجود',
+            not_available: 'ناموجود',
+        },
+        permissionStatus: {
+            allow: 'مجاز',
+            deny: 'غیرمجاز',
+        },
+        tenantStatus: {
+            active: 'فعال',
+            inactive: 'غیرفعال',
+            pending_confirmation: 'در حال بررسی',
+            expired: 'منقضی شده',
+        },
+        error: {
+            aclError: 'دسترسی غیر مجاز',
+        }
     },
     resources: {
         customers: {
-            name: 'Customer |||| Customers',
+            name: 'مشتری |||| مشتریان',
             fields: {
-                commands: 'Orders',
-                first_seen: 'First seen',
-                groups: 'Segments',
-                last_seen: 'Last seen',
-                last_seen_gte: 'Visited Since',
-                name: 'Name',
-                total_spent: 'Total spent',
-                password: 'Password',
-                confirm_password: 'Confirm password',
+                id: 'کد',
+                createdAt: 'تاریخ ثبت نام',
+                firstName: 'نام',
+                lastName: 'نام خانوادگی',
+                username: 'نام کاربری',
+                email: 'ایمیل',
+                status: 'وضعیت',
+                password: 'رمزعبور',
+                avatar: 'تصویر کاربر',
+                lastLogin: 'آخرین ورود',
             },
             filters: {
-                last_visited: 'Last visited',
-                today: 'Today',
-                this_week: 'This week',
-                last_week: 'Last week',
-                this_month: 'This month',
-                last_month: 'Last month',
-                earlier: 'Earlier',
-                has_ordered: 'Has ordered',
-                has_newsletter: 'Has newsletter',
-                group: 'Segment',
-            },
-            fieldGroups: {
-                identity: 'Identity',
-                address: 'Address',
-                stats: 'Stats',
-                history: 'History',
-                password: 'Password',
-                change_password: 'Change Password',
             },
             page: {
-                delete: 'Delete Customer',
+                delete: 'حذف مشتری',
+                add: 'ثبت مشتری جدید',
+                edit: '%{customer_name} ویرایش',
+                addAddress: 'ثبت آدرس جدید',
+                editAddress: 'ویرایش آدرس',
+                savedAddresses: 'آدرس های ثبت شده',
             },
             errors: {
                 password_mismatch:
-                    'The password confirmation is not the same as the password.',
+                'رمزعبور و تکرار یکی نیستند.',
+            },
+            tabs: {
+                addresses: 'آدرس های کاربر',
+                publicInfo: 'اطلاعات عمومی',
+            }
+        },
+        managers: {
+            name: 'مدیر |||| مدیران',
+            fields: {
+                id: 'کد',
+                createdAt: 'تاریخ ثبت نام',
+                firstName: 'نام',
+                lastName: 'نام خانوادگی',
+                username: 'نام کاربری',
+                email: 'ایمیل',
+                status: 'وضعیت',
+                password: 'رمزعبور',
+                avatar: 'تصویر کاربر',
+                lastLogin: 'آخرین ورود',
+                roles: 'نقش ها'
+            },
+            filters: {
+            },
+            page: {
+                delete: 'حذف مدیر',
+                add: 'ثبت مدیر جدید',
+            },
+            errors: {
+                password_mismatch:
+                'رمزعبور و تکرار یکی نیستند.',
             },
         },
-        commands: {
-            name: 'Order |||| Orders',
-            amount: '1 order |||| %{smart_count} orders',
-            title: 'Order %{reference}',
+        permissions: {
+            name: 'مجوز |||| مجوزها',
             fields: {
-                basket: {
-                    delivery: 'Delivery',
-                    reference: 'Reference',
-                    quantity: 'Quantity',
-                    sum: 'Sum',
-                    tax_rate: 'Tax Rate',
-                    total: 'Total',
-                    unit_price: 'Unit Price',
+                id: 'کد',
+                resource: 'منو',
+                action: 'عملیات',
+                description: 'توضیحات',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        brands: {
+            name: 'برند |||| برندها',
+            fields: {
+                id: 'کد',
+                name: 'منو',
+                logo: 'تصویر برند',
+                description: 'توضیحات',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        discounts: {
+            name: 'تخفیف |||| تخفیف ها',
+            fields: {
+                id: 'کد',
+                type: 'نوع تخفیف',
+                code: 'کد',
+                value: 'مقدار',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        messages: {
+            name: 'پیام |||| پیام ها',
+            fields: {
+                id: 'کد',
+                createdAt: 'تاریخ ثبت',
+                title: 'عنوان',
+                body: 'متن پیام',
+                type: 'نوع پیام',
+                expiredAt: 'تاریخ انقضا',
+                receivers: 'دریافت کنندگان',
+                receiver: 'دریافت کننده',
+                receiversType: 'نوع دریافت کننده',
+                receiverId: ' دریافت کننده',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        'user-addresses': {
+            name: 'آدرس مشتری |||| آدرس های مشتری',
+            fields: {
+                id: 'کد',
+                name: 'عنوان آدرس',
+                address: 'آدرس',
+                mobile: 'موبایل',
+                phone: 'تلفن',
+                city: 'شهر',
+                state: 'استان',
+                zip: 'کدپستی',
+            },
+        },
+        categories: {
+            name: 'دسته بندی |||| دسته بندی ها',
+            fields: {
+                id: 'کد',
+                name: 'نام',
+                avatar: 'تصویر دسته بندی',
+                description: 'توضیحات',
+                parentId: 'والد',
+                categoryFields: 'فیلدهای دسته بندی',
+                products: 'محصولات',
+                priority: 'اولویت',
+                hint: 'راهنما',
+                dataType: 'نوع فیلد',
+                defaultValue: 'مقدار پیشفرض',
+                isRequired: 'اجباری؟',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        categoryFields: {
+            name: 'فیلد دسته بندی |||| فیلدهای دسته بندی',
+            fields: {
+                id: 'کد',
+                name: 'نام',
+                priority: 'اولویت',
+                hint: 'راهنما',
+                dataType: 'نوع فیلد',
+                defaultValue: 'مقدار پیشفرض',
+                isRequired: 'اجباری؟',
+            },
+        },
+        departments: {
+            name: 'واحد |||| واحدها',
+            fields: {
+                id: 'کد',
+                name: 'نام',
+                logo: 'لوگو',
+                description: 'توضیحات',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        orders: {
+            name: 'سفارش |||| سفارشات',
+            amount: '۱ سفارش |||| %{smart_count} سفارش',
+            title: 'سفارش %{id}',
+            fields: {
+                createdAt: 'تاریخ ثبت',
+                id: 'شماره سفارش',
+                customer: 'مشتری',
+                factor :{
+                    orderPrice: 'مبلغ',
+                    productName: 'کالا',
+                    unitPrice: 'قیمت',
+                    quantity: 'تعداد',
+                    sum: 'جمع',
+                    productsPrice: 'مبلغ کل کالاها',
+                    discountPrice: 'تخفیف',
+                    deliveryPrice: 'هزینه ارسال',
+                    total: 'جمع',
                 },
-                customer_id: 'Customer',
-                date_gte: 'Passed Since',
-                date_lte: 'Passed Before',
-                total_gte: 'Min amount',
-                status: 'Status',
-                returned: 'Returned',
+                basketCount: 'تعداد سبد خرید',
+                shipmentType: 'نحوه ارسال',
+                returned: 'برگشت خورده؟',
+                userTenantId: 'مشتری',
+                status: 'وضعیت',
+            },
+            tabs: {
+                ordered: 'بررسی نشده',
+                paid: 'پرداخت شده',
+                delivered: 'تحویل شده',
+                cancelled: 'کنسل شده',
+            },
+        },
+        roles: {
+            name: 'نقش |||| نقش ها',
+            fields: {
+                id: 'کد',
+                createdAt: 'تاریخ ثبت',
+                name: 'نام',
+                rolePermissions: 'دسترسی ها',
+                permissionId: 'دسترسی',
+                status: 'وضعیت',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        rolePermissions: {
+            name: 'نقش |||| نقش ها',
+            fields: {
+                permissionId: 'دسترسی',
+                status: 'وضعیت',
+            },
+        },
+        tenants: {
+            name: 'شرکت |||| شرکت ها',
+            fields: {
+                id: 'کد',
+                createdAt: 'تاریخ ثبت',
+                name: 'نام',
+                description: 'توضیحات',
+                phone: 'تلفن',
+                mobile: 'موبایل',
+                logo: 'لوگو',
+                status: 'وضعیت',
+                type: 'نوع',
+                address: 'آدرس',
+                country: 'کشور',
+                city: 'شهر',
+                state: 'استان',
+                zip: 'کد پستی',
             },
         },
         invoices: {
@@ -114,60 +361,77 @@ const customFarsiMessages: TranslationMessages = {
             },
         },
         products: {
-            name: 'Poster |||| Posters',
+            name: 'کالا |||| کالاها',
             fields: {
-                category_id: 'Category',
-                height_gte: 'Min height',
-                height_lte: 'Max height',
-                height: 'Height',
-                image: 'Image',
-                price: 'Price',
-                reference: 'Reference',
-                stock_lte: 'Low Stock',
-                stock: 'Stock',
-                thumbnail: 'Thumbnail',
-                width_gte: 'Min width',
-                width_lte: 'Max width',
-                width: 'Width',
+                categoryId: 'دسته بندی',
+                name: 'نام',
+                secondName: 'نام دوم',
+                thumbnail: 'عکس',
+                status: 'وضعیت',
+                brandId: 'برند',
+                description: 'توضیحات',
+                pros: 'مزایا',
+                cons: 'معایب',
+                productFields: 'فیلدهای کالا',
+                prices: 'قیمت های کالا',
+                attachments: 'تصاویر',
+                analysis: 'توضیحات فنی',
+                prosValue: 'عنوان مزیت',
+                consValue: 'عنوان عیب',
+                fieldKey: 'عنوان',
+                fieldValue: 'مقدار',
+                priceFields: {
+                    name: 'نام',
+                    color: 'رنگ',
+                    quantity: 'تعداد',
+                    price: 'قیمت',
+                    status: 'وضعیت کالا',
+                }
+            },
+            filters: {
+                category: 'دسته بندی',
             },
             tabs: {
-                image: 'Image',
-                details: 'Details',
-                description: 'Description',
-                reviews: 'Reviews',
+                public: 'مشخصات عمومی',
+                description: 'توضیحات',
+                proscons: 'مزایا/معایب',
+                productFields: 'فیلدهای اختصاصی',
+                category: 'دسته بندی',
+                prices: 'قیمت ها',
+                other: 'سایر',
             },
         },
-        categories: {
-            name: 'Category |||| Categories',
-            fields: {
-                products: 'Products',
-            },
-        },
-        reviews: {
-            name: 'Review |||| Reviews',
-            amount: '1 review |||| %{smart_count} reviews',
+        'product-comments': {
+            name: 'نظر |||| نظرات کاربران',
+            amount: '1 نظر |||| %{smart_count} نظر',
             relative_to_poster: 'Review on poster',
-            detail: 'Review detail',
+            detail: 'جزییات نظر',
             fields: {
-                customer_id: 'Customer',
-                command_id: 'Order',
-                product_id: 'Product',
-                date_gte: 'Posted since',
-                date_lte: 'Posted before',
-                date: 'Date',
-                comment: 'Comment',
-                rating: 'Rating',
+                createdAt: 'تاریخ ثبت',
+                userTenant: 'کاربر',
+                product: 'کالا',
+                rate: 'امتیاز',
+                comment: 'نظر',
+                status: 'وضعیت',
+            },
+            filters: {
+                status: 'وضعیت'
             },
             action: {
-                accept: 'Accept',
-                reject: 'Reject',
+                accept: 'تایید',
+                reject: 'رد',
             },
             notification: {
-                approved_success: 'Review approved',
-                approved_error: 'Error: Review not approved',
-                rejected_success: 'Review rejected',
-                rejected_error: 'Error: Review not rejected',
+                approved_success: 'نظر تایید شد',
+                approved_error: 'Error: نظر تایید نشد',
+                rejected_success: 'نظر رد شد',
+                rejected_error: 'Error: نظر رد نشد',
             },
+            status: {
+                pending: 'بررسی نشده',
+                approved: 'تایید شده',
+                rejected: 'رد شده',
+            }
         },
         segments: {
             name: 'Segment |||| Segments',

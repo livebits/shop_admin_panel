@@ -49,6 +49,7 @@ const useStyles = makeStyles(theme => ({
 
 const EditAddress = ({ onCancel, onRefresh, data, ...props }: { [prop: string]: any; }) => {
     const classes = useStyles();
+    const translate = useTranslate();
     const dispatch = useDispatch();
     const redirect = useRedirect();
     const notify = useNotify();
@@ -88,7 +89,9 @@ const EditAddress = ({ onCancel, onRefresh, data, ...props }: { [prop: string]: 
         <form className={classes.root}>
             <div className={classes.title}>
                 <Typography variant="h6">
-                    ویرایش آدرس
+                    {
+                        translate('resources.customers.page.editAddress')
+                    }
                 </Typography>
                 <IconButton onClick={onCancel}>
                     <CloseIcon />
@@ -104,13 +107,13 @@ const EditAddress = ({ onCancel, onRefresh, data, ...props }: { [prop: string]: 
                 initialValues={{ userId: props.match.params.id }}
                 toolbar={<AddAddressToolbar />}
             >
-                <TextInput source="name" label="نام آدرس" validate={required()} />
-                <TextInput source="address" label="آدرس" multiline fullWidth validate={required()}/>
-                <TextInput source="mobile" label="موبایل" validate={required()}/>
-                <TextInput source="phone" label="تلفن" />
-                <TextInput source="city" label="شهر" validate={required()}/>
-                <TextInput source="state" label="استان" validate={required()} />
-                <TextInput source="zip" label="کدپستی" validate={required()} />
+                <TextInput source="name" validate={required()} />
+                <TextInput source="address" multiline fullWidth validate={required()}/>
+                <TextInput source="mobile" validate={required()}/>
+                <TextInput source="phone" />
+                <TextInput source="city" validate={required()}/>
+                <TextInput source="state" validate={required()} />
+                <TextInput source="zip" validate={required()} />
             </SimpleForm>
         </form>
     );
