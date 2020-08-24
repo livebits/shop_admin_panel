@@ -4,7 +4,7 @@ import { Role, Permission, UserPermissions } from './types';
 
 const authProvider: AuthProvider = {
     login: ({ username, password }) => {        
-        const request = new Request(`${API_URL}/auth/login`, {
+        const request = new Request(`${API_URL}/auth/manager-login`, {
             method: 'POST',
             body: JSON.stringify({ username, password }),
             headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -45,8 +45,6 @@ const authProvider: AuthProvider = {
         localStorage.getItem('token') ? Promise.resolve() : Promise.reject(),
     getPermissions: () => {
         const permsString = localStorage.getItem('permissions');
-        console.log('>>>', permsString);
-        
         const perms = permsString ? JSON.parse(permsString) : null
 
         const rolesString = localStorage.getItem('roles');

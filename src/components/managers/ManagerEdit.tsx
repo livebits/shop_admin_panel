@@ -5,6 +5,8 @@ import {
     Edit,
     EditButton,
     usePermissions,
+    SelectArrayInput,
+    ReferenceArrayInput,
     SelectInput,
     SimpleForm,
     TextInput,
@@ -126,6 +128,13 @@ const ManagerEdit = (props: any) => {
                 { id: 'active', name: 'فعال' },
                 { id: 'inactive', name: 'غیرفعال' },
             ]} />
+            <ReferenceArrayInput
+                label="نقش"
+                source="roles"
+                reference="roles"
+                filterToQuery={(searchText:string) => (searchText ? { name: searchText } : null)}>
+                    <SelectArrayInput optionText="name" />
+            </ReferenceArrayInput>
         </SimpleForm>
     </Edit>
 }

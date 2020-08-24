@@ -5,8 +5,10 @@ import {
     SimpleForm,
     PasswordInput,
     ReferenceInput,
+    ReferenceArrayInput,
     SelectInput,
-    TabbedForm,
+    AutocompleteInput,
+    SelectArrayInput,
     TextInput,
     usePermissions,
 } from 'react-admin';
@@ -34,6 +36,13 @@ const ManagerCreate = (props:any) => {
                     { id: 'active', name: 'فعال' },
                     { id: 'inactive', name: 'غیرفعال' },
                 ]} />
+                <ReferenceArrayInput
+                    label="نقش"
+                    source="roles"
+                    reference="roles"
+                    filterToQuery={(searchText:string) => (searchText ? { name: searchText } : null)}>
+                    <SelectArrayInput optionText="name" />
+                </ReferenceArrayInput>
             </SimpleForm>
         </Create>
     );

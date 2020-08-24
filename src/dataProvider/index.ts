@@ -119,6 +119,8 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
   };
 
   const convertHTTPResponse = (response:any, type:any, resource:string, params:any) => {
+    console.log('RESPONSE:', response);
+    
     const { headers, json } = response;
     switch (type) {
       case reactAdmin.GET_LIST:
@@ -131,6 +133,11 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
         return { data: { ...params.data, id: json.id } };
       case reactAdmin.DELETE:
         return { data: { id: params.id } };
+      case reactAdmin.GET_MANY:
+        return {
+          data: json.data ? json.data : json,
+          total: json.total ? parseInt(json.total, 10) : parseInt(json.length, 10),
+        };
       case reactAdmin.GET_ONE:
         if (resource === 'products') {
 
@@ -162,6 +169,7 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
   };
 
   return (type:any, resource:string, params:any) => {
+console.log('TYPE: ', type, ' RESOURCE: ', resource, ' PARAMS: ', params);
 
     // Translate resources
     if (resource === 'managers' || resource === 'customers') {

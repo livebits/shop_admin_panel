@@ -20,11 +20,11 @@ const RoleList = (props: any) => {
             <TextField source="id" />
             <DateField source="createdAt" />
             <TextField source="name" />
-            <ArrayField source="permissions">
+            {/* <ArrayField source="rolePermissions">
                 <SingleFieldList>
-                    <ChipField source="action.name" />
+                    <ChipField source="permission.name" />
                 </SingleFieldList>
-            </ArrayField>
+            </ArrayField> */}
             {
                 hasPermissions(permissions, [{ resource: 'role', action: 'update' }]) && 
                 <EditButton />

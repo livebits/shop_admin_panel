@@ -25,10 +25,10 @@ const RoleEdit = (props: any) => {
         <SimpleForm>
             <TextInput disabled source="id" label="کد"/>
             <TextInput source="name" label="نام نقش"/>
-            <ArrayInput source="permissions" label="دسترسی ها">
+            <ArrayInput source="rolePermissions" label="دسترسی ها">
                 <SimpleFormIterator>
-                    <ReferenceInput source="actionId" reference="actions" label="دسترسی">
-                        <SelectInput optionText="name" />
+                    <ReferenceInput source="permissionId" reference="permissions" label="دسترسی" perPage={100}>
+                        <SelectInput optionText={ (choice:any) => choice.description ? choice.description : `${choice.resource}-${choice.action}` }/>
                     </ReferenceInput>
                     <SelectInput source="status" label="وضعیت" choices={[
                         { id: 'allow', name: 'مجاز' },

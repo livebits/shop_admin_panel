@@ -9,10 +9,13 @@ const ACLError = ({
 }) => {
     const translate = useTranslate();
     return (
-        <div>
+        <div style={{ textAlign: 'center' }}>
             <Title title="Error" />
-            <h1><ErrorIcon /> Something Went Wrong </h1>
-            <div>You can't access to this page.</div>
+            <h2>
+                <ErrorIcon color="error" />
+                دسترسی غیرمجاز
+            </h2>
+            <div>شما اجازه دسترسی به این بخش را ندارید.</div>
         </div>
     );
 };
