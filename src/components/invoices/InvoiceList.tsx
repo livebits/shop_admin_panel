@@ -10,8 +10,8 @@ import {
     DateInput,
 } from 'react-admin';
 
-import FullNameField from '../visitors/FullNameField';
-import AddressField from '../visitors/AddressField';
+// import FullNameField from '../../visitors/FullNameField';
+// import AddressField from '../../visitors/AddressField';
 import InvoiceShow from './InvoiceShow';
 
 const ListFilters = (props: any) => (
@@ -27,7 +27,7 @@ const InvoiceList = (props: any) => (
             <TextField source="id" />
             <DateField source="date" />
             <ReferenceField source="customer_id" reference="customers">
-                <FullNameField />
+                {/* <FullNameField /> */}
             </ReferenceField>
             <ReferenceField
                 source="customer_id"
@@ -35,7 +35,7 @@ const InvoiceList = (props: any) => (
                 link={false}
                 label="resources.invoices.fields.address"
             >
-                <AddressField />
+                {/* <AddressField /> */}
             </ReferenceField>
             <ReferenceField source="command_id" reference="commands">
                 <TextField source="reference" />

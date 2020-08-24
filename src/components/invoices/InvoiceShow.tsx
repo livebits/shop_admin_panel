@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useShowController, ReferenceField, TextField } from 'react-admin';
 
-import Basket from '../orders/Basket';
-import { FieldProps, Customer } from '../types';
+// import Basket from '../../orders/Basket';
+import { FieldProps, Customer } from '../../types';
 
 const CustomerField: FC<FieldProps<Customer>> = ({ record }) =>
     record ? (
@@ -96,7 +96,7 @@ const InvoiceShow = (props: any) => {
                         record={record}
                         link={false}
                     >
-                        <Basket />
+                        {/* <Basket /> */}
                     </ReferenceField>
                 </div>
             </CardContent>

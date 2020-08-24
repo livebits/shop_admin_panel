@@ -1,15 +1,29 @@
-export const darkTheme = {
-    direction: 'rtl',
+export const darkTheme = (dir:string) => ({
+    direction: dir,
     palette: {
         primary: {
             main: '#90caf9',
         },
+        secondary: {
+            light: '#eeeeee',
+            main: '#eeeeee',
+            dark: '#eeeeee',
+            contrastText: '#333333',
+        },
         type: 'dark', // Switching the dark mode on is a single property value change.
     },
-};
+    typography: {
+        fontFamily: [
+            'IRANSans',
+            'Arial',
+            '"Segoe UI"',
+            'sans-serif',
+        ].join(','),
+    },
+});
 
-export const lightTheme = {
-    direction: 'rtl',
+export const lightTheme = (dir:string) => ({
+    direction: dir,
     palette: {
         primary: {
             main: '#4f3cc9',
@@ -83,4 +97,4 @@ export const lightTheme = {
             },
         },
     },
-};
+});

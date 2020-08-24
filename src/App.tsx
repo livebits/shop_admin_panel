@@ -12,8 +12,7 @@ import { Dashboard } from './dashboard';
 import customRoutes from './routes';
 
 import managers from './components/managers';
-import visitors from './visitors';
-import invoices from './invoices';
+import invoices from './components/invoices';
 
 import { create } from 'jss';
 import rtl from 'jss-rtl';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { Layout, Sidebar } from 'react-admin';
+import { Layout, Sidebar, useLocale } from 'react-admin';
 import AppBar from './AppBar';
 import Menu from './Menu';
 import { darkTheme, lightTheme } from './themes';
@@ -22,8 +22,11 @@ const MySidebar = (props:any) => {
 };
 
 export default (props: any) => {
-    const theme = useSelector((state: AppState) =>
-        state.theme === 'dark' ? darkTheme : lightTheme
+    const locale = useLocale();
+    const dir = locale === 'fa' ? 'rtl' : 'ltr';
+    const theme = useSelector((state: AppState) => {        
+        return state.theme === 'dark' ? darkTheme(dir) : lightTheme(dir)
+    }
     );
     return (
         <Layout

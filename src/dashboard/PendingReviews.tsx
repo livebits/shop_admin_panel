@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { useTranslate } from 'react-admin';
 
 import CardWithIcon from './CardWithIcon';
-import StarRatingField from '../reviews/StarRatingField';
+// import StarRatingField from '../reviews/StarRatingField';
 import { Customer, Review } from '../types';
 
 interface Props {
@@ -68,7 +68,7 @@ const PendingReviews: FC<Props> = ({ reviews = [], customers = {}, nb }) => {
                         </ListItemAvatar>
 
                         <ListItemText
-                            primary={<StarRatingField record={record} />}
+                            // primary={<StarRatingField record={record} />}
                             secondary={record.comment}
                             className={classes.listItemText}
                             style={{ paddingRight: 0 }}
