@@ -78,8 +78,8 @@ const ReviewEdit: FC<Props> = ({ onCancel, ...props }) => {
                 toolbar={<ReviewEditToolbar />}
             >
                 <FunctionField
-                    source="userTenant"
-                    render={(record:any) => <FullNameField record={record.userTenant.user} />}
+                    source="customer"
+                    render={(record:any) => <FullNameField record={record.customer.user} />}
                 />
 
                 <FunctionField

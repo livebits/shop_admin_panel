@@ -32,7 +32,7 @@ const aggregateOrdersByDay = (orders: Order[]): { [key: number]: number } =>
         .reduce(
             (acc, curr) => {
                 const day = new Date(
-                    new Date(curr.date).toDateString()
+                    new Date(curr.createdAt).toDateString()
                 ).getTime();
                 if (!acc[day]) {
                     acc[day] = 0;

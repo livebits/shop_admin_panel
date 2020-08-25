@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useTranslate } from 'react-admin';
 import { stringify } from 'query-string';
+import AppsRoundedIcon from '@material-ui/icons/AppsRounded';
 
 // import products from '../products';
 import { FieldProps, Category } from '../../types';
@@ -32,13 +33,12 @@ const LinkToRelatedProducts: FC<FieldProps<Category>> = ({ record }) => {
                     perPage: 25,
                     sort: 'id',
                     order: 'DESC',
-                    filter: JSON.stringify({ category_id: record.id }),
+                    filter: JSON.stringify({ 'categoryId||eq': record.id }),
                 }),
             }}
             className={classes.link}
         >
-            {/* <products.icon className={classes.icon} /> */}
-            {/* {translate('resources.categories.fields.products')} */}
+            <AppsRoundedIcon />
             {translate('resources.categories.fields.products')}
         </Button>
     ) : null;

@@ -22,6 +22,7 @@ import { CreateComponentProps } from '../../types';
 import { ProductCategoryFields } from './ProductCategoryFields';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import { ColorInput } from 'react-admin-color-input';
 
 export const styles = {
     price: { width: '7em' },
@@ -158,12 +159,13 @@ const ProductCreate: FC<CreateComponentProps> = props => {
                     >
                         <SimpleFormIterator>
                             <TextInput source="name" label="resources.products.fields.priceFields.name" />
-                            <TextInput source="color" label="resources.products.fields.priceFields.color" />
+                            <ColorInput source="color" label="resources.products.fields.priceFields.color" />
                             <NumberInput source="quantity" label="resources.products.fields.priceFields.quantity" />
                             <NumberInput source="price" label="resources.products.fields.priceFields.price" />
                             <SelectInput source="status" label="resources.products.fields.priceFields.status" choices={[
                                 { id: 'available', name: translate('pos.productStatus.available') },
-                                { id: 'not_available', name: translate('pos.productStatus.not_available') },                            ]} />
+                                { id: 'not_available', name: translate('pos.productStatus.not_available') },
+                            ]} />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>

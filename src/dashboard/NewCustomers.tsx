@@ -11,6 +11,7 @@ import { useTranslate, useQueryWithStore } from 'react-admin';
 
 import CardWithIcon from './CardWithIcon';
 import { Customer } from '../types';
+import { API_URL } from '../App';
 
 const NewCustomers = () => {
     const translate = useTranslate();
@@ -29,10 +30,10 @@ const NewCustomers = () => {
         resource: 'customers',
         payload: {
             filter: {
-                has_ordered: true,
-                first_seen_gte: aMonthAgo.toISOString(),
+                // has_ordered: true,
+                'createdAt||gte': aMonthAgo.toISOString(),
             },
-            sort: { field: 'first_seen', order: 'DESC' },
+            sort: { field: 'createdAt', order: 'DESC' },
             pagination: { page: 1, perPage: 100 },
         },
     });
@@ -57,11 +58,11 @@ const NewCustomers = () => {
                               key={record.id}
                           >
                               <ListItemAvatar>
-                                  <Avatar src={`${record.avatar}?size=32x32`} />
+                                  <Avatar src={`${API_URL}/public/users/${record.avatar}`} />
                               </ListItemAvatar>
                               <ListItemText
-                                  primary={`${record.first_name} ${
-                                      record.last_name
+                                  primary={`${record.firstName} ${
+                                      record.lastName
                                   }`}
                               />
                           </ListItem>

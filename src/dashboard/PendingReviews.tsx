@@ -40,7 +40,7 @@ const PendingReviews: FC<Props> = ({ reviews = [], customers = {}, nb }) => {
     const translate = useTranslate();
     return (
         <CardWithIcon
-            to="/reviews"
+            to="/product-comments"
             icon={CommentIcon}
             title={translate('pos.dashboard.pending_reviews')}
             subtitle={nb}
@@ -51,7 +51,7 @@ const PendingReviews: FC<Props> = ({ reviews = [], customers = {}, nb }) => {
                         key={record.id}
                         button
                         component={Link}
-                        to={`/reviews/${record.id}`}
+                        to={`/product-comments/${record.id}`}
                         alignItems="flex-start"
                     >
                         <ListItemAvatar>

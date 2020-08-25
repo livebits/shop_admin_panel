@@ -52,22 +52,6 @@ const Welcome: FC = () => {
                             {translate('pos.dashboard.welcome.subtitle')}
                         </Typography>
                     </Box>
-                    <CardActions className={classes.actions}>
-                        <Button
-                            variant="contained"
-                            href="https://marmelab.com/react-admin"
-                            startIcon={<HomeIcon />}
-                        >
-                            {translate('pos.dashboard.welcome.aor_button')}
-                        </Button>
-                        <Button
-                            variant="contained"
-                            href="https://github.com/marmelab/react-admin/tree/master/examples/demo"
-                            startIcon={<CodeIcon />}
-                        >
-                            {translate('pos.dashboard.welcome.demo_button')}
-                        </Button>
-                    </CardActions>
                 </Box>
 
                 <Box

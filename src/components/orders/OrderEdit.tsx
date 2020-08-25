@@ -54,7 +54,7 @@ const OrderEdit: FC<EditComponentProps> = props => {
         >
             <SimpleForm>
                 <DateInput source="createdAt" />
-                <ReferenceInput source="userTenantId" reference="user-tenants">
+                <ReferenceInput source="customerId" reference="user-tenants">
                     <AutocompleteInput
                         optionText={(choice: Customer) =>
                             `${choice.user.firstName} ${choice.user.lastName}`

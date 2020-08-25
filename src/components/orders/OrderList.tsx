@@ -49,7 +49,7 @@ interface FilterParams {
 const OrderFilter: FC<FilterProps<FilterParams>> = props => (
     <Filter {...props}>
         <SearchInput source="q" alwaysOn />
-        <ReferenceInput source="customerId" reference="customers">
+        <ReferenceInput source="customerId" reference="user-tenants">
             <AutocompleteInput
                 optionText={(choice: Customer) =>
                     choice.firstName && choice.lastName

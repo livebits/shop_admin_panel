@@ -13,7 +13,7 @@ const MonthlyRevenue: FC<Props> = ({ value }) => {
     const translate = useTranslate();
     return (
         <CardWithIcon
-            to="/commands"
+            to="/orders"
             icon={DollarIcon}
             title={translate('pos.dashboard.monthly_revenue')}
             subtitle={value}

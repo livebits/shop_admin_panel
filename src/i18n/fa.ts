@@ -13,22 +13,20 @@ const customFarsiMessages: TranslationMessages = {
             dark: 'شب',
         },
         dashboard: {
-            monthly_revenue: 'Monthly Revenue',
-            month_history: '30 Day Revenue History',
-            new_orders: 'New Orders',
-            pending_reviews: 'Pending Reviews',
-            new_customers: 'New Customers',
-            pending_orders: 'Pending Orders',
+            monthly_revenue: 'درآمد ماهیانه',
+            month_history: 'درآمد 30 روز اخیر ',
+            new_orders: 'سفارشات جدید',
+            pending_reviews: 'نظرات بررسی نشده',
+            new_customers: 'مشتریان جدید',
+            pending_orders: 'سفارشات بررسی نشده',
             order: {
                 items:
                     'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
             },
             welcome: {
-                title: 'Welcome to the react-admin e-commerce demo',
+                title: 'پنل مدیریتی فروشگاه نوین تک',
                 subtitle:
-                    "This is the admin of an imaginary poster shop. Feel free to explore and modify the data - it's local to your computer, and will reset each time you reload.",
-                aor_button: 'react-admin site',
-                demo_button: 'Source for this demo',
+                    "در این قسمت آخرین اعلان ها نمایش داده خواهد شد.",
             },
         },
         menu: {
@@ -331,7 +329,7 @@ const customFarsiMessages: TranslationMessages = {
                 basketCount: 'تعداد سبد خرید',
                 shipmentType: 'نحوه ارسال',
                 returned: 'برگشت خورده؟',
-                userTenantId: 'مشتری',
+                customerId: 'مشتری',
                 status: 'وضعیت',
             },
             tabs: {
@@ -444,7 +442,7 @@ const customFarsiMessages: TranslationMessages = {
             detail: 'جزییات نظر',
             fields: {
                 createdAt: 'تاریخ ثبت',
-                userTenant: 'کاربر',
+                customer: 'کاربر',
                 product: 'کالا',
                 rate: 'امتیاز',
                 comment: 'نظر',

@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useTranslate } from 'react-admin';
 import { Customer, Order } from '../types';
+import { API_URL } from '../App';
 
 interface Props {
     orders?: Order[];
@@ -40,40 +41,36 @@ const PendingOrders: FC<Props> = ({ orders = [], customers = {} }) => {
                         key={record.id}
                         button
                         component={Link}
-                        to={`/commands/${record.id}`}
+                        to={`/orders/${record.id}`}
                     >
                         <ListItemAvatar>
-                            {customers[record.customer_id] ? (
-                                <Avatar
-                                    src={`${
-                                        customers[record.customer_id].avatar
-                                    }?size=32x32`}
-                                />
+                            {customers[record.customer.user.id] ? (
+                                <Avatar src={`${API_URL}/public/users/${customers[record.customer.user.id].avatar}`} />
                             ) : (
                                 <Avatar />
                             )}
                         </ListItemAvatar>
                         <ListItemText
-                            primary={new Date(record.date).toLocaleString(
+                            primary={new Date(record.createdAt).toLocaleString(
                                 'en-GB'
                             )}
                             secondary={translate('pos.dashboard.order.items', {
-                                smart_count: record.basket.length,
-                                nb_items: record.basket.length,
-                                customer_name: customers[record.customer_id]
+                                smart_count: record.orderProducts.length,
+                                nb_items: record.orderProducts.length,
+                                customer_name: customers[record.customer.user.id]
                                     ? `${
-                                          customers[record.customer_id]
-                                              .first_name
+                                          customers[record.customer.user.id]
+                                              .firstName
                                       } ${
-                                          customers[record.customer_id]
-                                              .last_name
+                                          customers[record.customer.user.id]
+                                              .lastName
                                       }`
                                     : '',
                             })}
                         />
                         <ListItemSecondaryAction>
                             <span className={classes.cost}>
-                                {record.total}$
+                                {record.factor ? record.factor.orderPrice : 0}$
                             </span>
                         </ListItemSecondaryAction>
                     </ListItem>

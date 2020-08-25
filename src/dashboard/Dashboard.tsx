@@ -64,9 +64,9 @@ const Dashboard: FC = () => {
     const fetchOrders = useCallback(async () => {
         const aMonthAgo = new Date();
         aMonthAgo.setDate(aMonthAgo.getDate() - 30);
-        const { data: recentOrders } = await dataProvider.getList('commands', {
-            filter: { date_gte: aMonthAgo.toISOString() },
-            sort: { field: 'date', order: 'DESC' },
+        const { data: recentOrders } = await dataProvider.getList('orders', {
+            filter: { 'createdAt||gte': aMonthAgo.toISOString() },
+            sort: { field: 'createdAt', order: 'DESC' },
             pagination: { page: 1, perPage: 50 },
         });
         const aggregations = recentOrders
@@ -74,7 +74,7 @@ const Dashboard: FC = () => {
             .reduce(
                 (stats: OrderStats, order: Order) => {
                     if (order.status !== 'cancelled') {
-                        stats.revenue += order.total;
+                        stats.revenue += order.factor ? order.factor.orderPrice : 0;
                         stats.nbNewOrders++;
                     }
                     if (order.status === 'ordered') {
@@ -100,9 +100,9 @@ const Dashboard: FC = () => {
             nbNewOrders: aggregations.nbNewOrders,
             pendingOrders: aggregations.pendingOrders,
         }));
-        const { data: customers } = await dataProvider.getMany('customers', {
+        const { data: customers } = await dataProvider.getMany('user-tenants', {
             ids: aggregations.pendingOrders.map(
-                (order: Order) => order.customer_id
+                (order: Order) => order.userTenantId
             ),
         });
         setState(state => ({
@@ -118,16 +118,16 @@ const Dashboard: FC = () => {
     }, [dataProvider]);
 
     const fetchReviews = useCallback(async () => {
-        const { data: reviews } = await dataProvider.getList('reviews', {
-            filter: { status: 'pending' },
-            sort: { field: 'date', order: 'DESC' },
+        const { data: reviews } = await dataProvider.getList('product-comments', {
+            filter: { 'status||eq': 'pending' },
+            sort: { field: 'createdAt', order: 'DESC' },
             pagination: { page: 1, perPage: 100 },
         });
         const nbPendingReviews = reviews.reduce((nb: number) => ++nb, 0);
         const pendingReviews = reviews.slice(0, Math.min(10, reviews.length));
         setState(state => ({ ...state, pendingReviews, nbPendingReviews }));
-        const { data: customers } = await dataProvider.getMany('customers', {
-            ids: pendingReviews.map((review: Review) => review.customer_id),
+        const { data: customers } = await dataProvider.getMany('user-tenants', {
+            ids: pendingReviews.map((review: Review) => review.customerId),
         });
         setState(state => ({
             ...state,
@@ -156,74 +156,39 @@ const Dashboard: FC = () => {
         revenue,
         recentOrders,
     } = state;
-    return isXSmall ? (
-        <div>
-            <div style={styles.flexColumn as CSSProperties}>
-                <Welcome />
-                <MonthlyRevenue value={revenue} />
-                <VerticalSpacer />
-                <NbNewOrders value={nbNewOrders} />
-                <VerticalSpacer />
-                <PendingOrders
-                    orders={pendingOrders}
-                    customers={pendingOrdersCustomers}
-                />
-            </div>
-        </div>
-    ) : isSmall ? (
-        <div style={styles.flexColumn as CSSProperties}>
-            <div style={styles.singleCol}>
-                <Welcome />
-            </div>
-            <div style={styles.flex}>
-                <MonthlyRevenue value={revenue} />
-                <Spacer />
-                <NbNewOrders value={nbNewOrders} />
-            </div>
-            <div style={styles.singleCol}>
-                <OrderChart orders={recentOrders} />
-            </div>
-            <div style={styles.singleCol}>
-                <PendingOrders
-                    orders={pendingOrders}
-                    customers={pendingOrdersCustomers}
-                />
-            </div>
-        </div>
-    ) : (
-        <>
-            <Welcome />
-            <div style={styles.flex}>
-                <div style={styles.leftCol}>
-                    <div style={styles.flex}>
-                        <MonthlyRevenue value={revenue} />
-                        <Spacer />
-                        <NbNewOrders value={nbNewOrders} />
-                    </div>
-                    <div style={styles.singleCol}>
-                        <OrderChart orders={recentOrders} />
-                    </div>
-                    <div style={styles.singleCol}>
-                        <PendingOrders
-                            orders={pendingOrders}
-                            customers={pendingOrdersCustomers}
-                        />
-                    </div>
+    return <div>
+        <Welcome />
+        <div style={styles.flex}>
+            <div style={styles.leftCol}>
+                <div style={styles.flex}>
+                    <MonthlyRevenue value={revenue} />
+                    <Spacer />
+                    <NbNewOrders value={nbNewOrders} />
                 </div>
-                <div style={styles.rightCol}>
-                    <div style={styles.flex}>
-                        <PendingReviews
-                            nb={nbPendingReviews}
-                            reviews={pendingReviews}
-                            customers={pendingReviewsCustomers}
-                        />
-                        <Spacer />
-                        <NewCustomers />
-                    </div>
+                <div style={styles.singleCol}>
+                    <OrderChart orders={recentOrders} />
+                </div>
+                <div style={styles.singleCol}>
+                    <PendingOrders
+                        orders={pendingOrders}
+                        customers={pendingOrdersCustomers}
+                    />
                 </div>
             </div>
-        </>
-    );
+            <Spacer />
+            <div style={styles.rightCol}>
+                <div style={styles.flex}>
+                    <PendingReviews
+                        nb={nbPendingReviews}
+                        reviews={pendingReviews}
+                        customers={pendingReviewsCustomers}
+                    />
+                    <Spacer />
+                    <NewCustomers />
+                </div>
+            </div>
+        </div>
+    </div>
 };
 
 export default Dashboard;

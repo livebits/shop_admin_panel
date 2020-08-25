@@ -23,7 +23,7 @@ import {
 import { InputAdornment, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RichTextInput from 'ra-input-rich-text';
-
+import { ColorInput } from 'react-admin-color-input';
 import {
     usePermissions,
     DeleteButton
@@ -104,6 +104,8 @@ const ProductEdit: FC<EditComponentProps> = props => {
         delete requestBody.brand;
         delete requestBody.category;
         delete requestBody.thumbnail;
+        delete requestBody.attachments;
+        delete requestBody.updatedAt;
 
         return requestBody;
     };
@@ -340,7 +342,7 @@ const ProductEdit: FC<EditComponentProps> = props => {
                     >
                         <SimpleFormIterator>
                             <TextInput source="name" label="resources.products.fields.priceFields.name" />
-                            <TextInput source="color" label="resources.products.fields.priceFields.color" />
+                            <ColorInput source="color" label="resources.products.fields.priceFields.color" />
                             <NumberInput source="quantity" label="resources.products.fields.priceFields.quantity" />
                             <NumberInput source="price" label="resources.products.fields.priceFields.price" />
                             <SelectInput source="status" label="resources.products.fields.priceFields.status" choices={[

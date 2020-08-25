@@ -59,8 +59,8 @@ const ReviewListDesktop: FC<ReviewListDesktopProps> = ({
             <DateField source="createdAt" />
 
             <FunctionField
-                source="userTenant"
-                render={(record:any) => <FullNameField record={record.userTenant.user} />}
+                source="customer"
+                render={(record:any) => <FullNameField record={record.customer.user} />}
             />
 
             <FunctionField

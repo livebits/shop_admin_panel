@@ -75,7 +75,6 @@ export type OrderStatus = 'ordered' | 'delivered' | 'cancelled';
 
 export interface Order extends Record {
     status: OrderStatus;
-    basket: BasketItem[];
     orderProducts: BasketItem[];
     date: Date;
     total: number;
