@@ -90,6 +90,10 @@ const customFarsiMessages: TranslationMessages = {
             pending_confirmation: 'در حال بررسی',
             expired: 'منقضی شده',
         },
+        ticketStatus: {
+            pending: 'بررسی نشده',
+            checked: 'برسی شده',
+        },
         error: {
             aclError: 'دسترسی غیر مجاز',
         }
@@ -176,6 +180,25 @@ const customFarsiMessages: TranslationMessages = {
                 name: 'منو',
                 logo: 'تصویر برند',
                 description: 'توضیحات',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        tickets: {
+            name: 'تیکت |||| تیکت ها',
+            fields: {
+                id: 'کد',
+                title: 'موضوع',
+                body: 'متن تیکت',
+                status: 'وضعیت',
+                attachments: 'فایل های ضمیمه',
+                customer: 'کاربر ثبت کننده',
+                department: 'دپارتمان',
+                operator: 'اپراتور',
             },
             filters: {
             },
