@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     Datagrid,
     Edit,
-    EditButton,
+    useTranslate,
     usePermissions,
     SelectArrayInput,
     ReferenceArrayInput,
@@ -17,16 +17,30 @@ import { useNotify, useRedirect, fetchStart, fetchEnd, useRefresh } from 'react-
 import { API_URL } from '../../App';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import { Button, Drawer, makeStyles } from '@material-ui/core';
+import LockRoundedIcon from '@material-ui/icons/LockRounded';
+import ChangePassword from '../customers/ChangePassword';
+
+const useStyles = makeStyles((theme:any) => ({
+    listWithDrawer: {
+        marginRight: 400,
+    },
+    drawerPaper: {
+        zIndex: 100,
+    },
+}));
 
 const ManagerEdit = (props: any) => {
     const { permissions } = usePermissions();
-    
+    const translate = useTranslate();
+    const [passwordDrawer, setPasswordDrawer] = React.useState(false)
     const notify = useNotify();
     const refresh = useRefresh();
     const redirect = useRedirect();
     const dispatch = useDispatch();
     const [loading, setLoading] = React.useState(false);
     const [ id, setId ] = React.useState(Number(props.match.params.id));
+    const classes = useStyles();
     
     const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'update' }])
     if (!hasPerm) {
@@ -109,6 +123,16 @@ const ManagerEdit = (props: any) => {
 
     return <Edit transform={transform} undoable={false} {...props}>
         <SimpleForm>
+            <Button 
+                color="primary"
+                onClick={e => setPasswordDrawer(true)}
+                style={{width: 150}}
+            >
+                <LockRoundedIcon />
+                {
+                    translate('resources.customers.page.changePassword')
+                }
+            </Button>
             <TextInput disabled source="id" />
             <TextInput source="firstName" />
             <TextInput source="lastName" />
@@ -133,6 +157,24 @@ const ManagerEdit = (props: any) => {
                 filterToQuery={(searchText:string) => (searchText ? { name: searchText } : null)}>
                     <SelectArrayInput optionText="name" />
             </ReferenceArrayInput>
+            
+            <Drawer
+                variant="persistent"
+                open={passwordDrawer}
+                anchor="right"
+                onClose={e => setPasswordDrawer(false)}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                {
+                    <ChangePassword
+                        onCancel={(e:any) => setPasswordDrawer(false)}
+                        onRefresh={(e:any) => refresh()}
+                        {...props}
+                    />
+                }
+            </Drawer>
         </SimpleForm>
     </Edit>
 }

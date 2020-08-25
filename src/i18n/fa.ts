@@ -110,6 +110,7 @@ const customFarsiMessages: TranslationMessages = {
                 email: 'ایمیل',
                 status: 'وضعیت',
                 password: 'رمزعبور',
+                newPassword: ' رمزعبور جدید',
                 avatar: 'تصویر کاربر',
                 lastLogin: 'آخرین ورود',
             },
@@ -122,6 +123,7 @@ const customFarsiMessages: TranslationMessages = {
                 addAddress: 'ثبت آدرس جدید',
                 editAddress: 'ویرایش آدرس',
                 savedAddresses: 'آدرس های ثبت شده',
+                changePassword: 'تغییر رمزعبور',
             },
             errors: {
                 password_mismatch:
@@ -145,7 +147,8 @@ const customFarsiMessages: TranslationMessages = {
                 password: 'رمزعبور',
                 avatar: 'تصویر کاربر',
                 lastLogin: 'آخرین ورود',
-                roles: 'نقش ها'
+                roles: 'نقش ها',
+                newPassword: ' رمزعبور جدید',
             },
             filters: {
             },

@@ -23,11 +23,13 @@ import { Typography, Button, makeStyles } from '@material-ui/core';
 import { Drawer, useMediaQuery, Theme } from '@material-ui/core';
 import AddAddress from './AddAddress';
 import EditAddress from './EditAddress';
+import ChangePassword from './ChangePassword';
 import { useDispatch } from 'react-redux';
 import { useNotify, useRedirect, fetchStart, fetchEnd } from 'react-admin';
 import { API_URL } from '../../App';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import LockRoundedIcon from '@material-ui/icons/LockRounded';
 
 const useStyles = makeStyles((theme:any) => ({
     listWithDrawer: {
@@ -43,6 +45,7 @@ const UserEdit = (props: any) => {
     const { permissions } = usePermissions();
     const [drawer, setDrawer] = React.useState(false)
     const [editDrawer, setEditDrawer] = React.useState(false)
+    const [passwordDrawer, setPasswordDrawer] = React.useState(false)
     const [selectedId, setSelectedId] = React.useState(null)
     const [selectedAddress, setSelectedAddress] = React.useState(null)
     const refresh = useRefresh();
@@ -166,6 +169,16 @@ const UserEdit = (props: any) => {
     return <Edit transform={transform} undoable={false} {...props}>
         <TabbedForm>
             <FormTab label="resources.customers.tabs.publicInfo" >
+                <Button 
+                    color="primary"
+                    onClick={e => setPasswordDrawer(true)}
+                    style={{width: 150}}
+                >
+                    <LockRoundedIcon />
+                    {
+                        translate('resources.customers.page.changePassword')
+                    }
+                </Button>
                 <TextInput disabled source="id" />
                 <TextInput source="firstName" />
                 <TextInput source="lastName" />
@@ -237,6 +250,23 @@ const UserEdit = (props: any) => {
                     </Datagrid>
                 </ReferenceManyField>
             </FormTab>
+            <Drawer
+                variant="persistent"
+                open={passwordDrawer}
+                anchor="right"
+                onClose={e => setPasswordDrawer(false)}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                {
+                    <ChangePassword
+                        onCancel={(e:any) => setPasswordDrawer(false)}
+                        onRefresh={(e:any) => refresh()}
+                        {...props}
+                    />
+                }
+            </Drawer>
             <Drawer
                 variant="persistent"
                 open={drawer}
