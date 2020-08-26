@@ -18,6 +18,7 @@ import AddAddressToolbar from './AddAddressToolbar';
 import { useDispatch } from 'react-redux';
 import { useNotify, useRedirect, fetchStart, fetchEnd, Button } from 'react-admin';
 import { API_URL } from '../../App';
+import ContactMailRoundedIcon from '@material-ui/icons/ContactMailRounded';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -88,6 +89,7 @@ const EditAddress = ({ onCancel, onRefresh, data, ...props }: { [prop: string]: 
     return (
         <form className={classes.root}>
             <div className={classes.title}>
+                <ContactMailRoundedIcon />
                 <Typography variant="h6">
                     {
                         translate('resources.customers.page.editAddress')
@@ -113,6 +115,8 @@ const EditAddress = ({ onCancel, onRefresh, data, ...props }: { [prop: string]: 
                 <TextInput source="phone" />
                 <TextInput source="city" validate={required()}/>
                 <TextInput source="state" validate={required()} />
+                <TextInput source="pelak" />
+                <TextInput source="unit" />
                 <TextInput source="zip" validate={required()} />
             </SimpleForm>
         </form>

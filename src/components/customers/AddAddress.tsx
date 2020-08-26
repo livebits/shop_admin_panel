@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import { EditComponentProps } from '../../types';
-import AddAddressToolbar from './AddAddressToolbar';
+import ContactMailRoundedIcon from '@material-ui/icons/ContactMailRounded';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -68,6 +68,7 @@ const AddAddress: FC<Props> = ({ onCancel, onRefresh, ...props }) => {
     return (
         <div className={classes.root}>
             <div className={classes.title}>
+                <ContactMailRoundedIcon />
                 <Typography variant="h6">
                     {
                         translate('resources.customers.page.addAddress')
@@ -94,6 +95,8 @@ const AddAddress: FC<Props> = ({ onCancel, onRefresh, ...props }) => {
                 <TextInput source="phone" />
                 <TextInput source="city" validate={required()}/>
                 <TextInput source="state" validate={required()} />
+                <TextInput source="pelak" />
+                <TextInput source="unit" />
                 <TextInput source="zip" validate={required()} />
             </SimpleForm>
         </div>

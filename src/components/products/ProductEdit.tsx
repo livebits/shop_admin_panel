@@ -289,6 +289,10 @@ const ProductEdit: FC<EditComponentProps> = props => {
                     label="resources.products.tabs.description"
                     path="description"
                 >
+                    <TextInput
+                        source="guarantee"
+                        fullWidth
+                    />
                     <RichTextInput source="analysis" />
                 </FormTab>
                 <FormTab
@@ -345,6 +349,8 @@ const ProductEdit: FC<EditComponentProps> = props => {
                             <ColorInput source="color" label="resources.products.fields.priceFields.color" />
                             <NumberInput source="quantity" label="resources.products.fields.priceFields.quantity" />
                             <NumberInput source="price" label="resources.products.fields.priceFields.price" />
+                            <NumberInput source="offPercent" label="resources.products.fields.priceFields.offPercent" />
+                            <NumberInput source="offPrice" label="resources.products.fields.priceFields.offPrice" />
                             <SelectInput source="status" label="resources.products.fields.priceFields.status" choices={[
                                 { id: 'available', name: translate('pos.productStatus.available') },
                                 { id: 'not_available', name: translate('pos.productStatus.not_available') },

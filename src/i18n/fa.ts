@@ -255,6 +255,8 @@ const customFarsiMessages: TranslationMessages = {
                 phone: 'تلفن',
                 city: 'شهر',
                 state: 'استان',
+                pelak: 'پلاک',
+                unit: 'واحد',
                 zip: 'کدپستی',
             },
         },
@@ -415,12 +417,15 @@ const customFarsiMessages: TranslationMessages = {
                 consValue: 'عنوان عیب',
                 fieldKey: 'عنوان',
                 fieldValue: 'مقدار',
+                guarantee: 'گارانتی',
                 priceFields: {
                     name: 'نام',
                     color: 'رنگ',
                     quantity: 'تعداد',
                     price: 'قیمت',
                     status: 'وضعیت کالا',
+                    offPercent: 'درصد تخفیف',
+                    offPrice: 'قیمت با تخفیف',
                 }
             },
             filters: {
