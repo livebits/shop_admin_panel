@@ -168,6 +168,58 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
     }
   };
 
+  const convertHTTPErrorToDataProvider = (error:any, type:any, resource:string, params:any) => {
+      // const { headers, json } = response;
+
+      console.log('convertHTTPErrorToDataProvider: ', error.error);
+
+      let errors = "";
+      // if (error !== undefined && error !== null) {
+
+      //     errors = parseErrors(error);
+      // } else {
+      //     errors = "خطای سرور رخ داده است";
+      // }
+      return Promise.reject({ message: errors });
+  };
+
+  //helper funcs
+  function parseErrors(err:any) {
+
+      //handle error
+      // let errors = new Array();
+
+      // if (err.error.statusCode === 401) {
+
+      //     errors[0] = "دسترسی غیر مجاز";
+      //     return "دسترسی غیر مجاز";
+      // }
+      // else if (err.error.statusCode === 422) {
+
+      //     let error_code = err.error.message;
+      //     let error_parts = [];
+
+      //     if (error_code.includes(":")) {
+      //         error_parts = error_code.split(":");
+      //     }
+
+      //     let message = "";
+
+      //     if (error_parts.length > 0) {
+      //         message = `ra.validation.${error_parts[1]}`;
+      //     } else {
+      //         message = `ra.validation.${error_code}`;
+      //     }
+
+      //     return message;
+      // }
+      // else {
+
+      //     errors[0] = "خطای سرور رخ داده است";
+      //     return "خطای سرور رخ داده است";
+      // }
+  };
+
   return (type:any, resource:string, params:any) => {
 console.log('TYPE: ', type, ' RESOURCE: ', resource, ' PARAMS: ', params);
 
@@ -216,6 +268,7 @@ console.log('TYPE: ', type, ' RESOURCE: ', resource, ' PARAMS: ', params);
     );
     return httpClient(url, options).then(
       (response:any) => convertHTTPResponse(response, type, resource, params),
-    );
+    )
+    // .catch((error:any) => convertHTTPErrorToDataProvider(error, type, resource, params));
   };
 };

@@ -73,7 +73,7 @@ const ReviewListDesktop: FC<ReviewListDesktopProps> = ({
             <TextField source="status" />
             <FunctionField
                 source="status"
-                render={(record:any) => translate(`resources.product-comments.status.${record.status}`)}
+                render={(record:any) => translate(`resources.comments.status.${record.status}`)}
             />
         </Datagrid>
     );

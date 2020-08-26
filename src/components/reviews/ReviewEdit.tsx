@@ -61,7 +61,7 @@ const ReviewEdit: FC<Props> = ({ onCancel, ...props }) => {
         <div className={classes.root}>
             <div className={classes.title}>
                 <Typography variant="h6">
-                    {translate('resources.product-comments.detail')}
+                    {translate('resources.comments.detail')}
                 </Typography>
                 <IconButton onClick={onCancel}>
                     <CloseIcon />
@@ -74,7 +74,7 @@ const ReviewEdit: FC<Props> = ({ onCancel, ...props }) => {
                 save={controllerProps.save}
                 version={controllerProps.version}
                 redirect="list"
-                resource="product-comments"
+                resource="comments"
                 toolbar={<ReviewEditToolbar />}
             >
                 <FunctionField

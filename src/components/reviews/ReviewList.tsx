@@ -49,7 +49,7 @@ const ReviewList: FC<ListComponentProps<{ id: string }>> = props => {
     const history = useHistory();
 
     const handleClose = useCallback(() => {
-        history.push('/product-comments');
+        history.push('/comments');
     }, [history]);
     const { permissions } = usePermissions();    
     const hasPerm = hasPermissions(permissions, [{ resource: 'comment', action: 'read' }])
@@ -59,7 +59,7 @@ const ReviewList: FC<ListComponentProps<{ id: string }>> = props => {
 
     return (
         <div className={classes.root}>
-            <Route path="/product-comments/:id">
+            <Route path="/comments/:id">
                 {({ match }: RouteChildrenProps<{ id: string }>) => {
                     const isMatch = !!(
                         match &&

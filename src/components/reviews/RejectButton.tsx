@@ -15,7 +15,7 @@ const RejectButton: FC<{ record: Review }> = ({ record }) => {
     const redirectTo = useRedirect();
 
     const [reject, { loading }] = useUpdate(
-        'product-comments',
+        'comments',
         record.id,
         { status: 'rejected' },
         record,
@@ -23,16 +23,16 @@ const RejectButton: FC<{ record: Review }> = ({ record }) => {
             undoable: true,
             onSuccess: () => {
                 notify(
-                    'resources.product-comments.notification.rejected_success',
+                    'resources.comments.notification.rejected_success',
                     'info',
                     {},
                     true
                 );
-                redirectTo('/product-comments');
+                redirectTo('/comments');
             },
             onFailure: () => {
                 notify(
-                    'resources.product-comments.notification.rejected_error',
+                    'resources.comments.notification.rejected_error',
                     'warning'
                 );
             },
@@ -51,7 +51,7 @@ const RejectButton: FC<{ record: Review }> = ({ record }) => {
                 color="primary"
                 style={{ paddingRight: '0.5em', color: 'red' }}
             />
-            {translate('resources.product-comments.action.reject')}
+            {translate('resources.comments.action.reject')}
         </Button>
     ) : (
         <span />

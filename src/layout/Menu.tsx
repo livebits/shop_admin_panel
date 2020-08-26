@@ -375,8 +375,8 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 dense={dense}
             />
             <MenuItemLink
-                to={`/product-comments`}
-                primaryText={translate(`resources.product-comments.name`, {
+                to={`/comments`}
+                primaryText={translate(`resources.comments.name`, {
                     smart_count: 2,
                 })}
                 leftIcon={<MessageRoundedIcon />}

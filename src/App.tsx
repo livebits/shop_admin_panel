@@ -109,7 +109,7 @@ const App = () => {
                     <Resource name="discounts" label="Discounts" {...discounts} />,
                     <Resource name="messages" label="Messages" {...messages} />,
                     <Resource name="products" label="Products" {...products} />,
-                    <Resource name="product-comments" {...reviews} />,
+                    <Resource name="comments" {...reviews} />,
                     <Resource
                         name="orders"
                         {...orders}

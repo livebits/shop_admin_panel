@@ -118,7 +118,7 @@ const Dashboard: FC = () => {
     }, [dataProvider]);
 
     const fetchReviews = useCallback(async () => {
-        const { data: reviews } = await dataProvider.getList('product-comments', {
+        const { data: reviews } = await dataProvider.getList('comments', {
             filter: { 'status||eq': 'pending' },
             sort: { field: 'createdAt', order: 'DESC' },
             pagination: { page: 1, perPage: 100 },

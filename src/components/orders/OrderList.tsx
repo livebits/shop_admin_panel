@@ -167,7 +167,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"
-                                render={(record:any) => <FullNameField record={record.userTenant.user} />}
+                                render={(record:any) => <FullNameField record={record.customer.user} />}
                             />
                             <NbItemsField />
                             <NumberField
@@ -186,7 +186,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"
-                                render={(record:any) => <FullNameField record={record.userTenant.user} />}
+                                render={(record:any) => <FullNameField record={record.customer.user} />}
                             />
                             <NbItemsField />
                             <NumberField
@@ -207,7 +207,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"
-                                render={(record:any) => <FullNameField record={record.userTenant.user} />}
+                                render={(record:any) => <FullNameField record={record.customer.user} />}
                             />
                             <NbItemsField />
                             <NumberField

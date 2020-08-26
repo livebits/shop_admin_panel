@@ -15,10 +15,10 @@ import { BulkActionProps } from '../../types';
 const BulkRejectButton: FC<BulkActionProps> = ({ selectedIds }) => {
     const notify = useNotify();
     const redirectTo = useRedirect();
-    const unselectAll = useUnselectAll('product-comments');
+    const unselectAll = useUnselectAll('comments');
 
     const [reject, { loading }] = useUpdateMany(
-        'product-comments',
+        'comments',
         selectedIds,
         { status: 'rejected' },
         {
@@ -26,17 +26,17 @@ const BulkRejectButton: FC<BulkActionProps> = ({ selectedIds }) => {
             undoable: true,
             onSuccess: () => {
                 notify(
-                    'resources.product-comments.notification.approved_success',
+                    'resources.comments.notification.approved_success',
                     'info',
                     {},
                     true
                 );
-                redirectTo('/product-comments');
+                redirectTo('/comments');
                 unselectAll();
             },
             onFailure: () => {
                 notify(
-                    'resources.product-comments.notification.approved_error',
+                    'resources.comments.notification.approved_error',
                     'warning'
                 );
             },
@@ -45,7 +45,7 @@ const BulkRejectButton: FC<BulkActionProps> = ({ selectedIds }) => {
 
     return (
         <Button
-            label="resources.product-comments.action.reject"
+            label="resources.comments.action.reject"
             onClick={reject}
             disabled={loading}
         >

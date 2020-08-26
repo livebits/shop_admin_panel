@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         minHeight: '100vh',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        // background: 'url(https://source.unsplash.com/random/1600x900)',
+        background: 'url(https://source.unsplash.com/1600x900/?shop,product,armchair,market)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
@@ -128,7 +128,9 @@ const Login = () => {
                                 </Avatar>
                             </div>
                             <div className={classes.hint}>
-                                Hint: demo / demo
+                                {
+                                    translate('pos.appName')
+                                }
                             </div>
                             <div className={classes.form}>
                                 <div className={classes.input}>
@@ -202,6 +204,14 @@ const LoginWithTheme = (props: any) => (
             background: {
                 default: '#fcfcfe',
             },
+        },
+        typography: {
+            fontFamily: [
+                'IRANSans',
+                'Arial',
+                '"Segoe UI"',
+                'sans-serif',
+            ].join(','),
         },
         shape: {
             borderRadius: 10,

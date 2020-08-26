@@ -4,6 +4,7 @@ import farsiMessages from './farsiMessages';
 const customFarsiMessages: TranslationMessages = {
     ...farsiMessages,
     pos: {
+        appName: 'فروشگاه نوین تک',
         search: 'جستجو',
         configuration: 'تنظیمات',
         language: 'زبان',
@@ -435,7 +436,7 @@ const customFarsiMessages: TranslationMessages = {
                 other: 'سایر',
             },
         },
-        'product-comments': {
+        'comments': {
             name: 'نظر |||| نظرات کاربران',
             amount: '1 نظر |||| %{smart_count} نظر',
             relative_to_poster: 'Review on poster',
@@ -483,6 +484,15 @@ const customFarsiMessages: TranslationMessages = {
             },
         },
     },
+    error: {
+        user: {
+            'Not Found': 'موردی پیدا نشد'
+        },
+        unique: {
+            email: 'ایمیل تکراری می باشد',
+            username: 'نام کاربری تکراری می باشد',
+        },
+    }
 };
 
 export default customFarsiMessages;

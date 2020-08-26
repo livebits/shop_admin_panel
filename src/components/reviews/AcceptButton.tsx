@@ -15,7 +15,7 @@ const AcceptButton: FC<{ record: Review }> = ({ record }) => {
     const redirectTo = useRedirect();
 
     const [approve, { loading }] = useUpdate(
-        'product-comments',
+        'comments',
         record.id,
         { status: 'approved' },
         record,
@@ -23,16 +23,16 @@ const AcceptButton: FC<{ record: Review }> = ({ record }) => {
             undoable: true,
             onSuccess: () => {
                 notify(
-                    'resources.product-comments.notification.approved_success',
+                    'resources.comments.notification.approved_success',
                     'info',
                     {},
                     true
                 );
-                redirectTo('/product-comments');
+                redirectTo('/comments');
             },
             onFailure: () => {
                 notify(
-                    'resources.product-comments.notification.approved_error',
+                    'resources.comments.notification.approved_error',
                     'warning'
                 );
             },
@@ -50,7 +50,7 @@ const AcceptButton: FC<{ record: Review }> = ({ record }) => {
                 color="primary"
                 style={{ paddingRight: '0.5em', color: 'green' }}
             />
-            {translate('resources.product-comments.action.accept')}
+            {translate('resources.comments.action.accept')}
         </Button>
     ) : (
         <span />
