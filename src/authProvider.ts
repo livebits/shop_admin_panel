@@ -1,13 +1,16 @@
 import { AuthProvider } from 'ra-core';
-import { API_URL } from './App';
+import { API_URL, TENANT_ID } from './App';
 import { Role, Permission, UserPermissions } from './types';
 
 const authProvider: AuthProvider = {
-    login: ({ username, password }) => {        
+    login: ({ username, password }) => {
         const request = new Request(`${API_URL}/auth/manager-login`, {
             method: 'POST',
             body: JSON.stringify({ username, password }),
-            headers: new Headers({ 'Content-Type': 'application/json' }),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'X-TENANT-ID': `${TENANT_ID}`,
+            }),
         });
         return fetch(request)
             .then(response => {

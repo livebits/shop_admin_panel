@@ -118,6 +118,7 @@ const EditAddress = ({ onCancel, onRefresh, data, ...props }: { [prop: string]: 
                 <TextInput source="pelak" />
                 <TextInput source="unit" />
                 <TextInput source="zip" validate={required()} />
+                <TextInput source="receiver" />
             </SimpleForm>
         </form>
     );

@@ -21,7 +21,7 @@ const TicketList = (props: any) => {
             <TextField source="id" />
             <FunctionField
                 source="customer"
-                render={(record:any) => <FullNameField record={record.customer.user} />}
+                render={(record:any) => record.customer ? <FullNameField record={record.customer.user} /> : ''}
             />
             <TextField source="title" />
             <FunctionField

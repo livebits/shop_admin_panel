@@ -98,6 +98,7 @@ const AddAddress: FC<Props> = ({ onCancel, onRefresh, ...props }) => {
                 <TextInput source="pelak" />
                 <TextInput source="unit" />
                 <TextInput source="zip" validate={required()} />
+                <TextInput source="receiver" />
             </SimpleForm>
         </div>
     );

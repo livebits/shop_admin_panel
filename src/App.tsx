@@ -52,6 +52,7 @@ const i18nProvider = polyglotI18nProvider(locale => {
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 export const API_URL = process.env.REACT_APP_SERVER_ADDRESS
+export const TENANT_ID = process.env.REACT_APP_TENANT_ID
 
 const App = () => {
     const [dataProvider, setDataProvider] = useState<any>(null);
@@ -66,6 +67,7 @@ const App = () => {
                 // options.headers.set('X-Custom-Header', 'foobar');
                 const token = localStorage.getItem('token');
                 options.headers.set('Authorization', `Bearer ${token}`);
+                options.headers.set('X-TENANT-ID', TENANT_ID);
                 return fetchUtils.fetchJson(url, options);
             }
             const dataProviderInstance = dataProviderFactory(API_URL, fetchJson);

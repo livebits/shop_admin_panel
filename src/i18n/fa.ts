@@ -258,6 +258,7 @@ const customFarsiMessages: TranslationMessages = {
                 pelak: 'پلاک',
                 unit: 'واحد',
                 zip: 'کدپستی',
+                receiver: 'دریافت کننده',
             },
         },
         categories: {
@@ -491,7 +492,8 @@ const customFarsiMessages: TranslationMessages = {
     },
     error: {
         user: {
-            'Not Found': 'موردی پیدا نشد'
+            'Not Found': 'موردی پیدا نشد',
+            'Forbidden': 'شما دسترسی های لازم را ندارید',
         },
         unique: {
             email: 'ایمیل تکراری می باشد',

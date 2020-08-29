@@ -64,12 +64,14 @@ const Dashboard: FC = () => {
     const fetchOrders = useCallback(async () => {
         const aMonthAgo = new Date();
         aMonthAgo.setDate(aMonthAgo.getDate() - 30);
-        const { data: recentOrders } = await dataProvider.getList('orders', {
-            filter: { 'createdAt||gte': aMonthAgo.toISOString() },
-            sort: { field: 'createdAt', order: 'DESC' },
-            pagination: { page: 1, perPage: 50 },
-        });
-        const aggregations = recentOrders
+        try {
+            const { data: recentOrders } = await dataProvider.getList('orders', {
+                filter: { 'createdAt||gte': aMonthAgo.toISOString() },
+                sort: { field: 'createdAt', order: 'DESC' },
+                pagination: { page: 1, perPage: 50 },
+            });
+
+            const aggregations = recentOrders
             .filter((order: Order) => order.status !== 'cancelled')
             .reduce(
                 (stats: OrderStats, order: Order) => {
@@ -88,33 +90,38 @@ const Dashboard: FC = () => {
                     pendingOrders: [],
                 }
             );
-        setState(state => ({
-            ...state,
-            recentOrders,
-            revenue: aggregations.revenue.toLocaleString(undefined, {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-            }),
-            nbNewOrders: aggregations.nbNewOrders,
-            pendingOrders: aggregations.pendingOrders,
-        }));
-        const { data: customers } = await dataProvider.getMany('user-tenants', {
-            ids: aggregations.pendingOrders.map(
-                (order: Order) => order.userTenantId
-            ),
-        });
-        setState(state => ({
-            ...state,
-            pendingOrdersCustomers: customers.reduce(
-                (prev: CustomerData, customer: Customer) => {
-                    prev[customer.id] = customer; // eslint-disable-line no-param-reassign
-                    return prev;
-                },
-                {}
-            ),
-        }));
+            setState(state => ({
+                ...state,
+                recentOrders,
+                revenue: aggregations.revenue.toLocaleString(undefined, {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                }),
+                nbNewOrders: aggregations.nbNewOrders,
+                pendingOrders: aggregations.pendingOrders,
+            }));
+            const { data: customers } = await dataProvider.getMany('user-tenants', {
+                ids: aggregations.pendingOrders.map(
+                    (order: Order) => order.userTenantId
+                ),
+            });
+            setState(state => ({
+                ...state,
+                pendingOrdersCustomers: customers.reduce(
+                    (prev: CustomerData, customer: Customer) => {
+                        prev[customer.id] = customer; // eslint-disable-line no-param-reassign
+                        return prev;
+                    },
+                    {}
+                ),
+            }));
+        } catch (error) {
+            console.log(error);
+            
+        }
+        
     }, [dataProvider]);
 
     const fetchReviews = useCallback(async () => {
@@ -166,7 +173,7 @@ const Dashboard: FC = () => {
                     <NbNewOrders value={nbNewOrders} />
                 </div>
                 <div style={styles.singleCol}>
-                    <OrderChart orders={recentOrders} />
+                    {/* <OrderChart orders={recentOrders} /> */}
                 </div>
                 <div style={styles.singleCol}>
                     <PendingOrders

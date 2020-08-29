@@ -53,14 +53,14 @@ const CategoryCreate = (props:any) => {
                         <TextInput source="name"/>
                         <NumberInput source="priority"/>
                         <TextInput source="hint" fullWidth/>
-                        <SelectInput source="dataType" choices={[
+                        {/* <SelectInput source="dataType" choices={[
                             { id: 'number', name: 'pos.dataType.number' },
                             { id: 'string', name: 'pos.dataType.string' },
                             { id: 'text', name: 'pos.dataType.text' },
                             { id: 'date', name: 'pos.dataType.date' },
                             { id: 'option', name: 'pos.dataType.option' },
                         ]} />
-                        <TextInput source="defaultValue"/>
+                        <TextInput source="defaultValue"/> */}
                         <BooleanInput source="isRequired"/>
                     </SimpleFormIterator>
                 </ArrayInput>
