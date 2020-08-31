@@ -60,8 +60,8 @@ const ProductCreate: FC<CreateComponentProps> = props => {
         let requestBody = {
             ...data,
             prosAndCons: {
-                pros: data.pros.map((val:any) => val.value),
-                cons: data.cons.map((val:any) => val.value)
+                pros: data.pros ? data.pros.map((val:any) => val.value) : [],
+                cons: data.cons ? data.cons.map((val:any) => val.value) : []
             },
             productCategoryFields: catFields,
         }

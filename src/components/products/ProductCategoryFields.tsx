@@ -6,12 +6,13 @@ import {
     SelectInput,
     FormDataConsumer,
     ArrayInput,
+    DateInput,
     SimpleFormIterator,
     TextInput,
 } from 'react-admin';
 import { Query, Loading, LinearProgress, Error } from 'react-admin';
 
-export const ProductCategoryFields = ({ formData, ...rest }: { formData: any }) => {
+export const ProductCategoryFields = ({ formData, ...rest }: { formData: any }) => {    
     const form = useForm();
     const payload = {
         pagination: { page: 1, perPage: 1000 },
@@ -20,11 +21,53 @@ export const ProductCategoryFields = ({ formData, ...rest }: { formData: any }) 
         categoryId: formData.categoryId,
     };
 
+    const generateOptions = (options:string) => {
+        let itemOptions: { id: string; name: string; }[] = []
+        options.split("\n").forEach(item => {
+            itemOptions.push({
+                id: item, name: item
+            })
+        });
+
+        return itemOptions
+    }
+
     const generateCategoryFields = (data: any) => {
         return data.map((item: any, index: number) => {
-            return <div>
-                <TextInput key={index} source={'cf_' + item.id} label={item.name} placeholder={item.defaultValue} />
-            </div>
+            switch (item.dataType) {
+                case 'date':
+                    return <div>
+                        <DateInput 
+                            style={{width: 256}} 
+                            key={index} 
+                            source={'cf_' + item.id + "_" + item.categoryId} 
+                            label={item.name} 
+                            placeholder={item.defaultValue}
+                        />
+                    </div>
+                case 'option':
+                    return <div>
+                        <SelectInput 
+                            style={{width: 256}}
+                            key={index}
+                            source={'cf_' + item.id + "_" + item.categoryId}
+                            label={item.name}
+                            placeholder={item.defaultValue}
+                            choices={generateOptions(item.options)}
+                        />
+                    </div>
+            
+                default:
+                    return <div>
+                        <TextInput 
+                            style={{width: 256}} 
+                            key={index} 
+                            source={'cf_' + item.id + "_" + item.categoryId} 
+                            label={item.name} 
+                            placeholder={item.defaultValue}
+                        />
+                    </div>
+            }
         })
     }
 

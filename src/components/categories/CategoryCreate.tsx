@@ -10,6 +10,7 @@ import {
     TextInput,
     NumberInput,
     usePermissions,
+    FormDataConsumer,
     BooleanInput,
 } from 'react-admin';
 import { SaveButton, Toolbar } from 'react-admin';
@@ -53,15 +54,48 @@ const CategoryCreate = (props:any) => {
                         <TextInput source="name"/>
                         <NumberInput source="priority"/>
                         <TextInput source="hint" fullWidth/>
-                        {/* <SelectInput source="dataType" choices={[
+                        <SelectInput source="dataType" choices={[
                             { id: 'number', name: 'pos.dataType.number' },
                             { id: 'string', name: 'pos.dataType.string' },
                             { id: 'text', name: 'pos.dataType.text' },
                             { id: 'date', name: 'pos.dataType.date' },
                             { id: 'option', name: 'pos.dataType.option' },
                         ]} />
-                        <TextInput source="defaultValue"/> */}
-                        <BooleanInput source="isRequired"/>
+                        
+                        <FormDataConsumer>
+                            {
+                                (props:any) => {                                    
+                                    return props.scopedFormData && props.scopedFormData.dataType && props.scopedFormData.dataType === 'number' &&
+                                    <>
+                                        <NumberInput 
+                                            source={props.getSource('min')} 
+                                            label="resources.categories.fields.min"
+                                        />
+                                        <NumberInput 
+                                            style={{padding: '0px 5px'}}
+                                            source={props.getSource('max')} 
+                                            label="resources.categories.fields.max"
+                                        />
+                                    </>
+                                }
+                            }
+                        </FormDataConsumer>
+                        <FormDataConsumer>
+                            {
+                                (props:any) => {                                    
+                                    return props.scopedFormData && props.scopedFormData.dataType && props.scopedFormData.dataType === 'option' &&
+                                    <TextInput 
+                                        source={props.getSource('options')} 
+                                        label="resources.categories.fields.options" 
+                                        fullWidth 
+                                        multiline
+                                    />
+                                }
+                            }
+                        </FormDataConsumer>
+                        <BooleanInput source="showInFilter"/>
+                        {/* <TextInput source="defaultValue"/> */}
+                        {/* <BooleanInput source="isRequired"/> */}
                     </SimpleFormIterator>
                 </ArrayInput>
             </SimpleForm>

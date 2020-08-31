@@ -81,28 +81,43 @@ const ProductEdit: FC<EditComponentProps> = props => {
         Object.keys(data).forEach(element => {
             if (element.includes("cf_")) {
                 let catFieldId = Number(element.split('_')[1]);
+                let catId = Number(element.split('_')[2]);
+                
+                if (catId !== data.categoryId) {
+                    return
+                }
+
                 let productCatField = data.productCategoryFields.filter((pcf: any) => pcf.categoryFieldId === catFieldId)[0]
                 
-                catFields.push({
-                    categoryFieldId: catFieldId,
-                    id: productCatField.id,
-                    value: data[element],
-                })
+                if (productCatField) {
+                    catFields.push({
+                        categoryFieldId: catFieldId,
+                        id: productCatField.id,
+                        value: data[element],
+                    })
+                } else {
+                    catFields.push({
+                        categoryFieldId: catFieldId,
+                        value: data[element],
+                    })
+                }
             }
         });
 
         let requestBody = {
             ...data,
             prosAndCons: {
-                pros: data.pros.map((val:any) => val.value),
-                cons: data.cons.map((val:any) => val.value)
+                pros: data.pros ? data.pros.map((val:any) => val.value) : [],
+                cons: data.cons ? data.cons.map((val:any) => val.value) : []
             },
             productCategoryFields: catFields,
+            brand: { id: data.brandId },
+            category: { id: data.categoryId },
         }
         delete requestBody.pros;
         delete requestBody.cons;
-        delete requestBody.brand;
-        delete requestBody.category;
+        // delete requestBody.brand;
+        // delete requestBody.category;
         delete requestBody.thumbnail;
         delete requestBody.attachments;
         delete requestBody.updatedAt;

@@ -157,7 +157,7 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
 
           if (json.productCategoryFields !== null && json.productCategoryFields !== undefined) {
             json.productCategoryFields.forEach((pcf:any) => {
-              json['cf_' + pcf.categoryFieldId] = pcf.value
+              json['cf_' + pcf.categoryFieldId + "_" + pcf.categoryField.categoryId] = pcf.value
             })
           }
           

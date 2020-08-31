@@ -181,7 +181,7 @@ const customFarsiMessages: TranslationMessages = {
             name: 'برند |||| برندها',
             fields: {
                 id: 'کد',
-                name: 'منو',
+                name: 'نام',
                 logo: 'تصویر برند',
                 description: 'توضیحات',
             },
@@ -278,6 +278,10 @@ const customFarsiMessages: TranslationMessages = {
                 dataType: 'نوع فیلد',
                 defaultValue: 'مقدار پیشفرض',
                 isRequired: 'اجباری؟',
+                min: 'حداقل',
+                max: 'حداکثر',
+                showInFilter: 'نمایش در فیلتر',
+                options: 'گزینه ها (در هر سطر یک مورد وارد کنید)',
             },
             filters: {
             },
