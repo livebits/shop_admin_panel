@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { FunctionField } from 'react-admin';
 import { Order, FieldProps } from '../../types';
 
-const render = (record: Order) => record.orderProducts.length;
+const render = (record: Order) => record.orderProducts ? record.orderProducts.length : 0;
 
 interface NbItemsFieldProps extends FieldProps {
     textAlign?: string;

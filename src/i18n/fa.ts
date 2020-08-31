@@ -70,8 +70,10 @@ const customFarsiMessages: TranslationMessages = {
         },
         orderStatus: {
             delivered: 'تحویل داده شده',
-            ordered: 'بررسی نشده',
-            paid: 'پرداخت شده',
+            pending: 'بررسی نشده',
+            accepted: 'تایید سفارش',
+            ready_to_send: 'آماده ارسال',
+            posted: 'ارسال شده',
             cancelled: 'کنسل شده',
             unknown: 'نامشخص',
         },
@@ -338,7 +340,7 @@ const customFarsiMessages: TranslationMessages = {
             },
             tabs: {
                 ordered: 'بررسی نشده',
-                paid: 'پرداخت شده',
+                posted: 'ارسال شده',
                 delivered: 'تحویل شده',
                 cancelled: 'کنسل شده',
             },

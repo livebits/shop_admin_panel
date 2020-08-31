@@ -100,7 +100,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                             )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {record.factor && record.factor.totalTaxPrice.toLocaleString(undefined, {
+                            {record.factor && record.factor.orderPrice.toLocaleString(undefined, {
                                 style: 'currency',
                                 currency: 'USD',
                             })}

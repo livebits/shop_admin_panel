@@ -71,7 +71,7 @@ const useDatagridStyles = makeStyles({
 
 const tabs = [
     { id: 'ordered', name: 'resources.orders.tabs.ordered' },
-    { id: 'paid', name: 'resources.orders.tabs.paid' },
+    { id: 'posted', name: 'resources.orders.tabs.posted' },
     { id: 'delivered', name: 'resources.orders.tabs.delivered' },
     { id: 'cancelled', name: 'resources.orders.tabs.cancelled' },
 ];
@@ -92,7 +92,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
         theme.breakpoints.down('xs')
     );
     const [ordered, setOrdered] = useState<Identifier[]>([]);
-    const [paid, setPaid] = useState<Identifier[]>([]);
+    const [posted, setPosted] = useState<Identifier[]>([]);
     const [delivered, setDelivered] = useState<Identifier[]>([]);
     const [cancelled, setCancelled] = useState<Identifier[]>([]);
 
@@ -103,8 +103,8 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                 case 'ordered':
                     setOrdered(ids);
                     break;
-                case 'paid':
-                    setPaid(ids);
+                case 'posted':
+                    setPosted(ids);
                     break;
                 case 'delivered':
                     setDelivered(ids);
@@ -130,8 +130,8 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
     const selectedIds =
         filterValues['status||eq'] === 'ordered'
             ? ordered
-            : filterValues['status||eq'] === 'paid'
-            ? paid
+            : filterValues['status||eq'] === 'posted'
+            ? posted
             : filterValues['status||eq'] === 'delivered'
             ? delivered
             : cancelled;
@@ -156,10 +156,10 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
             <Divider />
             {
                 <div>
-                    {(filterValues['status||eq'] === 'ordered' || filterValues['status||eq'] === 'paid') && (
+                    {(filterValues['status||eq'] === 'ordered' || filterValues['status||eq'] === 'posted') && (
                         <Datagrid
                             {...rest}
-                            ids={filterValues['status||eq'] === 'ordered' ? ordered : paid}
+                            ids={filterValues['status||eq'] === 'ordered' ? ordered : posted}
                             optimized
                             rowClick="edit"
                         >
@@ -167,7 +167,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"
-                                render={(record:any) => <FullNameField record={record.customer.user} />}
+                                render={(record:any) => <FullNameField record={record.customer ? record.customer.user : ''} />}
                             />
                             <NbItemsField />
                             <NumberField
@@ -186,7 +186,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"
-                                render={(record:any) => <FullNameField record={record.customer.user} />}
+                                render={(record:any) => <FullNameField record={record.customer ? record.customer.user : ''} />}
                             />
                             <NbItemsField />
                             <NumberField
@@ -207,7 +207,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"
-                                render={(record:any) => <FullNameField record={record.customer.user} />}
+                                render={(record:any) => <FullNameField record={record.customer ? record.customer.user : ''} />}
                             />
                             <NbItemsField />
                             <NumberField

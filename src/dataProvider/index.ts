@@ -161,6 +161,13 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
             })
           }
           
+        } else if (resource === 'orders') {
+
+          if (json.logs && json.logs.length > 0) {
+            json.status = json.logs[json.logs.length - 1].status
+          } else {
+            json.status = 'pending'
+          }
         }
         return { data: json };
       default:
