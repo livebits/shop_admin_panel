@@ -48,20 +48,23 @@ interface FilterParams {
 
 const OrderFilter: FC<FilterProps<FilterParams>> = props => (
     <Filter {...props}>
-        <SearchInput source="q" alwaysOn />
-        <ReferenceInput source="customerId" reference="user-tenants">
+        <SearchInput source="id" alwaysOn />
+        <ReferenceInput 
+            label="resources.orders.filters.customer" 
+            source="customerId||eq" 
+            reference="user-tenants"
+            filter={{ 'user.type||eq': 'customer' }}
+        >
             <AutocompleteInput
                 optionText={(choice: Customer) =>
-                    choice.firstName && choice.lastName
-                        ? `${choice.firstName} ${choice.lastName}`
-                        : ''
+                    choice.user ? `${choice.user.firstName} ${choice.user.lastName ?? '' }` : ''
                 }
             />
         </ReferenceInput>
-        {/* <DateInput source="date_gte" />
-        <DateInput source="date_lte" />
-        <TextInput source="total_gte" /> */}
-        <NullableBooleanInput source="returned" />
+        <DateInput source="createdAt||gte" label="resources.orders.filters.minDate" />
+        <DateInput source="createdAt||lte" label="resources.orders.filters.maxDate" />
+        {/* <TextInput source="total_gte" /> */}
+        <NullableBooleanInput label="resources.orders.filters.returned" source="returned||eq" />
     </Filter>
 );
 

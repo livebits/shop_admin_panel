@@ -342,6 +342,15 @@ const customFarsiMessages: TranslationMessages = {
                 customerId: 'مشتری',
                 status: 'وضعیت',
             },
+            filters: {
+                id: 'شماره سفارش',
+                customer: 'کاربر',
+                returned: 'برگشت خورده؟',
+                minDate: 'از تاریخ',
+                maxDate: 'تا تاریخ',
+                minPrice: 'حداقل قیمت',
+                maxPrice: 'حداکثر قیمت',
+            },
             tabs: {
                 ordered: 'بررسی نشده',
                 posted: 'ارسال شده',
@@ -437,6 +446,10 @@ const customFarsiMessages: TranslationMessages = {
             },
             filters: {
                 category: 'دسته بندی',
+                brand: 'برند',
+                status: 'وضعیت',
+                minPrice: 'حداقل قیمت',
+                maxPrice: 'حداکثر قیمت',
             },
             tabs: {
                 public: 'مشخصات عمومی',
@@ -462,7 +475,9 @@ const customFarsiMessages: TranslationMessages = {
                 status: 'وضعیت',
             },
             filters: {
-                status: 'وضعیت'
+                status: 'وضعیت',
+                customer: 'کاربر',
+                product: 'کالا',
             },
             action: {
                 accept: 'تایید',

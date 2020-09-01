@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FC } from 'react';
-import { EditButton, DeleteWithConfirmButton, List, usePermissions } from 'react-admin';
+import { EditButton, Filter, SearchInput, DeleteWithConfirmButton, List, usePermissions } from 'react-admin';
 import { ListControllerProps } from 'ra-core';
 import inflection from 'inflection';
 import {
@@ -15,7 +15,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 import LinkToRelatedProducts from './LinkToRelatedProducts';
-import { Category } from '../../types';
+import { Category, FilterProps } from '../../types';
 import { API_URL } from '../../App';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
@@ -35,6 +35,16 @@ const useStyles = makeStyles({
         justifyContent: 'space-around',
     },
 });
+
+interface FilterParams {
+    name?: string;
+}
+
+export const ListFilter: React.FC<FilterProps<FilterParams>> = props => (
+    <Filter {...props}>
+        <SearchInput source="name" alwaysOn />
+    </Filter>
+);
 
 const CategoryGrid: FC<ListControllerProps<Category>> = props => {
     const { permissions } = usePermissions();
@@ -96,6 +106,7 @@ const CategoryList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
+        filters={<ListFilter />}
         perPage={25}
         component="div"
         // actions={false}

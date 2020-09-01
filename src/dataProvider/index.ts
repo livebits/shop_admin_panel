@@ -19,7 +19,7 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
       let field = splitKey[0];
 
       if (field.indexOf('_') === 0 && field.indexOf('.') > -1) {
-        field = field.split(/\.(.+)/)[1];
+        // field = field.split(/\.(.+)/)[1];
       }
       return { field, operator: ops, value: flatFilter[key] };
     });

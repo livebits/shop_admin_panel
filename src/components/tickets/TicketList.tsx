@@ -1,8 +1,19 @@
 import * as React from 'react';
-import { Datagrid, TextField, useTranslate, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, Filter, SearchInput, useTranslate, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 import FullNameField from '../reviews/FullNameField';
+import { FilterProps } from '../../types';
+
+interface FilterParams {
+    name?: string;
+}
+
+export const ListFilter: React.FC<FilterProps<FilterParams>> = props => (
+    <Filter {...props}>
+        <SearchInput source="title" alwaysOn />
+    </Filter>
+);
 
 const TicketList = (props: any) => {
     const translate = useTranslate();
@@ -15,6 +26,7 @@ const TicketList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
+        filters={<ListFilter />}
         perPage={25}
     >
         <Datagrid rowClick="edit">

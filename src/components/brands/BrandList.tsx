@@ -1,7 +1,18 @@
 import * as React from 'react';
-import { Datagrid, TextField, EmailField, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, Filter, SearchInput, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import { FilterProps } from '../../types';
+
+interface FilterParams {
+    name?: string;
+}
+
+export const ListFilter: React.FC<FilterProps<FilterParams>> = props => (
+    <Filter {...props}>
+        <SearchInput source="name" alwaysOn />
+    </Filter>
+);
 
 const BrandList = (props: any) => {
     const { permissions } = usePermissions();    
@@ -13,6 +24,7 @@ const BrandList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
+        filters={<ListFilter />}
         perPage={25}
     >
         <Datagrid rowClick="edit">

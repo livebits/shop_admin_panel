@@ -3,6 +3,7 @@ import { FC } from 'react';
 import {
     AutocompleteInput,
     DateInput,
+    useTranslate,
     Filter,
     ReferenceInput,
     SearchInput,
@@ -26,27 +27,38 @@ interface FilterParams {
 }
 
 const ReviewFilter: FC<FilterProps<FilterParams>> = props => {
+    const translate = useTranslate();
     const classes = useFilterStyles();
     return (
         <Filter {...props}>
-            <SearchInput source="q" alwaysOn />
+            <SearchInput source="comment" alwaysOn />
             <SelectInput
                 source="status||eq"
+                label="resources.comments.filters.status"
                 choices={[
-                    { id: 'approved', name: 'Approved' },
-                    { id: 'pending', name: 'Pending' },
-                    { id: 'rejected', name: 'Rejected' },
+                    { id: 'approved', name: translate(`resources.comments.status.approved`) },
+                    { id: 'pending', name: translate(`resources.comments.status.pending`) },
+                    { id: 'rejected', name: translate(`resources.comments.status.rejected`) },
                 ]}
                 className={classes.status}
             />
-            <ReferenceInput source="customerId||eq" reference="customers">
+            <ReferenceInput 
+                label="resources.comments.filters.customer" 
+                source="customerId||eq" 
+                reference="user-tenants"
+                filter={{ 'user.type||eq': 'customer' }}
+            >
                 <AutocompleteInput
                     optionText={(choice: Customer) =>
-                        `${choice.firstName} ${choice.lastName}`
+                        choice.user ? `${choice.user.firstName} ${choice.user.lastName ?? '' }` : ''
                     }
                 />
             </ReferenceInput>
-            <ReferenceInput source="productId||eq" reference="products">
+            <ReferenceInput 
+                source="productId||eq" 
+                reference="products"
+                label="resources.comments.filters.product"
+            >
                 <AutocompleteInput optionText="name" />
             </ReferenceInput>
             {/* <DateInput source="date_gte" />

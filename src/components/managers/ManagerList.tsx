@@ -1,8 +1,23 @@
 import * as React from 'react';
-import { Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton, usePermissions, useTranslate } from 'react-admin';
-import { UserPermissions } from '../../types';
+import { Datagrid, TextField, Filter, SearchInput, TextInput, EmailField, DateField, EditButton, List, FunctionField, DeleteButton, usePermissions, useTranslate } from 'react-admin';
+import { UserPermissions, FilterProps } from '../../types';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+
+interface FilterParams {
+    firstName?: string;
+    lastName?: string;
+    username?: string;
+    email?: string;
+}
+
+export const ListFilter: React.FC<FilterProps<FilterParams>> = props => (
+    <Filter {...props}>
+        <SearchInput source="firstName" alwaysOn />
+        <TextInput source="email" />
+        <TextInput source="username" />
+    </Filter>
+);
 
 const ManagerList = (props:any) => {
     const translate = useTranslate();
@@ -16,6 +31,7 @@ const ManagerList = (props:any) => {
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
         filter={{ 'type||eq': 'manager' }}
+        filters={<ListFilter />}
         perPage={25}
         // actions={false}
     >

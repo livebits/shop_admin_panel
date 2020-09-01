@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Datagrid, TextField, NumberField, useTranslate, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, Filter, SearchInput, NumberField, useTranslate, usePermissions, EditButton, List, FunctionField, DeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import { FilterProps } from '../../types';
 
 const translateType = (type: string, translate:any) => {
 
@@ -15,6 +16,16 @@ const translateType = (type: string, translate:any) => {
     }
 }
 
+interface FilterParams {
+    code?: string;
+}
+
+export const ListFilter: React.FC<FilterProps<FilterParams>> = props => (
+    <Filter {...props}>
+        <SearchInput source="code" alwaysOn />
+    </Filter>
+);
+
 const DiscountList = (props: any) => {
     const { permissions } = usePermissions();
     const translate = useTranslate();
@@ -26,6 +37,7 @@ const DiscountList = (props: any) => {
     return <List
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
+        filters={<ListFilter />}
         perPage={25}
     >
         <Datagrid rowClick="edit">

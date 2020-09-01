@@ -10,6 +10,7 @@ import {
     Pagination,
     ReferenceInput,
     SearchInput,
+    NumberInput,
     SelectInput,
     useTranslate,
 } from 'react-admin';
@@ -32,7 +33,9 @@ const QuickFilter: FC<InputProps> = ({ label }) => {
 
 interface FilterParams {
     q?: string;
-    category_id?: string;
+    categoryId?: string;
+    brandId?: string;
+    status?: string;
     // width_gte?: number;
     // width_lte?: number;
     // height_gte?: number;
@@ -40,8 +43,10 @@ interface FilterParams {
     // stock_lte?: number;
 }
 
-export const ProductFilter: FC<FilterProps<FilterParams>> = props => (
-    <Filter {...props}>
+export const ProductFilter: FC<FilterProps<FilterParams>> = props => {
+    const translate = useTranslate();
+
+    return <Filter {...props}>
         <SearchInput source="name" alwaysOn />
         <ReferenceInput
             label="resources.products.filters.category"
@@ -53,17 +58,28 @@ export const ProductFilter: FC<FilterProps<FilterParams>> = props => (
         >
             <SelectInput source="name" />
         </ReferenceInput>
-        {/* <NumberInput source="width_gte" />
-        <NumberInput source="width_lte" />
-        <NumberInput source="height_gte" />
-        <NumberInput source="height_lte" />
-        <QuickFilter
-            label="resources.products.fields.stock_lte"
-            source="stock_lte"
-            defaultValue={10}
-        /> */}
+        <SelectInput
+            source="status||eq"
+            alwaysOn
+            label="resources.products.filters.status"
+            choices={[
+                { id: 'available', name: translate('pos.productStatus.available') },
+                { id: 'not_available', name: translate('pos.productStatus.not_available') },
+            ]}
+        />
+        <ReferenceInput
+            label="resources.products.filters.brand"
+            source="brandId||eq"
+            reference="brands"
+            default={null}
+            sort={{ field: 'id', order: 'ASC' }}
+        >
+            <SelectInput source="name" />
+        </ReferenceInput>
+        <NumberInput source="prices.price||gte" label="resources.products.filters.minPrice" defaultValue={0} />
+        <NumberInput source="prices.price||lte" label="resources.products.filters.maxPrice" defaultValue={10000000} />
     </Filter>
-);
+};
 
 const ProductList: FC<ListComponentProps> = props => {
     const { permissions } = usePermissions();

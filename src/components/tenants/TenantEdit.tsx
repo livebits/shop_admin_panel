@@ -22,7 +22,7 @@ const TenantEdit = (props: any) => {
 
     return <Edit {...props}>
         <SimpleForm>
-            <TextInput disabled source="id" />
+            <TextInput disabled source="id" fullWidth />
             <TextInput source="name" />
             <TextInput source="description" fullWidth />
             <TextInput source="phone" />

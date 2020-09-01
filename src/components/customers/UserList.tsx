@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { usePermissions, Datagrid, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton, useTranslate, } from 'react-admin';
+import { usePermissions, Datagrid, Filter, SearchInput, TextInput, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton, useTranslate, } from 'react-admin';
 import { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import { BulkDeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import { FilterProps } from '../../types';
 // import ResetViewsButton from './ResetViewsButton';
 
 const BulkActionButtons = (props: any) => (
@@ -13,6 +14,21 @@ const BulkActionButtons = (props: any) => (
         {/* default bulk delete action */}
         <BulkDeleteButton {...props} />
     </Fragment>
+);
+
+interface FilterParams {
+    firstName?: string;
+    lastName?: string;
+    username?: string;
+    email?: string;
+}
+
+export const ListFilter: React.FC<FilterProps<FilterParams>> = props => (
+    <Filter {...props}>
+        <SearchInput source="firstName" alwaysOn />
+        <TextInput source="email" />
+        <TextInput source="username" />
+    </Filter>
 );
 
 const UserList = (props: any) => {
@@ -27,6 +43,7 @@ const UserList = (props: any) => {
         {...props}
         sort={{ field: 'id', order: 'DESC' }}
         filter={{ 'type||eq': 'customer' }}
+        filters={<ListFilter />}
         perPage={25}
         // actions={false}
         // title="مشتریان"
