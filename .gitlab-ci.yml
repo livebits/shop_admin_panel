@@ -1,0 +1,9 @@
+image: node:10
+
+test:
+  script:
+    - yarn install --pure-lockfile
+    - yarn analyze
+build:
+    script:
+    - yarn build
