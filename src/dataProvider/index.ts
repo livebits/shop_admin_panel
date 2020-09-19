@@ -102,9 +102,25 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
         break;
       }
       case reactAdmin.CREATE: {
+
+        switch (resource) {
+          case 'banners':
+            const data = new FormData();
+            data.append('link', params.data.link)
+            data.append('priority', params.data.priority)
+            data.append('description', params.data.description)
+            data.append('file', params.data.filename.rawFile)
+
+            options.body = data;
+            break;
+        
+          default:
+            options.body = JSON.stringify(params.data);
+            break;
+        }
+
         url = `${apiUrl}/${resource}`;
         options.method = 'POST';
-        options.body = JSON.stringify(params.data);
         break;
       }
       case reactAdmin.DELETE: {

@@ -20,7 +20,7 @@ import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import LockRoundedIcon from '@material-ui/icons/LockRounded';
 import VerifiedUserRoundedIcon from '@material-ui/icons/VerifiedUserRounded';
 import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
-import MoneyOffRoundedIcon from '@material-ui/icons/MoneyOffRounded';
+import ViewCarouselRoundedIcon from '@material-ui/icons/ViewCarouselRounded';
 import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
 import MailOutlineRoundedIcon from '@material-ui/icons/MailOutlineRounded';
 import AppsRoundedIcon from '@material-ui/icons/AppsRounded';
@@ -29,7 +29,7 @@ import ExtensionRoundedIcon from '@material-ui/icons/ExtensionRounded';
 import AnnouncementRoundedIcon from '@material-ui/icons/AnnouncementRounded';
 import PermIdentityRoundedIcon from '@material-ui/icons/PermIdentityRounded';
 
-type MenuName = 'menuManagers' | 'menuCustomers' | 'menuTenants' | 'menuRoles' | 'menuPermissions' | 'menuBrands' | 'menuCategories' | 'menuDepartments' | 'menuDiscounts' | 'menuMessages' | 'menuTickets' | 'menuProducts' | 'menuProductComments' | 'menuOrders';
+type MenuName = 'menuManagers' | 'menuCustomers' | 'menuTenants' | 'menuRoles' | 'menuPermissions' | 'menuBrands' | 'menuBanners' | 'menuCategories' | 'menuDepartments' | 'menuDiscounts' | 'menuMessages' | 'menuTickets' | 'menuProducts' | 'menuProductComments' | 'menuOrders';
 
 interface Props {
     dense: boolean;
@@ -45,6 +45,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         menuRoles: false,
         menuPermissions: false,
         menuBrands: false,
+        menuBanners: false,
         menuCategories: false,
         menuDepartments: false,
         menuDiscounts: false,
@@ -276,6 +277,33 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 />
                 <MenuItemLink
                     to={`/brands/create`}
+                    primaryText={translate(`ra.action.create`)}
+                    leftIcon={<AddCircleRoundedIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+            </SubMenu>
+            <SubMenu
+                handleToggle={() => handleToggle('menuBanners')}
+                isOpen={state.menuBanners}
+                sidebarIsOpen={open}
+                name="pos.menu.banners"
+                icon={<ViewCarouselRoundedIcon />}
+                dense={dense}
+            >
+                <MenuItemLink
+                    to={`/banners`}
+                    primaryText={translate(`resources.banners.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<ViewCarouselRoundedIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/banners/create`}
                     primaryText={translate(`ra.action.create`)}
                     leftIcon={<AddCircleRoundedIcon />}
                     onClick={onMenuClick}

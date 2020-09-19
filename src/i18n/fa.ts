@@ -37,6 +37,7 @@ const customFarsiMessages: TranslationMessages = {
             roles: 'نقش ها',
             permissions: 'مجوزات',
             brands: 'برندها',
+            banners: 'بنرها',
             categories: 'دسته بندی ها',
             departments: 'واحدها',
             discounts: 'تخفیفات',
@@ -184,6 +185,22 @@ const customFarsiMessages: TranslationMessages = {
                 name: 'نام',
                 logo: 'تصویر برند',
                 description: 'توضیحات',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
+        banners: {
+            name: 'بنر |||| بنرها',
+            fields: {
+                id: 'کد',
+                link: 'لینک',
+                priority: 'اولویت',
+                description: 'توضیحات',
+                filename: 'تصویر',
             },
             filters: {
             },
