@@ -11,6 +11,7 @@ import {
     NumberInput,
     usePermissions,
     FormDataConsumer,
+    required,
     BooleanInput,
 } from 'react-admin';
 import { SaveButton, Toolbar } from 'react-admin';
@@ -41,7 +42,7 @@ const CategoryCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm toolbar={<CreateToolbar />} redirect="list">
-                <TextInput source="name" />
+                <TextInput source="name" validate={required()} />
                 <TextInput source="description" fullWidth/>
                 <ReferenceInput source="parentId" reference="categories">
                     <SelectInput optionText="name" />
@@ -51,10 +52,10 @@ const CategoryCreate = (props:any) => {
                     sort={{ field: 'priority', order: 'ASC' }}
                 >
                     <SimpleFormIterator>
-                        <TextInput source="name"/>
+                        <TextInput source="name" validate={required()} />
                         <NumberInput source="priority"/>
                         <TextInput source="hint" fullWidth/>
-                        <SelectInput source="dataType" choices={[
+                        <SelectInput validate={required()}  source="dataType" choices={[
                             { id: 'number', name: 'pos.dataType.number' },
                             { id: 'string', name: 'pos.dataType.string' },
                             { id: 'text', name: 'pos.dataType.text' },

@@ -4,7 +4,7 @@ import {
     ReferenceInput,
     Edit,
     useTranslate,
-    DateInput,
+    required,
     SelectInput,
     SimpleForm,
     TextInput,
@@ -25,13 +25,13 @@ const RoleEdit = (props: any) => {
     return <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="name" />
+            <TextInput source="name" validate={required()} />
             <ArrayInput source="rolePermissions">
                 <SimpleFormIterator>
-                    <ReferenceInput source="permissionId" reference="permissions" perPage={100}>
+                    <ReferenceInput validate={required()} source="permissionId" reference="permissions" perPage={100}>
                         <SelectInput optionText={ (choice:any) => choice.description ? choice.description : `${choice.resource}-${choice.action}` }/>
                     </ReferenceInput>
-                    <SelectInput source="status" choices={[
+                    <SelectInput validate={required()} source="status" choices={[
                         { id: 'allow', name: translate('pos.permissionStatus.allow') },
                         { id: 'deny', name: translate('pos.permissionStatus.deny') },
                     ]} />

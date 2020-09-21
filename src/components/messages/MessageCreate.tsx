@@ -10,6 +10,7 @@ import {
     TextInput,
     useTranslate,
     AutocompleteInput,
+    required,
     FormDataConsumer,
 } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
@@ -28,14 +29,14 @@ const MessageCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm >
-                <TextInput source="title" />
-                <TextInput source="body" fullWidth multiline />
-                <SelectInput source="type" choices={[
+                <TextInput source="title" validate={required()} />
+                <TextInput source="body" fullWidth multiline validate={required()} />
+                <SelectInput source="type" validate={required()} choices={[
                     { id: 'SMS', name: translate('pos.messageType.sms') },
                     { id: 'NOTIFICATION', name: translate('pos.messageType.notification') },
                 ]} />
                 <DateInput source="expiredAt" />
-                <SelectInput source="receiversType" choices={[
+                <SelectInput source="receiversType" validate={required()} choices={[
                     { id: 'SINGLE_USER', name: translate('pos.receiverType.single_user') },
                     { id: 'ALL_USERS', name: translate('pos.receiverType.all_users') },
                 ]} />
@@ -45,7 +46,8 @@ const MessageCreate = (props:any) => {
                         <ReferenceInput 
                             source="receiverId"
                             label="resources.messages.fields.receiver"
-                            reference="customers" 
+                            reference="customers"
+                            validate={required()}
                             filter={{ 'type||eq': 'customer' }}
                             filterToQuery={(searchText:any) => (searchText ? { firstName: searchText, lastName: searchText } : {})}
                         >

@@ -73,10 +73,10 @@ const EditAddress = ({ onCancel, onRefresh, data, ...props }: { [prop: string]: 
                 } 
             })
             .then(() => {
-                notify('user_address_updated');
+                notify('notification.user_address_updated');
             })
             .catch((e) => {
-                notify('Error: comment not approved', 'warning')
+                notify('notification.user_address_not_updated', 'warning')
             })
             .finally(() => {
                 setLoading(false);

@@ -82,10 +82,10 @@ const ChangePassword: FC<Props> = ({ onCancel, onRefresh, ...props }) => {
                 })
             })
         .then(() => {
-            notify('user_password_changed');
+            notify('notification.user_password_changed');
         })
         .catch((e) => {
-            notify('Error: user_password_not_changed', 'warning')
+            notify('notification.user_password_not_changed', 'warning')
         })
         .finally(() => {
             dispatch(fetchEnd()); // stop the global loading indicator

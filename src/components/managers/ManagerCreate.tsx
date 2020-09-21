@@ -7,7 +7,7 @@ import {
     ReferenceInput,
     ReferenceArrayInput,
     SelectInput,
-    AutocompleteInput,
+    required,
     SelectArrayInput,
     TextInput,
     usePermissions,
@@ -27,12 +27,12 @@ const ManagerCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm initialValues={defaultValue}>
-                <TextInput source="firstName" />
+                <TextInput source="firstName" validate={required()} />
                 <TextInput source="lastName" />
-                <TextInput source="username" />
-                <PasswordInput source="password" />
+                <TextInput source="username" validate={required()} />
+                <PasswordInput source="password" validate={required()} />
                 <TextInput source="email" />
-                <SelectInput source="status" choices={[
+                <SelectInput source="status" validate={required()} choices={[
                     { id: 'active', name: 'pos.status.active' },
                     { id: 'inactive', name: 'pos.status.inactive' },
                 ]} />

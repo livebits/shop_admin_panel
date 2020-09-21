@@ -8,6 +8,7 @@ import {
     SelectInput,
     SimpleFormIterator,
     TextInput,
+    required,
     useTranslate,
     usePermissions,
 } from 'react-admin';
@@ -41,13 +42,13 @@ const RoleCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm toolbar={<CreateToolbar />} redirect="show">
-                <TextInput source="name"/>
+                <TextInput source="name" validate={required()} />
                 <ArrayInput source="rolePermissions">
                     <SimpleFormIterator>
-                        <ReferenceInput source="permissionId" reference="permissions" perPage={100}>
+                        <ReferenceInput validate={required()} source="permissionId" reference="permissions" perPage={100}>
                             <SelectInput optionText={ (choice:any) => choice.description ? choice.description : `${choice.resource}-${choice.action}` }/>
                         </ReferenceInput>
-                        <SelectInput source="status" choices={[
+                        <SelectInput source="status" validate={required()} choices={[
                             { id: 'allow', name: translate('pos.permissionStatus.allow') },
                             { id: 'deny', name: translate('pos.permissionStatus.deny') },
                         ]} />

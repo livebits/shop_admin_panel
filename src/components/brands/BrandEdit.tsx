@@ -4,7 +4,7 @@ import {
     Datagrid,
     Edit,
     EditButton,
-    DateInput,
+    required,
     ImageInput,
     SimpleForm,
     TextInput,
@@ -22,7 +22,7 @@ const BrandEdit = (props: any) => {
     return <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="name" />
+            <TextInput source="name" validate={required()} />
             <TextInput source="description" fullWidth />
             <ImageInput 
                 source="logo"

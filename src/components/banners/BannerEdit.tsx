@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     Datagrid,
     Edit,
-    EditButton,
+    required,
     NumberInput,
     ImageInput,
     SimpleForm,
@@ -55,10 +55,10 @@ const BannerEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('banner_image_deleted');
+                notify('notification.banner_image_deleted');
             })
             .catch((e) => {
-                notify('banner_image_not_deleted', 'warning')
+                notify('notification.banner_image_not_deleted', 'warning')
             })
 
         setLoading(false);
@@ -83,10 +83,10 @@ const BannerEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('banner_image_updated');
+                notify('notification.banner_image_updated');
             })
             .catch((e) => {
-                notify('banner_image_not_uploaded', 'warning')
+                notify('notification.banner_image_not_uploaded', 'warning')
             })
 
         setLoading(false);
@@ -106,7 +106,7 @@ const BannerEdit = (props: any) => {
     return <Edit {...props} transform={transform}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="link" />
+            <TextInput source="link" validate={required()}  />
             <NumberInput source="priority" />
             <TextInput source="description" fullWidth />
             <ImageInput 

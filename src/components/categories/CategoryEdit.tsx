@@ -13,6 +13,7 @@ import {
     usePermissions,
     FormDataConsumer,
     SimpleFormIterator,
+    required,
 } from 'react-admin';
 import { useNotify, useRefresh, useRedirect, fetchStart, fetchEnd } from 'react-admin';
 import { useDispatch } from 'react-redux';
@@ -59,10 +60,10 @@ const CategoryEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('cat_image_deleted');
+                notify('notification.cat_image_deleted');
             })
             .catch((e) => {
-                notify('cat_image_not_deleted', 'warning')
+                notify('notification.cat_image_not_deleted', 'warning')
             })
 
         setLoading(false);
@@ -87,10 +88,10 @@ const CategoryEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('cat_image_updated');
+                notify('notification.cat_image_updated');
             })
             .catch((e) => {
-                notify('cat_image_not_uploaded', 'warning')
+                notify('notification.cat_image_not_uploaded', 'warning')
             })
 
         setLoading(false);
@@ -110,7 +111,7 @@ const CategoryEdit = (props: any) => {
     return <Edit transform={transform} undoable={false} {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="name" />
+            <TextInput source="name" validate={required()} />
             <TextInput source="description" fullWidth />
             <ReferenceInput source="parentId" reference="categories">
                 <SelectInput optionText="name" />
@@ -129,10 +130,10 @@ const CategoryEdit = (props: any) => {
                 sort={{ field: 'priority', order: 'ASC' }}
             >
                 <SimpleFormIterator>
-                <TextInput source="name"/>
+                <TextInput source="name" validate={required()} />
                     <NumberInput source="priority"/>
                     <TextInput source="hint" fullWidth/>
-                    <SelectInput source="dataType" choices={[
+                    <SelectInput validate={required()} source="dataType" choices={[
                         { id: 'number', name: 'pos.dataType.number' },
                         { id: 'string', name: 'pos.dataType.string' },
                         { id: 'text', name: 'pos.dataType.text' },

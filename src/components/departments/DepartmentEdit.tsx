@@ -5,7 +5,7 @@ import {
     Edit,
     BooleanInput,
     NumberInput,
-    SelectInput,
+    required,
     SimpleForm,
     TextInput,
     ImageInput,
@@ -56,10 +56,10 @@ const DepartmentEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('dep_image_deleted');
+                notify('notification.dep_image_deleted');
             })
             .catch((e) => {
-                notify('dep_image_not_deleted', 'warning')
+                notify('notification.dep_image_not_deleted', 'warning')
             })
 
         setLoading(false);
@@ -84,10 +84,10 @@ const DepartmentEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('dep_image_updated');
+                notify('notification.dep_image_updated');
             })
             .catch((e) => {
-                notify('dep_image_not_uploaded', 'warning')
+                notify('notification.dep_image_not_uploaded', 'warning')
             })
 
         setLoading(false);
@@ -107,7 +107,7 @@ const DepartmentEdit = (props: any) => {
     return <Edit transform={transform} undoable={false} {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="name" />
+            <TextInput source="name" validate={required()}/>
             <TextInput source="description" fullWidth />
             <ImageInput 
                 source="logo" 

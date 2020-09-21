@@ -140,10 +140,10 @@ const ProductEdit: FC<EditComponentProps> = props => {
                 } 
             })
             .then(() => {
-                notify('product_image_deleted');
+                notify('notification.product_image_deleted');
             })
             .catch((e) => {
-                notify('product_thumbnail_not_deleted', 'warning')
+                notify('notification.product_thumbnail_not_deleted', 'warning')
             })
 
         setLoading(false);
@@ -168,10 +168,10 @@ const ProductEdit: FC<EditComponentProps> = props => {
                 } 
             })
             .then(() => {
-                notify('product_image_updated');
+                notify('notification.product_image_updated');
             })
             .catch((e) => {
-                notify('product_thumbnail_not_uploaded', 'warning')
+                notify('notification.product_image_not_updated', 'warning')
             })
 
         setLoading(false);
@@ -195,10 +195,10 @@ const ProductEdit: FC<EditComponentProps> = props => {
                 } 
             })
             .then(() => {
-                notify('product_image_deleted');
+                notify('notification.product_image_deleted');
             })
             .catch((e) => {
-                notify('product_image_not_deleted', 'warning')
+                notify('notification.product_image_not_deleted', 'warning')
             })
 
         setLoading(false);
@@ -223,10 +223,10 @@ const ProductEdit: FC<EditComponentProps> = props => {
                 } 
             })
             .then(() => {
-                notify('product_image_updated');
+                notify('notification.product_image_updated');
             })
             .catch((e) => {
-                notify('product_thumbnail_not_uploaded', 'warning')
+                notify('notification.product_image_not_uploaded', 'warning')
             })
 
         setLoading(false);
@@ -360,16 +360,19 @@ const ProductEdit: FC<EditComponentProps> = props => {
                         source="prices"
                     >
                         <SimpleFormIterator>
-                            <TextInput source="name" label="resources.products.fields.priceFields.name" />
-                            <ColorInput source="color" label="resources.products.fields.priceFields.color" />
-                            <NumberInput source="quantity" label="resources.products.fields.priceFields.quantity" />
-                            <NumberInput source="price" label="resources.products.fields.priceFields.price" />
+                            <TextInput source="name" label="resources.products.fields.priceFields.name" validate={required()} />
+                            <ColorInput source="color" label="resources.products.fields.priceFields.color" validate={required()} />
+                            <NumberInput source="quantity" label="resources.products.fields.priceFields.quantity" validate={required()} />
+                            <NumberInput source="price" label="resources.products.fields.priceFields.price" validate={required()} />
                             <NumberInput source="offPercent" label="resources.products.fields.priceFields.offPercent" />
                             <NumberInput source="offPrice" label="resources.products.fields.priceFields.offPrice" />
-                            <SelectInput source="status" label="resources.products.fields.priceFields.status" choices={[
-                                { id: 'available', name: translate('pos.productStatus.available') },
-                                { id: 'not_available', name: translate('pos.productStatus.not_available') },
-                            ]} />
+                            <SelectInput source="status" label="resources.products.fields.priceFields.status" 
+                                validate={required()}
+                                choices={[
+                                    { id: 'available', name: translate('pos.productStatus.available') },
+                                    { id: 'not_available', name: translate('pos.productStatus.not_available') },
+                                ]}
+                            />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>

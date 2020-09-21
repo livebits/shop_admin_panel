@@ -29,7 +29,7 @@ const TicketEdit = (props: any) => {
     return <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="title" />
+            <TextInput source="title" validate={required()} />
             <RichTextInput source="body" />
             <SelectInput
                 source="status"

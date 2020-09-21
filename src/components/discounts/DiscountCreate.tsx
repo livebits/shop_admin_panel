@@ -4,7 +4,7 @@ import {
     Create,
     SimpleForm,
     NumberInput,
-    ReferenceInput,
+    required,
     SelectInput,
     useTranslate,
     TextInput,
@@ -23,12 +23,12 @@ const DiscountCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm >
-                <TextInput source="code" />
-                <SelectInput source="type" choices={[
+                <TextInput source="code" validate={required()}/>
+                <SelectInput source="type" validate={required()} choices={[
                     { id: 'constant', name: translate('pos.discountType.constant') },
                     { id: 'percent', name: translate('pos.discountType.percent') },
                 ]} />
-                <NumberInput source="value" />
+                <NumberInput validate={required()} source="value" />
             </SimpleForm>
         </Create>
     );

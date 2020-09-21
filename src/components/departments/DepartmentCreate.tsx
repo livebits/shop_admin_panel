@@ -6,7 +6,7 @@ import {
     ArrayInput,
     ReferenceInput,
     SelectInput,
-    SimpleFormIterator,
+    required,
     TextInput,
     NumberInput,
     usePermissions,
@@ -41,7 +41,7 @@ const DepartmentCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm toolbar={<CreateToolbar />} redirect="list">
-                <TextInput source="name"/>
+                <TextInput source="name" validate={required()}/>
                 <TextInput source="description" fullWidth />
             </SimpleForm>
         </Create>

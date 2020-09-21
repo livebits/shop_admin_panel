@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FC } from 'react';
 import {
-    Datagrid,
+    required,
     Edit,
     useTranslate,
     NumberInput,
@@ -23,12 +23,12 @@ const DiscountEdit = (props: any) => {
     return <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="code" />
-            <SelectInput source="type" choices={[
+            <TextInput validate={required()} source="code" />
+            <SelectInput validate={required()} source="type" choices={[
                 { id: 'constant', name: translate('pos.discountType.constant') },
                 { id: 'percent', name: translate('pos.discountType.percent') },
             ]} />
-            <NumberInput source="value" />
+            <NumberInput validate={required()} source="value" />
         </SimpleForm>
     </Edit>
 }

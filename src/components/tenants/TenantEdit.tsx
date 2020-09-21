@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     Datagrid,
     Edit,
-    EditButton,
+    required,
     useTranslate,
     SelectInput,
     SimpleForm,
@@ -20,14 +20,23 @@ const TenantEdit = (props: any) => {
         return <ACLError />
     }
 
-    return <Edit {...props}>
+    const transform = (data:any) => {
+        let requestBody = {
+            ...data
+        }
+        delete requestBody.id;
+
+        return requestBody;
+    };
+
+    return <Edit {...props} transform={transform}>
         <SimpleForm>
             <TextInput disabled source="id" fullWidth />
-            <TextInput source="name" />
+            <TextInput source="name" validate={required()} />
             <TextInput source="description" fullWidth />
             <TextInput source="phone" />
             <TextInput source="mobile" />
-            <SelectInput source="status" choices={[
+            <SelectInput source="status" validate={required()} choices={[
                 { id: 'active', name: translate('pos.tenantStatus.active') },
                 { id: 'inactive', name: translate('pos.tenantStatus.inactive') },
                 { id: 'pending_confirmation', name: translate('pos.tenantStatus.pending_confirmation') },

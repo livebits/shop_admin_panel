@@ -5,7 +5,7 @@ import {
     Edit,
     EditButton,
     DateInput,
-    SelectInput,
+    required,
     SimpleForm,
     TextInput,
     usePermissions,
@@ -22,8 +22,8 @@ const ActionEdit = (props: any) => {
     return <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="resource" />
-            <TextInput source="action" />
+            <TextInput source="resource" validate={required()} />
+            <TextInput source="action" validate={required()} />
             <TextInput source="description" fullWidth />
         </SimpleForm>
     </Edit>

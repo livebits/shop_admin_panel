@@ -25,11 +25,11 @@ const TenantCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm >
-                <TextInput source="name" />
+                <TextInput source="name" validate={required()} />
                 <TextInput source="description" multiline fullWidth />
                 <TextInput source="phone" />
                 <TextInput source="mobile" />
-                <SelectInput source="status" choices={[
+                <SelectInput source="status" validate={required()} choices={[
                     { id: 'active', name: translate('pos.tenantStatus.active') },
                     { id: 'inactive', name: translate('pos.tenantStatus.inactive') },
                     { id: 'pending_confirmation', name: translate('pos.tenantStatus.pending_confirmation') },

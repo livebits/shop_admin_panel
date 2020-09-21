@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     Datagrid,
     Edit,
-    EditButton,
+    required,
     FormTab,
     SelectInput,
     TabbedForm,
@@ -87,10 +87,10 @@ const UserEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('user_image_deleted');
+                notify('notification.user_image_deleted');
             })
             .catch((e) => {
-                notify('user_image_not_deleted', 'warning')
+                notify('notification.user_image_not_deleted', 'warning')
             })
 
         setLoading(false);
@@ -115,10 +115,10 @@ const UserEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('user_image_updated');
+                notify('notification.user_image_updated');
             })
             .catch((e) => {
-                notify('user_image_not_uploaded', 'warning')
+                notify('notification.user_image_not_updated', 'warning')
             })
 
         setLoading(false);
@@ -154,10 +154,10 @@ const UserEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('user_address_deleted');
+                notify('notification.user_address_deleted');
             })
             .catch((e) => {
-                notify('Error: comment not approved', 'warning')
+                notify('notification.user_address_not_deleted', 'warning')
             })
             .finally(() => {
                 setLoading(false);
@@ -172,7 +172,7 @@ const UserEdit = (props: any) => {
                 <Button 
                     color="primary"
                     onClick={e => setPasswordDrawer(true)}
-                    style={{width: 150}}
+                    style={{width: 150, float: 'left'}}
                 >
                     <LockRoundedIcon />
                     {
@@ -180,7 +180,7 @@ const UserEdit = (props: any) => {
                     }
                 </Button>
                 <TextInput disabled source="id" />
-                <TextInput source="firstName" />
+                <TextInput source="firstName" validate={required()} />
                 <TextInput source="lastName" />
                 <ImageInput 
                     source="avatar" 
@@ -191,7 +191,7 @@ const UserEdit = (props: any) => {
                 >
                     <PreviewImage /> 
                 </ImageInput>
-                <TextInput source="username" />
+                <TextInput source="username" validate={required()} />
                 <TextInput source="email" />
                 <SelectInput source="status" choices={[
                     { id: 'active', name: 'pos.status.active' },
@@ -202,7 +202,7 @@ const UserEdit = (props: any) => {
                 <Button 
                     color="primary"
                     onClick={e => setDrawer(true)}
-                    style={{width: 150}}
+                    style={{width: 150, float: 'left'}}
                 >
                     <AddCircleIcon />
                     {
@@ -215,6 +215,7 @@ const UserEdit = (props: any) => {
                     target="userId"
                     filter={{userId: props.match.params.id}}
                     perPage={100}
+                    style={{width: '100%'}}
                 >
                     <Datagrid>
                         <TextField source="id" />

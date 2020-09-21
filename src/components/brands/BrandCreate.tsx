@@ -6,7 +6,7 @@ import {
     PasswordInput,
     ReferenceInput,
     SelectInput,
-    TabbedForm,
+    required,
     TextInput,
     usePermissions,
 } from 'react-admin';
@@ -22,7 +22,7 @@ const BrandCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm>
-                <TextInput source="name" />
+                <TextInput source="name" validate={required()} />
                 <TextInput source="description" fullWidth />
             </SimpleForm>
         </Create>

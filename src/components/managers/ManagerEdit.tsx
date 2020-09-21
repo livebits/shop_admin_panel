@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FC } from 'react';
 import {
-    Datagrid,
+    required,
     Edit,
     useTranslate,
     usePermissions,
@@ -73,10 +73,10 @@ const ManagerEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('user_image_deleted');
+                notify('notification.user_image_deleted');
             })
             .catch((e) => {
-                notify('user_image_not_deleted', 'warning')
+                notify('notification.user_image_not_deleted', 'warning')
             })
 
         setLoading(false);
@@ -101,10 +101,10 @@ const ManagerEdit = (props: any) => {
                 } 
             })
             .then(() => {
-                notify('user_image_updated');
+                notify('notification.user_image_updated');
             })
             .catch((e) => {
-                notify('user_image_not_uploaded', 'warning')
+                notify('notification.user_image_not_updated', 'warning')
             })
 
         setLoading(false);
@@ -134,9 +134,9 @@ const ManagerEdit = (props: any) => {
                 }
             </Button>
             <TextInput disabled source="id" />
-            <TextInput source="firstName" />
+            <TextInput source="firstName" validate={required()} />
             <TextInput source="lastName" />
-            <TextInput source="username" />
+            <TextInput source="username" validate={required()} />
             <ImageInput 
                 source="avatar"
                 accept="image/*" 
@@ -147,7 +147,7 @@ const ManagerEdit = (props: any) => {
                 <PreviewImage /> 
             </ImageInput>
             <TextInput source="email" />
-            <SelectInput source="status" choices={[
+            <SelectInput source="status" validate={required()} choices={[
                 { id: 'active', name: 'pos.status.active' },
                 { id: 'inactive', name: 'pos.status.inactive' },
             ]} />

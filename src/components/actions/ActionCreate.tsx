@@ -6,7 +6,7 @@ import {
     PasswordInput,
     ReferenceInput,
     SelectInput,
-    TabbedForm,
+    required,
     TextInput,
     usePermissions,
 } from 'react-admin';
@@ -22,8 +22,8 @@ const ActionCreate = (props:any) => {
     return (
         <Create {...props}>
             <SimpleForm>
-                <TextInput source="resource" />
-                <TextInput source="action" />
+                <TextInput source="resource" validate={required()} />
+                <TextInput source="action" validate={required()} />
                 <TextInput source="description" fullWidth />
             </SimpleForm>
         </Create>

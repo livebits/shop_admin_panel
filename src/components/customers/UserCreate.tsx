@@ -6,7 +6,7 @@ import {
     PasswordInput,
     ReferenceInput,
     SelectInput,
-    TabbedForm,
+    required,
     TextInput,
     usePermissions,
 } from 'react-admin';
@@ -25,10 +25,10 @@ const UserCreate = (props:any) => {
     return (
         <Create {...props} title="resources.customers.page.add">
             <SimpleForm initialValues={defaultValue} >
-                <TextInput source="firstName" />
+                <TextInput source="firstName" validate={required()} />
                 <TextInput source="lastName" />
-                <TextInput source="username" />
-                <PasswordInput source="password" />
+                <TextInput source="username" validate={required()} />
+                <PasswordInput source="password" validate={required()} />
                 <TextInput source="email" />
                 <SelectInput source="status" choices={[
                     { id: 'active', name: 'pos.status.active' },

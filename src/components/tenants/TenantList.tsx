@@ -47,15 +47,15 @@ const TenantList = (props: any) => {
             <TextField source="id" />
             <DateField source="createdAt" />
             <TextField source="name" />
-            <TextField source="description"/>
-            <TextField source="phone" />
+            {/* <TextField source="description"/> */}
+            {/* <TextField source="phone" /> */}
             <TextField source="mobile" />
-            <TextField source="logo" />
+            {/* <TextField source="logo" /> */}
             <FunctionField
                 source="status"
                 render={(record:any) => translateStatus(record.status, translate)}
             />
-            <TextField source="type" />
+            {/* <TextField source="type" /> */}
             <TextField source="address" />
             {/* <TextField source="country" />
             <TextField source="city" />
