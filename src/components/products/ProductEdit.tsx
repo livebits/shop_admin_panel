@@ -106,16 +106,12 @@ const ProductEdit: FC<EditComponentProps> = props => {
 
         let requestBody = {
             ...data,
-            prosAndCons: {
-                pros: data.pros ? data.pros.map((val:any) => val.value) : [],
-                cons: data.cons ? data.cons.map((val:any) => val.value) : []
-            },
+            pros: data.pros ? data.pros.map((val:any) => val) : [],
+            cons: data.cons ? data.cons.map((val:any) => val) : [],
             productCategoryFields: catFields,
             brand: { id: data.brandId },
             category: { id: data.categoryId },
         }
-        delete requestBody.pros;
-        delete requestBody.cons;
         // delete requestBody.brand;
         // delete requestBody.category;
         delete requestBody.thumbnail;
@@ -318,14 +314,14 @@ const ProductEdit: FC<EditComponentProps> = props => {
                         source="pros"
                     >
                         <SimpleFormIterator>
-                            <TextInput source="value" label="resources.products.fields.prosValue" fullWidth/>
+                            <TextInput label="resources.products.fields.prosValue" fullWidth/>
                         </SimpleFormIterator>
                     </ArrayInput>
                     <ArrayInput
                         source="cons" 
                     >
                         <SimpleFormIterator>
-                            <TextInput source="value" label="resources.products.fields.consValue" fullWidth/>
+                            <TextInput label="resources.products.fields.consValue" fullWidth/>
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>

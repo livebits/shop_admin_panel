@@ -555,6 +555,10 @@ const customFarsiMessages: TranslationMessages = {
         product_image_not_deleted: 'حذف تصویر کالا با مشکل مواجه شد',
         product_image_updated: 'تصویر کالا با موفقیت بروزرسانی شد',
         product_image_not_updated: 'بروزرسانی تصویر کالا با مشکل مواجه شد',
+        brand_image_deleted: 'تصویر برند حذف شد',
+        brand_image_not_deleted: 'حذف تصویر برند با مشکل مواجه شد',
+        brand_image_updated: 'تصویر برند با موفقیت بروزرسانی شد',
+        brand_image_not_updated: 'بروزرسانی تصویر برند با مشکل مواجه شد',
     },
     error: {
         user: {

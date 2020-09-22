@@ -157,20 +157,6 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
       case reactAdmin.GET_ONE:
         if (resource === 'products') {
 
-          if (json.prosAndCons !== null && json.prosAndCons !== undefined) {
-            json['pros'] = json.prosAndCons.pros.map((pro:string) => (
-              {
-                value: pro
-              }
-            ))
-  
-            json['cons'] = json.prosAndCons.cons.map((con:string) => (
-              {
-                value: con
-              }
-            ))
-          }
-
           if (json.productCategoryFields !== null && json.productCategoryFields !== undefined) {
             json.productCategoryFields.forEach((pcf:any) => {
               json['cf_' + pcf.categoryFieldId + "_" + pcf.categoryField.categoryId] = pcf.value

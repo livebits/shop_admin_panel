@@ -59,14 +59,10 @@ const ProductCreate: FC<CreateComponentProps> = props => {
 
         let requestBody = {
             ...data,
-            prosAndCons: {
-                pros: data.pros ? data.pros.map((val:any) => val.value) : [],
-                cons: data.cons ? data.cons.map((val:any) => val.value) : []
-            },
+            pros: data.pros ? data.pros.map((val:any) => val) : [],
+            cons: data.cons ? data.cons.map((val:any) => val) : [],
             productCategoryFields: catFields,
         }
-        delete requestBody.pros;
-        delete requestBody.cons;
 
         return requestBody;
     };
@@ -120,14 +116,14 @@ const ProductCreate: FC<CreateComponentProps> = props => {
                         source="pros"
                     >
                         <SimpleFormIterator>
-                            <TextInput source="value" label="resources.products.fields.prosValue" fullWidth/>
+                            <TextInput label="resources.products.fields.prosValue" fullWidth/>
                         </SimpleFormIterator>
                     </ArrayInput>
                     <ArrayInput
                         source="cons" 
                     >
                         <SimpleFormIterator>
-                            <TextInput source="value" label="resources.products.fields.consValue" fullWidth/>
+                            <TextInput label="resources.products.fields.consValue" fullWidth/>
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>
