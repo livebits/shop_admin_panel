@@ -6,6 +6,8 @@ import { BulkDeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 import { FilterProps } from '../../types';
+import CustomDateField from '../commons/CustomDateField';
+import CustomDateTimeField from '../commons/CustomDateTimeField';
 // import ResetViewsButton from './ResetViewsButton';
 
 const BulkActionButtons = (props: any) => (
@@ -51,7 +53,11 @@ const UserList = (props: any) => {
     >
         <Datagrid rowClick="edit">
             <TextField source="id" />
-            <DateField source="createdAt" />
+            {/* <DateField source="createdAt" /> */}
+            <FunctionField
+                source="createdAt"
+                render={(record:any) => <CustomDateField source={record.createdAt} />}
+            />
             <TextField source="firstName" />
             <TextField source="lastName" />
             <TextField source="username" />
@@ -60,7 +66,11 @@ const UserList = (props: any) => {
                 source="status"
                 render={(record:any) => record.status === 'active' ? translate('pos.status.active') : translate('pos.status.inactive')}
             />
-            <TextField source="lastLogin" />
+            {/* <TextField source="lastLogin" /> */}
+            <FunctionField
+                source="lastLogin"
+                render={(record:any) => <CustomDateTimeField source={record.lastLogin} />}
+            />
             {
                 hasPermissions(permissions, [{ resource: 'user', action: 'update' }]) && 
                 <EditButton />

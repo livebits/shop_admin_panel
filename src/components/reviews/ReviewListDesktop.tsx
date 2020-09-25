@@ -12,6 +12,7 @@ import { DatagridProps } from '../../types';
 import { Identifier } from 'ra-core';
 import FullNameField from './FullNameField';
 import ProductNameField from './ProductNameField';
+import CustomDateField from '../commons/CustomDateField';
 
 const useListStyles = makeStyles({
     headerRow: {
@@ -56,7 +57,11 @@ const ReviewListDesktop: FC<ReviewListDesktopProps> = ({
             optimized
             {...props}
         >
-            <DateField source="createdAt" />
+            {/* <DateField source="createdAt" /> */}
+            <FunctionField
+                source="createdAt"
+                render={(record:any) => <CustomDateField source={record.createdAt} />}
+            />
 
             <FunctionField
                 source="customer"

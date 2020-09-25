@@ -6,7 +6,6 @@ import {
     usePermissions,
     ReferenceInput,
     SelectInput,
-    DateInput,
     TextInput,
     useTranslate,
     AutocompleteInput,
@@ -15,6 +14,7 @@ import {
 } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import { CustomDateInput } from '../commons/CustomDatePicker';
 
 const optionRenderer = (choice:any) => `${choice.firstName} ${choice.lastName}`;
 
@@ -35,7 +35,8 @@ const MessageCreate = (props:any) => {
                     { id: 'SMS', name: translate('pos.messageType.sms') },
                     { id: 'NOTIFICATION', name: translate('pos.messageType.notification') },
                 ]} />
-                <DateInput source="expiredAt" />
+                {/* <DateInput source="expiredAt" /> */}
+                <CustomDateInput source="expiredAt" label="resources.messages.fields.expiredAt" />
                 <SelectInput source="receiversType" validate={required()} choices={[
                     { id: 'SINGLE_USER', name: translate('pos.receiverType.single_user') },
                     { id: 'ALL_USERS', name: translate('pos.receiverType.all_users') },

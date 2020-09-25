@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Datagrid, TextField, ArrayField, SingleFieldList, ChipField, DateField, EditButton, List, usePermissions, DeleteButton } from 'react-admin';
+import { Datagrid, TextField, ArrayField, SingleFieldList, FunctionField, DateField, EditButton, List, usePermissions, DeleteButton } from 'react-admin';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import CustomDateField from '../commons/CustomDateField';
 
 const RoleList = (props: any) => {
     const { permissions } = usePermissions();
@@ -17,7 +18,11 @@ const RoleList = (props: any) => {
     >
         <Datagrid rowClick="edit">
             <TextField source="id" />
-            <DateField source="createdAt" />
+            {/* <DateField source="createdAt" /> */}
+            <FunctionField
+                source="createdAt"
+                render={(record:any) => <CustomDateField source={record.createdAt} />}
+            />
             <TextField source="name" />
             {/* <ArrayField source="rolePermissions">
                 <SingleFieldList>

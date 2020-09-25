@@ -3,6 +3,7 @@ import { useTranslate, Datagrid, Filter, SearchInput, TextField, usePermissions,
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 import { FilterProps } from '../../types';
+import CustomDateField from '../commons/CustomDateField';
 
 const translateStatus = (status: string, translate: any) => {
     switch (status) {
@@ -45,7 +46,11 @@ const TenantList = (props: any) => {
     >
         <Datagrid rowClick="edit">
             <TextField source="id" />
-            <DateField source="createdAt" />
+            {/* <DateField source="createdAt" /> */}
+            <FunctionField
+                source="createdAt"
+                render={(record:any) => <CustomDateField source={record.createdAt} />}
+            />
             <TextField source="name" />
             {/* <TextField source="description"/> */}
             {/* <TextField source="phone" /> */}

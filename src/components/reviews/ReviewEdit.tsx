@@ -20,6 +20,7 @@ import ReviewEditToolbar from './ReviewEditToolbar';
 import { EditComponentProps } from '../../types';
 import FullNameField from './FullNameField';
 import ProductNameField from './ProductNameField';
+import CustomDateField from '../commons/CustomDateField';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -86,7 +87,12 @@ const ReviewEdit: FC<Props> = ({ onCancel, ...props }) => {
                     source="product"
                     render={(record:any) => <ProductNameField record={record.product} />}
                 />
-                <DateField source="createdAt" formClassName={classes.inlineField} />
+                {/* <DateField source="createdAt" formClassName={classes.inlineField} /> */}
+                <FunctionField
+                    source="createdAt"
+                    formClassName={classes.inlineField}
+                    render={(record:any) => <CustomDateField source={record.createdAt} />}
+                />
                 <StarRatingField formClassName={classes.inlineField} />
                 <TextInput source="comment" rowsMax={15} multiline fullWidth />
             </SimpleForm>

@@ -19,6 +19,7 @@ import Basket from './Basket';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 import { Divider } from '@material-ui/core';
+import { CustomDateInput } from '../commons/CustomDatePicker';
 
 interface OrderTitleProps {
     record?: Order;
@@ -98,7 +99,7 @@ const OrderEdit: FC<EditComponentProps> = props => {
             {...props}
         >
             <SimpleForm>
-                <DateInput source="createdAt" />
+                <CustomDateInput source="createdAt" label="resources.orders.fields.createdAt" />
                 <ReferenceInput disabled source="customerId" reference="user-tenants">
                     <AutocompleteInput
                         optionText={(choice: Customer) =>

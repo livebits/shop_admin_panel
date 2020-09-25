@@ -35,6 +35,9 @@ import { Identifier } from 'ra-core';
 import FullNameField from '../reviews/FullNameField';
 import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
+import { CustomDateInput } from '../commons/CustomDatePicker';
+import { CustomFilterDateInput } from '../commons/CustomFilterDatePicker';
+import CustomDateTimeField from '../commons/CustomDateTimeField';
 
 interface FilterParams {
     q?: string;
@@ -61,8 +64,8 @@ const OrderFilter: FC<FilterProps<FilterParams>> = props => (
                 }
             />
         </ReferenceInput>
-        <DateInput source="createdAt||gte" label="resources.orders.filters.minDate" />
-        <DateInput source="createdAt||lte" label="resources.orders.filters.maxDate" />
+        <CustomFilterDateInput source="createdAt||gte" label="resources.orders.filters.minDate" />
+        <CustomFilterDateInput source="createdAt||lte" label="resources.orders.filters.maxDate" />
         {/* <TextInput source="total_gte" /> */}
         <NullableBooleanInput label="resources.orders.filters.returned" source="returned||eq" />
     </Filter>
@@ -166,7 +169,11 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             optimized
                             rowClick="edit"
                         >
-                            <DateField source="createdAt" showTime />
+                            {/* <DateField source="createdAt" showTime /> */}
+                            <FunctionField
+                                source="createdAt"
+                                render={(record:any) => <CustomDateTimeField source={record.createdAt} />}
+                            />
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"
@@ -185,7 +192,11 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                     )}
                     {filterValues['status||eq'] === 'delivered' && (
                         <Datagrid {...rest} ids={delivered} rowClick="edit">
-                            <DateField source="createdAt" showTime />
+                            {/* <DateField source="createdAt" showTime /> */}
+                            <FunctionField
+                                source="createdAt"
+                                render={(record:any) => <CustomDateTimeField source={record.createdAt} />}
+                            />
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"
@@ -206,7 +217,11 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                     )}
                     {filterValues['status||eq'] === 'cancelled' && (
                         <Datagrid {...rest} ids={cancelled} rowClick="edit">
-                            <DateField source="createdAt" showTime />
+                            {/* <DateField source="createdAt" showTime /> */}
+                            <FunctionField
+                                source="createdAt"
+                                render={(record:any) => <CustomDateTimeField source={record.createdAt} />}
+                            />
                             <TextField source="id" />
                             <FunctionField
                                 source="customer"

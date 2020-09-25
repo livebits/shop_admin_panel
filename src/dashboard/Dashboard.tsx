@@ -125,27 +125,32 @@ const Dashboard: FC = () => {
     }, [dataProvider]);
 
     const fetchReviews = useCallback(async () => {
-        const { data: reviews } = await dataProvider.getList('comments', {
-            filter: { 'status||eq': 'pending' },
-            sort: { field: 'createdAt', order: 'DESC' },
-            pagination: { page: 1, perPage: 100 },
-        });
-        const nbPendingReviews = reviews.reduce((nb: number) => ++nb, 0);
-        const pendingReviews = reviews.slice(0, Math.min(10, reviews.length));
-        setState(state => ({ ...state, pendingReviews, nbPendingReviews }));
-        const { data: customers } = await dataProvider.getMany('user-tenants', {
-            ids: pendingReviews.map((review: Review) => review.customerId),
-        });
-        setState(state => ({
-            ...state,
-            pendingReviewsCustomers: customers.reduce(
-                (prev: CustomerData, customer: Customer) => {
-                    prev[customer.id] = customer; // eslint-disable-line no-param-reassign
-                    return prev;
-                },
-                {}
-            ),
-        }));
+        try {
+            const { data: reviews } = await dataProvider.getList('comments', {
+                filter: { 'status||eq': 'pending' },
+                sort: { field: 'createdAt', order: 'DESC' },
+                pagination: { page: 1, perPage: 20 },
+            });
+            const nbPendingReviews = reviews.reduce((nb: number) => ++nb, 0);
+            const pendingReviews = reviews.slice(0, Math.min(10, reviews.length));
+            setState(state => ({ ...state, pendingReviews, nbPendingReviews }));
+            const { data: customers } = await dataProvider.getMany('user-tenants', {
+                ids: pendingReviews.map((review: Review) => review.customerId),
+            });
+            setState(state => ({
+                ...state,
+                pendingReviewsCustomers: customers.reduce(
+                    (prev: CustomerData, customer: Customer) => {
+                        prev[customer.id] = customer; // eslint-disable-line no-param-reassign
+                        return prev;
+                    },
+                    {}
+                ),
+            }));
+        } catch (error) {
+            console.log(error);
+        }
+        
     }, [dataProvider]);
 
     useEffect(() => {

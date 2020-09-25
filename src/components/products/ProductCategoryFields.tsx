@@ -11,6 +11,7 @@ import {
     TextInput,
 } from 'react-admin';
 import { Query, Loading, LinearProgress, Error } from 'react-admin';
+import { CustomDateInput } from '../commons/CustomDatePicker';
 
 export const ProductCategoryFields = ({ formData, ...rest }: { formData: any }) => {    
     const form = useForm();
@@ -37,7 +38,7 @@ export const ProductCategoryFields = ({ formData, ...rest }: { formData: any }) 
             switch (item.dataType) {
                 case 'date':
                     return <div>
-                        <DateInput 
+                        <CustomDateInput 
                             style={{width: 256}} 
                             key={index} 
                             source={'cf_' + item.id + "_" + item.categoryId} 
