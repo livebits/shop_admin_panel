@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between',
         alignItems: 'center',
         '& .icon': {
-            color: theme.palette.type === 'dark' ? 'inherit' : '#dc2440',
+            color: theme.palette.type === 'dark' ? 'inherit' : '#ed5936bf',
         },
     }),
     title: {},

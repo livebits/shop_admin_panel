@@ -16,6 +16,7 @@ import LockIcon from '@material-ui/icons/Lock';
 
 import { Notification } from 'react-admin';
 import { useTranslate, useLogin, useNotify } from 'ra-core';
+import bg from './assets/bg.jpg'
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
         minHeight: '100vh',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        background: 'url(https://source.unsplash.com/1600x900/?shop,product,armchair,market)',
+        background: `url(${bg})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
@@ -33,18 +34,19 @@ const useStyles = makeStyles(theme => ({
         marginTop: '6em',
     },
     avatar: {
-        margin: '1em',
+        padding: '1em',
         display: 'flex',
         justifyContent: 'center',
+        backgroundColor: '#373e48'
     },
     icon: {
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.primary.main,
     },
     hint: {
         marginTop: '1em',
         display: 'flex',
         justifyContent: 'center',
-        color: theme.palette.grey[500],
+        color: '#373e48',
     },
     form: {
         padding: '0 1em 1em 1em',
@@ -193,7 +195,7 @@ const LoginWithTheme = (props: any) => (
         direction: 'rtl',
         palette: {
             primary: {
-                main: '#4f3cc9',
+                main: '#ed5936bf',
             },
             secondary: {
                 light: '#5f5fc4',

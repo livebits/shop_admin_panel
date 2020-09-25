@@ -126,7 +126,7 @@ const ManagerEdit = (props: any) => {
             <Button 
                 color="primary"
                 onClick={e => setPasswordDrawer(true)}
-                style={{width: 150}}
+                style={{width: 150, float: 'left'}}
             >
                 <LockRoundedIcon />
                 {

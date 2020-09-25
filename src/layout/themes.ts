@@ -26,7 +26,7 @@ export const lightTheme = (dir:string) => ({
     direction: dir,
     palette: {
         primary: {
-            main: '#4f3cc9',
+            main: '#ed5936bf',
         },
         secondary: {
             light: '#5f5fc4',
@@ -55,8 +55,11 @@ export const lightTheme = (dir:string) => ({
                 borderLeft: '3px solid #fff',
             },
             active: {
-                borderLeft: '3px solid #4f3cc9',
+                borderLeft: '3px solid #ed5936bf',
+                // background: '#4f3cc945',
+                // borderRadius: '0px 5px 5px 0px',
             },
+        
         },
         MuiPaper: {
             elevation1: {
@@ -76,8 +79,8 @@ export const lightTheme = (dir:string) => ({
         },
         MuiAppBar: {
             colorSecondary: {
-                color: '#808080',
-                backgroundColor: '#fff',
+                color: '#ffffff',
+                backgroundColor: '#373e48',
             },
         },
         MuiLinearProgress: {
@@ -96,5 +99,15 @@ export const lightTheme = (dir:string) => ({
                 },
             },
         },
+        MuiListItemIcon: {
+            root: {
+                color: '#ed5936bf',
+            }
+        },
+        // MuiSvgIcon: {
+        //     root: {
+        //         color: '#ed5936bf',
+        //     }
+        // }
     },
 });

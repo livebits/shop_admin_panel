@@ -13,6 +13,7 @@ const useStyles = makeStyles({
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
+        // color: '#ed5936bf',
     },
     spacer: {
         flex: 1,
