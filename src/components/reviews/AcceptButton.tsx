@@ -48,7 +48,7 @@ const AcceptButton: FC<{ record: Review }> = ({ record }) => {
         >
             <ThumbUp
                 color="primary"
-                style={{ paddingRight: '0.5em', color: 'green' }}
+                style={{ paddingRight: '0.5em', paddingLeft: '0.5em', color: 'green' }}
             />
             {translate('resources.comments.action.accept')}
         </Button>

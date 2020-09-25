@@ -49,7 +49,7 @@ const RejectButton: FC<{ record: Review }> = ({ record }) => {
         >
             <ThumbDown
                 color="primary"
-                style={{ paddingRight: '0.5em', color: 'red' }}
+                style={{ paddingRight: '0.5em', paddingLeft: '0.5em', color: 'red' }}
             />
             {translate('resources.comments.action.reject')}
         </Button>

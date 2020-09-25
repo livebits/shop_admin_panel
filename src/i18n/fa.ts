@@ -478,7 +478,7 @@ const customFarsiMessages: TranslationMessages = {
                 other: 'سایر',
             },
         },
-        'comments': {
+        comments: {
             name: 'نظر |||| نظرات کاربران',
             amount: '1 نظر |||| %{smart_count} نظر',
             relative_to_poster: 'Review on poster',

@@ -75,10 +75,10 @@ const ReviewListDesktop: FC<ReviewListDesktopProps> = ({
 
             <StarRatingField size="small" />
             <TextField source="comment" cellClassName={classes.comment} />
-            <TextField source="status" />
+            {/* <TextField source="status" /> */}
             <FunctionField
                 source="status"
-                render={(record:any) => translate(`resources.comments.status.${record.status}`)}
+                render={(record:any) => <span>{translate(`resources.comments.status.${record.status}`)}</span>}
             />
         </Datagrid>
     );
