@@ -15,6 +15,7 @@ import { useTranslate } from 'react-admin';
 import CardWithIcon from './CardWithIcon';
 // import StarRatingField from '../reviews/StarRatingField';
 import { Customer, Review } from '../types';
+import { API_URL } from '../App';
 
 interface Props {
     reviews?: Review[];
@@ -55,10 +56,10 @@ const PendingReviews: FC<Props> = ({ reviews = [], customers = {}, nb }) => {
                         alignItems="flex-start"
                     >
                         <ListItemAvatar>
-                            {customers[record.customer_id] ? (
+                            {customers[record.customerId] ? (
                                 <Avatar
-                                    src={`${
-                                        customers[record.customer_id].avatar
+                                    src={`${API_URL}/${
+                                        record.customer.user.avatar
                                     }?size=32x32`}
                                     className={classes.avatar}
                                 />

@@ -127,7 +127,7 @@ const UserEdit = (props: any) => {
 
     const PreviewImage = (record:any) => {
         if (typeof record.record === 'string') {
-            return <img width={150} src={`${API_URL}/public/users/${record.record}`} alt="Avatar" />
+            return <img width={150} src={`${API_URL}/${record.record}`} alt="Avatar" />
         } else {
             return <img width={150} src={`${record.record.undefined}`} alt="Avatar" />
         }
@@ -182,6 +182,12 @@ const UserEdit = (props: any) => {
                 <TextInput disabled source="id" />
                 <TextInput source="firstName" validate={required()} />
                 <TextInput source="lastName" />
+                <TextInput source="username" validate={required()} />
+                <TextInput source="email" />
+                <SelectInput source="status" choices={[
+                    { id: 'active', name: 'pos.status.active' },
+                    { id: 'inactive', name: 'pos.status.inactive' },
+                ]} />
                 <ImageInput 
                     source="avatar" 
                     accept="image/*" 
@@ -191,12 +197,6 @@ const UserEdit = (props: any) => {
                 >
                     <PreviewImage /> 
                 </ImageInput>
-                <TextInput source="username" validate={required()} />
-                <TextInput source="email" />
-                <SelectInput source="status" choices={[
-                    { id: 'active', name: 'pos.status.active' },
-                    { id: 'inactive', name: 'pos.status.inactive' },
-                ]} />
             </FormTab>
             <FormTab label="resources.customers.tabs.addresses">
                 <Button 

@@ -12,7 +12,7 @@ interface Props extends FieldProps<Customer> {
 const BrandLogo: FC<Props> = ({ record, size = '25', className }) =>
     record ? (
         <Avatar
-            src={`${API_URL}/public/brands/${record.logo}`}
+            src={`${API_URL}/${record.logo}`}
             style={{ width: parseInt(size, 10), height: parseInt(size, 10) }}
             className={className}
         />

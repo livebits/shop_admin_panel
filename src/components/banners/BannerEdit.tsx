@@ -95,7 +95,7 @@ const BannerEdit = (props: any) => {
 
     const PreviewImage = (record:any) => {
         if (typeof record.record === 'string') {
-            return <img width={150} src={`${API_URL}/public/banners/${record.record}`} alt="Avatar" />
+            return <img width={150} src={`${API_URL}/${record.record}`} alt="Avatar" />
         } else {
             return <img width={150} src={`${record.record.undefined}`} alt="Avatar" />
         }

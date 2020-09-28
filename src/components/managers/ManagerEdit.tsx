@@ -113,7 +113,7 @@ const ManagerEdit = (props: any) => {
 
     const PreviewImage = (record:any) => {
         if (typeof record.record === 'string') {
-            return <img width={150} src={`${API_URL}/public/users/${record.record}`} alt="Avatar" />
+            return <img width={150} src={`${API_URL}/${record.record}`} alt="Avatar" />
         } else {
             return <img width={150} src={`${record.record.undefined}`} alt="Avatar" />
         }
@@ -137,15 +137,6 @@ const ManagerEdit = (props: any) => {
             <TextInput source="firstName" validate={required()} />
             <TextInput source="lastName" />
             <TextInput source="username" validate={required()} />
-            <ImageInput 
-                source="avatar"
-                accept="image/*" 
-                maxSize="2000000" 
-                multiple={false}
-                options={{ onRemove:onRemoveAvatar, onDrop:onDropAvatar }}
-            >
-                <PreviewImage /> 
-            </ImageInput>
             <TextInput source="email" />
             <SelectInput source="status" validate={required()} choices={[
                 { id: 'active', name: 'pos.status.active' },
@@ -157,6 +148,15 @@ const ManagerEdit = (props: any) => {
                 filterToQuery={(searchText:string) => (searchText ? { name: searchText } : null)}>
                     <SelectArrayInput optionText="name" />
             </ReferenceArrayInput>
+            <ImageInput 
+                source="avatar"
+                accept="image/*" 
+                maxSize="2000000" 
+                multiple={false}
+                options={{ onRemove:onRemoveAvatar, onDrop:onDropAvatar }}
+            >
+                <PreviewImage /> 
+            </ImageInput>
             
             <Drawer
                 variant="persistent"

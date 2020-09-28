@@ -8,7 +8,22 @@ import ACLError from '../../layout/ACLError';
 import { FilterProps } from '../../types';
 import CustomDateField from '../commons/CustomDateField';
 import CustomDateTimeField from '../commons/CustomDateTimeField';
+import { makeStyles } from '@material-ui/core';
+import UserLogo from './UserLogo';
 // import ResetViewsButton from './ResetViewsButton';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        flexWrap: 'nowrap',
+        alignItems: 'center',
+    },
+    avatar: {
+        marginRight: theme.spacing(1),
+        marginTop: -theme.spacing(0.5),
+        marginBottom: -theme.spacing(0.5),
+    },
+}));
 
 const BulkActionButtons = (props: any) => (
     <Fragment>
@@ -35,7 +50,8 @@ export const ListFilter: React.FC<FilterProps<FilterParams>> = props => (
 
 const UserList = (props: any) => {
     const translate = useTranslate();
-    const { permissions } = usePermissions();    
+    const { permissions } = usePermissions();
+    const classes = useStyles();
     const hasPerm = hasPermissions(permissions, [{ resource: 'user', action: 'read' }])
     if (!hasPerm) {
         return <ACLError />
@@ -52,6 +68,15 @@ const UserList = (props: any) => {
         bulkActionButtons={<BulkActionButtons />}
     >
         <Datagrid rowClick="edit">
+            <FunctionField
+                render={(record:any) =>  
+                    <UserLogo
+                        className={classes.avatar}
+                        record={record}
+                        size={"40"}
+                    />
+                }
+            />
             <TextField source="id" />
             {/* <DateField source="createdAt" /> */}
             <FunctionField

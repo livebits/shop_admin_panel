@@ -26,6 +26,12 @@ export interface Category extends Record {
     logo: string;
 }
 
+export interface Brand extends Record {
+    name: string;
+    description: string;
+    logo: string;
+}
+
 export interface Role {
     name: string;
 }

@@ -12,7 +12,7 @@ interface Props extends FieldProps<Customer> {
 const BannerImage: FC<Props> = ({ record, size = '25', className }) =>
     record ? (
         <img
-            src={`${API_URL}/public/banners/${record.filename}`}
+            src={`${API_URL}/${record.filename}`}
             style={{ width: parseInt(size, 10), height: parseInt(size, 10) }}
             className={className}
         />

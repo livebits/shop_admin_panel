@@ -58,7 +58,7 @@ const CategoryGrid: FC<ListControllerProps<Category>> = props => {
                 <Grid key={id} xs={12} sm={6} md={4} lg={3} xl={2} item>
                     <Card>
                         <CardMedia
-                            image={`${API_URL}/public/departments/${data[id].logo}`}
+                            image={`${API_URL}/${data[id].logo}`}
                             className={classes.media}
                         />
                         <CardContent className={classes.title}>

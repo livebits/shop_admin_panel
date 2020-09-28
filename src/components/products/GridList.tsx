@@ -92,7 +92,7 @@ const LoadedGridList: FC<GridProps> = ({ ids, data, basePath, width }) => {
                         key={id}
                         to={linkToRecord(basePath, data[id].id)}
                     >
-                        <img src={`${API_URL}/public/products/${data[id].thumbnail}`} alt="" />
+                        <img src={`${API_URL}/${data[id].thumbnail}`} alt="" />
                         <GridListTileBar
                             className={classes.tileBar}
                             title={data[id].name}

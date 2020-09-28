@@ -235,7 +235,7 @@ const ProductEdit: FC<EditComponentProps> = props => {
 
     const PreviewImage = (record:any) => {
         if (typeof record.record === 'string') {
-            return <img width={150} src={`${API_URL}/public/products/${record.record}`} alt="Avatar" />
+            return <img width={150} src={`${API_URL}/${record.record}`} alt="Avatar" />
         } else {
             return <img width={150} src={`${record.record.undefined}`} alt="Avatar" />
         }
@@ -243,7 +243,7 @@ const ProductEdit: FC<EditComponentProps> = props => {
 
     const PreviewImages = (record:any) => {
         if (record.record.fileName !== undefined) {
-            return <img width={150} style={{padding: 5}} src={`${API_URL}/public/products/${record.record.fileName}`} alt="Avatar" />
+            return <img width={150} style={{padding: 5}} src={`${API_URL}/${record.record.fileName}`} alt="Avatar" />
         } else {
             return <img width={150} style={{padding: 5}} src={`${record.record.undefined}`} alt="Avatar" />
         }
@@ -268,16 +268,6 @@ const ProductEdit: FC<EditComponentProps> = props => {
                         source="secondName"
                         fullWidth
                     />
-                    <ImageInput 
-                        source="thumbnail" 
-                        accept="image/*" 
-                        maxSize="2000000" 
-                        multiple={false}
-                        options={{ onRemove:onRemoveThumbnail, onDrop:onDropThumbnail }}
-                    >
-                        {/* <ImageField source="thumbnail" src="thumbnail" /> */}
-                        <PreviewImage /> 
-                    </ImageInput>
 
                     <SelectInput
                         source="status"
@@ -295,6 +285,16 @@ const ProductEdit: FC<EditComponentProps> = props => {
                     >
                         <SelectInput source="name" />
                     </ReferenceInput>
+                    <ImageInput 
+                        source="thumbnail" 
+                        accept="image/*" 
+                        maxSize="2000000" 
+                        multiple={false}
+                        options={{ onRemove:onRemoveThumbnail, onDrop:onDropThumbnail }}
+                    >
+                        {/* <ImageField source="thumbnail" src="thumbnail" /> */}
+                        <PreviewImage /> 
+                    </ImageInput>
                 </FormTab>
                 <FormTab
                     label="resources.products.tabs.description"

@@ -58,7 +58,7 @@ const NewCustomers = () => {
                               key={record.id}
                           >
                               <ListItemAvatar>
-                                  <Avatar src={`${API_URL}/public/users/${record.avatar}`} />
+                                  <Avatar src={`${API_URL}/${record.avatar}`} />
                               </ListItemAvatar>
                               <ListItemText
                                   primary={`${record.firstName} ${

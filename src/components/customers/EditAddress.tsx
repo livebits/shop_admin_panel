@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#eeeeee',
+        backgroundColor: '#373e48',
+        color: '#fff',
         padding: 5,
         paddingLeft: 20,
         marginTop: 10,
@@ -89,13 +90,13 @@ const EditAddress = ({ onCancel, onRefresh, data, ...props }: { [prop: string]: 
     return (
         <form className={classes.root}>
             <div className={classes.title}>
-                <ContactMailRoundedIcon />
+                <ContactMailRoundedIcon  style={{ color: '#eee' }} />
                 <Typography variant="h6">
                     {
                         translate('resources.customers.page.editAddress')
                     }
                 </Typography>
-                <IconButton onClick={onCancel}>
+                <IconButton onClick={onCancel}  style={{ color: '#eee' }} >
                     <CloseIcon />
                 </IconButton>
             </div>

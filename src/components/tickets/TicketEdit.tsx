@@ -23,7 +23,7 @@ const TicketEdit = (props: any) => {
     }
 
     const PreviewImages = (record:any) => {
-        return <img width={150} style={{padding: 5}} src={`${API_URL}/public/tickets/${record.fileName}`} alt="Avatar" />
+        return <img width={150} style={{padding: 5}} src={`${API_URL}/${record.fileName}`} alt="Avatar" />
     };
 
     return <Edit {...props}>

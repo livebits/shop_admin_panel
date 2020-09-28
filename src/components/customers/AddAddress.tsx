@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#eeeeee',
+        backgroundColor: '#373e48',
+        color: '#eee',
         padding: 5,
         paddingLeft: 20,
         marginTop: 10,
@@ -68,13 +69,13 @@ const AddAddress: FC<Props> = ({ onCancel, onRefresh, ...props }) => {
     return (
         <div className={classes.root}>
             <div className={classes.title}>
-                <ContactMailRoundedIcon />
-                <Typography variant="h6">
+                <ContactMailRoundedIcon style={{ color: '#eee' }} />
+                <Typography variant="h6" >
                     {
                         translate('resources.customers.page.addAddress')
                     }
                 </Typography>
-                <IconButton onClick={onCancel}>
+                <IconButton onClick={onCancel}  style={{ color: '#eee' }}>
                     <CloseIcon />
                 </IconButton>
             </div>

@@ -9,7 +9,7 @@ interface Props extends FieldProps<Customer> {
     size?: string;
 }
 
-const AvatarField: FC<Props> = ({ record, size = '25', className }) =>
+const UserLogo: FC<Props> = ({ record, size = '25', className }) =>
     record ? (
         <Avatar
             src={`${API_URL}/${record.avatar}`}
@@ -18,4 +18,4 @@ const AvatarField: FC<Props> = ({ record, size = '25', className }) =>
         />
     ) : null;
 
-export default AvatarField;
+export default UserLogo;

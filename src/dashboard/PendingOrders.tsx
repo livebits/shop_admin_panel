@@ -45,7 +45,7 @@ const PendingOrders: FC<Props> = ({ orders = [], customers = {} }) => {
                     >
                         <ListItemAvatar>
                             {customers[record.customer.user.id] ? (
-                                <Avatar src={`${API_URL}/public/users/${customers[record.customer.user.id].avatar}`} />
+                                <Avatar src={`${API_URL}/${customers[record.customer.user.id].avatar}`} />
                             ) : (
                                 <Avatar />
                             )}
