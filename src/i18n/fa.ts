@@ -109,6 +109,7 @@ const customFarsiMessages: TranslationMessages = {
                 firstName: 'نام',
                 lastName: 'نام خانوادگی',
                 username: 'نام کاربری',
+                mobile: 'موبایل',
                 email: 'ایمیل',
                 status: 'وضعیت',
                 password: 'رمزعبور',
@@ -435,7 +436,7 @@ const customFarsiMessages: TranslationMessages = {
             fields: {
                 categoryId: 'دسته بندی',
                 name: 'نام',
-                secondName: 'نام دوم',
+                caption: 'عنوان',
                 thumbnail: 'عکس',
                 status: 'وضعیت',
                 brandId: 'برند',
@@ -568,6 +569,7 @@ const customFarsiMessages: TranslationMessages = {
         unique: {
             email: 'ایمیل تکراری می باشد',
             username: 'نام کاربری تکراری می باشد',
+            mobile: 'موبایل تکراری می باشد',
         },
     }
 };

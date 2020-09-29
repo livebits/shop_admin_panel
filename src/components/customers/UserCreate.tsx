@@ -28,6 +28,7 @@ const UserCreate = (props:any) => {
                 <TextInput source="firstName" validate={required()} />
                 <TextInput source="lastName" />
                 <TextInput source="username" validate={required()} />
+                <TextInput source="mobile" />
                 <PasswordInput source="password" validate={required()} />
                 <TextInput source="email" />
                 <SelectInput source="status" choices={[

@@ -98,7 +98,7 @@ const LoadedGridList: FC<GridProps> = ({ ids, data, basePath, width }) => {
                             title={data[id].name}
                             subtitle={
                                 <span>
-                                    {data[id].secondName}
+                                    {data[id].caption}
                                 </span>
                             }
                         />

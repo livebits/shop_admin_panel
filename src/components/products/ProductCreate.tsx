@@ -77,7 +77,7 @@ const ProductCreate: FC<CreateComponentProps> = props => {
                         validate={required()}
                     />
                     <TextInput
-                        source="secondName"
+                        source="caption"
                         fullWidth
                     />
 

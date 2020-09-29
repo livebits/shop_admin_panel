@@ -265,7 +265,7 @@ const ProductEdit: FC<EditComponentProps> = props => {
                         validate={required()}
                     />
                     <TextInput
-                        source="secondName"
+                        source="caption"
                         fullWidth
                     />
 

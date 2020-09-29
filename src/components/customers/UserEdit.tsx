@@ -183,6 +183,7 @@ const UserEdit = (props: any) => {
                 <TextInput source="firstName" validate={required()} />
                 <TextInput source="lastName" />
                 <TextInput source="username" validate={required()} />
+                <TextInput source="mobile" />
                 <TextInput source="email" />
                 <SelectInput source="status" choices={[
                     { id: 'active', name: 'pos.status.active' },
