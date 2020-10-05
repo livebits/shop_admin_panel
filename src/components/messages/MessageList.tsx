@@ -72,7 +72,7 @@ const MessageList = (props: any) => {
             />
             <FunctionField
                 source="receiver"
-                render={(record:any) => record.receiver ? `${record.receiver.user.firstName} ${record.receiver.user.lastName}` : ''}
+                render={(record:any) => record.receiver && record.receiver.user ? `${record.receiver.user.firstName} ${record.receiver.user.lastName}` : ''}
             />
             {
                 hasPermissions(permissions, [{ resource: 'user', action: 'update' }]) && 

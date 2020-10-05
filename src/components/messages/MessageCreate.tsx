@@ -16,7 +16,7 @@ import { hasPermissions } from '../../authProvider';
 import ACLError from '../../layout/ACLError';
 import { CustomDateInput } from '../commons/CustomDatePicker';
 
-const optionRenderer = (choice:any) => `${choice.firstName} ${choice.lastName}`;
+const optionRenderer = (choice:any) => `${choice.user.firstName} ${choice.user.lastName}`;
 
 const MessageCreate = (props:any) => {
     const { permissions } = usePermissions();
@@ -47,14 +47,14 @@ const MessageCreate = (props:any) => {
                         <ReferenceInput 
                             source="receiverId"
                             label="resources.messages.fields.receiver"
-                            reference="customers"
+                            reference="user-tenants"
                             validate={required()}
-                            filter={{ 'type||eq': 'customer' }}
-                            filterToQuery={(searchText:any) => (searchText ? { firstName: searchText, lastName: searchText } : {})}
+                            filter={{ 'user.type||eq': 'customer' }}
+                            filterToQuery={(searchText:any) => (searchText ? { 'user.firstName': searchText, 'user.lastName': searchText } : {})}
                         >
                             <AutocompleteInput
                                 optionText={optionRenderer}
-                                optionValue="userTenants[0].id"
+                                // optionValue="userTenants[0].id"
                             />
                         </ReferenceInput>
                     }
