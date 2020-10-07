@@ -370,7 +370,7 @@ const customFarsiMessages: TranslationMessages = {
                 maxPrice: 'حداکثر قیمت',
             },
             tabs: {
-                ordered: 'بررسی نشده',
+                ordered: 'در حال بررسی',
                 posted: 'ارسال شده',
                 delivered: 'تحویل شده',
                 cancelled: 'کنسل شده',
