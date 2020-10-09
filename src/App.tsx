@@ -36,6 +36,8 @@ import { UserPermissions } from './types';
 import fa from './i18n/fa';
 import tickets from './components/tickets';
 import banners from './components/banners';
+import transactions from './components/transactions';
+import onlinePayments from './components/onlinePayments';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'en') {
@@ -111,6 +113,8 @@ const App = () => {
                     <Resource name="categories" label="Categories" {...categories} />,
                     <Resource name="departments" label="Departments" {...departments} />,
                     <Resource name="discounts" label="Discounts" {...discounts} />,
+                    <Resource name="transactions" label="Transactions" {...transactions} />,
+                    <Resource name="online-payments" label="onlinePayments" {...onlinePayments} />,
                     <Resource name="messages" label="Messages" {...messages} />,
                     <Resource name="products" label="Products" {...products} />,
                     <Resource name="comments" {...reviews} />,

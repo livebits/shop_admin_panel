@@ -45,6 +45,7 @@ const customFarsiMessages: TranslationMessages = {
             products: 'محصولات',
             productComments: 'نظرات',
             orders: 'سفارشات',
+            financials: 'مالی',
         },
         status: {
             active: 'فعال',
@@ -96,6 +97,18 @@ const customFarsiMessages: TranslationMessages = {
             pending: 'بررسی نشده',
             checked: 'برسی شده',
         },
+        transactionType: {
+            increase_credit: 'افزایش حساب',
+            decrease_credit: 'برداشت از حساب',
+        },
+        transactionReason: {
+            order: 'سفارش',
+            charge: 'شارژ کیف پول',
+        },
+        paymentStatus: {
+            paid: 'پرداخت شده',
+            not_paid: 'پرداخت نشده',
+        },
         error: {
             aclError: 'دسترسی غیر مجاز',
         }
@@ -112,6 +125,7 @@ const customFarsiMessages: TranslationMessages = {
                 mobile: 'موبایل',
                 email: 'ایمیل',
                 status: 'وضعیت',
+                credit: 'اعتبار',
                 password: 'رمزعبور',
                 newPassword: ' رمزعبور جدید',
                 avatar: 'تصویر کاربر',
@@ -163,6 +177,50 @@ const customFarsiMessages: TranslationMessages = {
                 password_mismatch:
                 'رمزعبور و تکرار یکی نیستند.',
             },
+        },
+        transactions: {
+            name: 'تراکنش |||| تراکنش ها',
+            fields: {
+                id: 'کد',
+                createdAt: 'تاریخ ثبت',
+                customerId: 'مشتری',
+                customer: 'مشتری',
+                price: 'مقدار تراکنش',
+                type: 'نوع تراکنش',
+                reason: 'دلیل تراکنش',
+                relatedId: 'سفارش',
+                description: 'توضیحات',
+            },
+            filters: {
+            },
+            page: {
+                delete: 'حذف تراکنش',
+                add: 'ثبت تراکنش',
+            },
+            errors: {},
+        },
+        'online-payments': {
+            name: 'پرداخت |||| پرداخت ها',
+            fields: {
+                id: 'کد',
+                createdAt: 'تاریخ ثبت',
+                createdBy: 'نام کاربر',
+                amount: 'مقدار',
+                status: 'وضعیت',
+                gatewayStatus: 'پاسخ درگاه',
+                refNum: 'کد ارجاع',
+                resNum: '',
+                terminalId: '',
+                traceNo: '',
+                cartNo: 'شماره کارت',
+            },
+            filters: {
+            },
+            page: {
+                delete: 'حذف پرداختی',
+                add: 'ثبت پرداختی',
+            },
+            errors: {},
         },
         permissions: {
             name: 'مجوز |||| مجوزها',
@@ -348,6 +406,7 @@ const customFarsiMessages: TranslationMessages = {
                     productName: 'کالا',
                     unitPrice: 'قیمت',
                     quantity: 'تعداد',
+                    status: 'وضعیت پرداخت',
                     sum: 'جمع',
                     productsPrice: 'مبلغ کل کالاها',
                     discountPrice: 'تخفیف',

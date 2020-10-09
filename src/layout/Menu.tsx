@@ -28,8 +28,10 @@ import CardGiftcardRoundedIcon from '@material-ui/icons/CardGiftcardRounded';
 import ExtensionRoundedIcon from '@material-ui/icons/ExtensionRounded';
 import AnnouncementRoundedIcon from '@material-ui/icons/AnnouncementRounded';
 import PermIdentityRoundedIcon from '@material-ui/icons/PermIdentityRounded';
+import MonetizationOnRoundedIcon from '@material-ui/icons/MonetizationOnRounded';
+import LocalAtmRoundedIcon from '@material-ui/icons/LocalAtmRounded';
 
-type MenuName = 'menuManagers' | 'menuCustomers' | 'menuTenants' | 'menuRoles' | 'menuPermissions' | 'menuBrands' | 'menuBanners' | 'menuCategories' | 'menuDepartments' | 'menuDiscounts' | 'menuMessages' | 'menuTickets' | 'menuProducts' | 'menuProductComments' | 'menuOrders';
+type MenuName = 'menuManagers' | 'menuCustomers' | 'menuTenants' | 'menuRoles' | 'menuFinancials' | 'menuPermissions' | 'menuBrands' | 'menuBanners' | 'menuCategories' | 'menuDepartments' | 'menuDiscounts' | 'menuMessages' | 'menuTickets' | 'menuProducts' | 'menuProductComments' | 'menuOrders';
 
 interface Props {
     dense: boolean;
@@ -42,6 +44,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         menuManagers: false,
         menuCustomers: false,
         menuTenants: false,
+        menuFinancials: false,
         menuRoles: false,
         menuPermissions: false,
         menuBrands: false,
@@ -402,6 +405,43 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 sidebarIsOpen={open}
                 dense={dense}
             />
+            <SubMenu
+                handleToggle={() => handleToggle('menuFinancials')}
+                isOpen={state.menuFinancials}
+                sidebarIsOpen={open}
+                name="pos.menu.financials"
+                icon={<MonetizationOnRoundedIcon />}
+                dense={dense}
+            >
+                <MenuItemLink
+                    to={`/transactions`}
+                    primaryText={translate(`resources.transactions.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<MonetizationOnRoundedIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/transactions/create`}
+                    primaryText={translate(`resources.transactions.page.add`)}
+                    leftIcon={<AddCircleRoundedIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/online-payments`}
+                    primaryText={translate(`resources.online-payments.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<LocalAtmRoundedIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+            </SubMenu>
             <MenuItemLink
                 to={`/comments`}
                 primaryText={translate(`resources.comments.name`, {

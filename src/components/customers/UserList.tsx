@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { usePermissions, Datagrid, Filter, SearchInput, TextInput, TextField, EmailField, DateField, EditButton, List, FunctionField, DeleteButton, useTranslate, } from 'react-admin';
+import { usePermissions, Datagrid, Filter, SearchInput, TextInput, TextField, EmailField, NumberField, EditButton, List, FunctionField, DeleteButton, useTranslate, } from 'react-admin';
 import { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import { BulkDeleteButton } from 'react-admin';
@@ -87,6 +87,7 @@ const UserList = (props: any) => {
             <TextField source="lastName" />
             <TextField source="username" />
             <EmailField source="email" />
+            <NumberField source="credit" />
             <FunctionField
                 source="status"
                 render={(record:any) => record.status === 'active' ? translate('pos.status.active') : translate('pos.status.inactive')}

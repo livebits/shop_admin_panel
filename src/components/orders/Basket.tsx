@@ -150,6 +150,22 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                             })}
                         </TableCell>
                     </TableRow>
+                    <TableRow>
+                        <TableCell colSpan={2} />
+                        <TableCell className={classes.boldCell}>
+                            {translate(
+                                'resources.orders.fields.factor.status'
+                            )}
+                        </TableCell>
+                        <TableCell
+                            className={classnames(
+                                classes.boldCell,
+                                classes.rightAlignedCell
+                            )}
+                        >
+                            {record.factor && record.factor.status === 'paid' ? translate('pos.paymentStatus.paid') : translate('pos.paymentStatus.not_paid')}
+                        </TableCell>
+                    </TableRow>
                 </TableBody>
             </Table>
         </Paper>
