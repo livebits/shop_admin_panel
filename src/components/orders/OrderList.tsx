@@ -182,10 +182,10 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <NbItemsField />
                             <NumberField
                                 source="factor.orderPrice"
-                                options={{
-                                    style: 'currency',
-                                    currency: 'USD',
-                                }}
+                                // options={{
+                                //     style: 'currency',
+                                //     currency: 'USD',
+                                // }}
                                 className={classes.total}
                             />
                         </Datagrid>
@@ -205,10 +205,10 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <NbItemsField />
                             <NumberField
                                 source="factor.orderPrice"
-                                options={{
-                                    style: 'currency',
-                                    currency: 'USD',
-                                }}
+                                // options={{
+                                //     style: 'currency',
+                                //     currency: 'USD',
+                                // }}
                                 className={classes.total}
                             />
                             <TextField source="shipmentType" />
@@ -230,10 +230,10 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <NbItemsField />
                             <NumberField
                                 source="factor.orderPrice"
-                                options={{
-                                    style: 'currency',
-                                    currency: 'USD',
-                                }}
+                                // options={{
+                                //     style: 'currency',
+                                //     currency: 'USD',
+                                // }}
                                 className={classes.total}
                             />
                             <BooleanField source="returned" />

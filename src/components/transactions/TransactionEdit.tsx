@@ -59,7 +59,7 @@ const TransactionEdit = (props: any) => {
             <FormDataConsumer>
                 {
                     ({ formData, ...rest }: { formData: any }) => formData.reason === 'charge' &&
-                    <SelectInput disabled source="type" validate={required()} choices={[
+                    <SelectInput disabled source="type" label="resources.transactions.fields.type" validate={required()} choices={[
                         { id: 'increase_credit', name: translate('pos.transactionType.increase_credit') },
                         { id: 'decrease_credit', name: translate('pos.transactionType.decrease_credit') },
                     ]} />

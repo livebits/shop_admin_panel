@@ -68,10 +68,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                                     <TableCell
                                         className={classes.rightAlignedCell}
                                     >
-                                        {item.productPrice.price.toLocaleString(undefined, {
-                                            style: 'currency',
-                                            currency: 'USD',
-                                        })}
+                                        {item.productPrice.price}
                                     </TableCell>
                                     <TableCell
                                         className={classes.rightAlignedCell}
@@ -84,10 +81,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                                         {(
                                             item.productPrice.price *
                                             item.quantity
-                                        ).toLocaleString(undefined, {
-                                            style: 'currency',
-                                            currency: 'USD',
-                                        })}
+                                        )}
                                     </TableCell>
                                 </TableRow>
                             )
@@ -100,10 +94,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                             )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {record.factor && record.factor.orderPrice.toLocaleString(undefined, {
-                                style: 'currency',
-                                currency: 'USD',
-                            })}
+                            {record.factor && record.factor.orderPrice}
                         </TableCell>
                     </TableRow>
                     <TableRow>
@@ -114,10 +105,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                             )}
                         </TableCell>
                         <TableCell className={classes.rightAlignedCell}>
-                            {record.factor && record.factor.deliveryPrice.toLocaleString(undefined, {
-                                style: 'currency',
-                                currency: 'USD',
-                            })}
+                            {record.factor && record.factor.deliveryPrice}
                         </TableCell>
                     </TableRow>
                     <TableRow>
@@ -144,10 +132,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                                 classes.rightAlignedCell
                             )}
                         >
-                            {record.factor && record.factor.orderPrice.toLocaleString(undefined, {
-                                style: 'currency',
-                                currency: 'USD',
-                            })}
+                            {record.factor && record.factor.orderPrice}
                         </TableCell>
                     </TableRow>
                     <TableRow>

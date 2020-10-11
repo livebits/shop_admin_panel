@@ -66,7 +66,7 @@ const Dashboard: FC = () => {
         aMonthAgo.setDate(aMonthAgo.getDate() - 30);
         try {
             const { data: recentOrders } = await dataProvider.getList('orders', {
-                filter: { 'createdAt||gte': aMonthAgo.toISOString() },
+                filter: { 'createdAt||gte': aMonthAgo.toISOString(), status: 'ordered' },
                 sort: { field: 'createdAt', order: 'DESC' },
                 pagination: { page: 1, perPage: 50 },
             });
@@ -93,12 +93,7 @@ const Dashboard: FC = () => {
             setState(state => ({
                 ...state,
                 recentOrders,
-                revenue: aggregations.revenue.toLocaleString(undefined, {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                }),
+                revenue: aggregations.revenue,
                 nbNewOrders: aggregations.nbNewOrders,
                 pendingOrders: aggregations.pendingOrders,
             }));

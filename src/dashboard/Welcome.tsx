@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate } from 'react-admin';
 
 import backgroundImage from './welcome_bg.png';
-import publishArticleImage from './welcome_illustration.png';
+import publishArticleImage from './logo_cart.png';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '1em',
     },
     media: {
-        background: `url(${publishArticleImage}) top right / cover`,
+        background: `url(${publishArticleImage}) top center / cover`,
         marginLeft: 'auto',
     },
     actions: {
@@ -59,7 +59,7 @@ const Welcome: FC = () => {
                     width="450px"
                     overflow="hidden"
                 >
-                    <Box height="9em" width="450px" className={classes.media} />
+                    <Box height="11em" width="400px" className={classes.media} />
                 </Box>
             </Box>
         </Card>
