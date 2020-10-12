@@ -188,6 +188,10 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                                 // }}
                                 className={classes.total}
                             />
+                            <FunctionField
+                                source="shipmentType"
+                                render={(record:any) => translate(`pos.orderShipmentType.${record.shipmentType}`)}
+                            />
                         </Datagrid>
                     )}
                     {filterValues['status||eq'] === 'delivered' && (
@@ -211,7 +215,10 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                                 // }}
                                 className={classes.total}
                             />
-                            <TextField source="shipmentType" />
+                            <FunctionField
+                                source="shipmentType"
+                                render={(record:any) => translate(`pos.orderShipmentType.${record.shipmentType}`)}
+                            />
                             <BooleanField source="returned" />
                         </Datagrid>
                     )}

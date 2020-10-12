@@ -11,9 +11,15 @@ import Paper from '@material-ui/core/Paper';
 import { Link, useTranslate, useQueryWithStore } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 import { FieldProps, AppState, Order, Product } from '../../types';
+var moment = require('moment-jalaali');
+
+const castDateToJalali = (date:any) => {
+    return (date != null && (typeof date === 'string')) ? `${moment.utc(date, 'YYYY-M-D H:m').local().format('jYYYY/jMM/jDD HH:mm', 'fa')}` : ''
+};
 
 const useStyles = makeStyles({
     container: { minWidth: '35em', marginLeft: '1em' },
+    logContainer: { minWidth: '28em', marginLeft: '1em' },
     rightAlignedCell: { textAlign: 'right' },
     boldCell: { fontWeight: 'bold' },
 });
@@ -25,6 +31,7 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
     if (!record) return null;
 
     return (
+        <>
         <Paper className={classes.container} elevation={2}>
             <Table>
                 <TableHead>
@@ -154,6 +161,43 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
                 </TableBody>
             </Table>
         </Paper>
+        <Paper className={classes.logContainer} elevation={2}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell className={classnames(classes.boldCell)} >
+                            {translate(
+                                'resources.orders.fields.action'
+                            )}
+                        </TableCell>
+                        <TableCell className={classnames(classes.rightAlignedCell, classes.boldCell)}>
+                            {translate(
+                                'resources.orders.fields.doneDate'
+                            )}
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {record.logs.map(
+                        (item: any) =>
+                            <TableRow key={item.id}>
+                                <TableCell>
+                                    {translate(
+                                        `pos.orderLogStatus.${item.status}`
+                                    )}
+                                </TableCell>
+                                <TableCell
+                                    className={classes.rightAlignedCell}
+                                >
+                                    {castDateToJalali(item.createdAt)}
+                                </TableCell>
+                                
+                            </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+        </Paper>
+        </>
     );
 };
 

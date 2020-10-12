@@ -32,6 +32,7 @@ const NewCustomers = () => {
             filter: {
                 // has_ordered: true,
                 'createdAt||gte': aMonthAgo.toISOString(),
+                'type||eq': 'customer',
             },
             sort: { field: 'createdAt', order: 'DESC' },
             pagination: { page: 1, perPage: 100 },

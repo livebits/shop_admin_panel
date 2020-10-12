@@ -66,7 +66,7 @@ const Dashboard: FC = () => {
         aMonthAgo.setDate(aMonthAgo.getDate() - 30);
         try {
             const { data: recentOrders } = await dataProvider.getList('orders', {
-                filter: { 'createdAt||gte': aMonthAgo.toISOString(), status: 'ordered' },
+                filter: { 'createdAt||gte': aMonthAgo.toISOString(), 'status||in': ['ordered', 'pending'] },
                 sort: { field: 'createdAt', order: 'DESC' },
                 pagination: { page: 1, perPage: 50 },
             });

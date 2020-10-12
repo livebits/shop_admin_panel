@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 var moment = require('moment-jalaali');
 
 const castDateToJalali = (date:any) => {
-    return (date != null && (typeof date === 'string')) ? `${moment.utc(date, 'YYYY-M-D H:m').local().format('jYYYY/jMM/jDD H:m', 'fa')}` : ''
+    return (date != null && (typeof date === 'string')) ? `${moment.utc(date, 'YYYY-M-D H:m').local().format('jYYYY/jMM/jDD HH:mm', 'fa')}` : ''
 };
 
 const useStyles = makeStyles(theme => ({

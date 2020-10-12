@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     AutocompleteInput,
     BooleanInput,
-    DateInput,
+    TextInput,
     Edit,
     ReferenceInput,
     SelectInput,
@@ -125,6 +125,27 @@ const OrderEdit: FC<EditComponentProps> = props => {
                     ]}
                 />
                 <BooleanInput source="returned" />
+                <SelectInput
+                    source="paymentType"
+                    label="resources.orders.fields.paymentType"
+                    choices={[
+                        { id: 'online', name: translate('pos.orderPaymentType.online') },
+                        { id: 'cash', name: translate('pos.orderPaymentType.cash') },
+                        { id: 'card', name: translate('pos.orderPaymentType.card') },
+                    ]}
+                />
+                <SelectInput
+                    source="shipmentType"
+                    label="resources.orders.fields.shipmentType"
+                    choices={[
+                        { id: 'express', name: translate('pos.orderShipmentType.express') },
+                        { id: 'custom_post', name: translate('pos.orderShipmentType.custom_post') },
+                        { id: 'courier', name: translate('pos.orderShipmentType.courier') },
+                        { id: 'alopeik', name: translate('pos.orderShipmentType.alopeik') },
+                        { id: 'tipax', name: translate('pos.orderShipmentType.tipax') },
+                    ]}
+                />
+                <TextInput fullWidth multiline source="description" />
 
                 <Divider variant="fullWidth" style={{width: 'auto'}} />
 
