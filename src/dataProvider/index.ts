@@ -180,16 +180,7 @@ export default (apiUrl: any, httpClient = reactAdmin.fetchUtils.fetchJson) => {
   const convertHTTPErrorToDataProvider = (error:any, type:any, resource:string, params:any) => {
       // const { headers, json } = response;
 
-      console.log('convertHTTPErrorToDataProvider: ', error.error);
-
-      let errors = "";
-      // if (error !== undefined && error !== null) {
-
-      //     errors = parseErrors(error);
-      // } else {
-      //     errors = "خطای سرور رخ داده است";
-      // }
-      return Promise.reject({ message: errors });
+      return Promise.reject({ message: `error.${error.message}` });
   };
 
   //helper funcs
@@ -278,6 +269,6 @@ console.log('TYPE: ', type, ' RESOURCE: ', resource, ' PARAMS: ', params);
     return httpClient(url, options).then(
       (response:any) => convertHTTPResponse(response, type, resource, params),
     )
-    // .catch((error:any) => convertHTTPErrorToDataProvider(error, type, resource, params));
+    .catch((error:any) => convertHTTPErrorToDataProvider(error, type, resource, params));
   };
 };

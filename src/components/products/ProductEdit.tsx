@@ -360,8 +360,8 @@ const ProductEdit: FC<EditComponentProps> = props => {
                             <ColorInput source="color" variant="filled" label="resources.products.fields.priceFields.color" validate={required()} />
                             <NumberInput source="quantity" label="resources.products.fields.priceFields.quantity" validate={required()} />
                             <NumberInput source="price" label="resources.products.fields.priceFields.price" validate={required()} />
-                            <NumberInput source="offPercent" label="resources.products.fields.priceFields.offPercent" />
-                            <NumberInput source="offPrice" label="resources.products.fields.priceFields.offPrice" />
+                            {/* <NumberInput source="offPercent" label="resources.products.fields.priceFields.offPercent" />
+                            <NumberInput source="offPrice" label="resources.products.fields.priceFields.offPrice" /> */}
                             <SelectInput source="status" label="resources.products.fields.priceFields.status" 
                                 validate={required()}
                                 choices={[

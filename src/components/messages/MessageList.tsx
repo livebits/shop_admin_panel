@@ -75,11 +75,11 @@ const MessageList = (props: any) => {
                 render={(record:any) => record.receiver && record.receiver.user ? `${record.receiver.user.firstName} ${record.receiver.user.lastName}` : ''}
             />
             {
-                hasPermissions(permissions, [{ resource: 'user', action: 'update' }]) && 
+                hasPermissions(permissions, [{ resource: 'message', action: 'update' }]) && 
                 <EditButton />
             } 
             {
-                hasPermissions(permissions, [{ resource: 'user', action: 'delete' }]) && 
+                hasPermissions(permissions, [{ resource: 'message', action: 'delete' }]) && 
                 <DeleteButton />
             }
         </Datagrid>

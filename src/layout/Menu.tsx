@@ -394,6 +394,25 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
+
+                <MenuItemLink
+                    to={`/product-offers`}
+                    primaryText={translate(`resources.product-offers.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<CardGiftcardRoundedIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/product-offers/create`}
+                    primaryText={translate(`resources.product-offers.add`)}
+                    leftIcon={<AddCircleRoundedIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
             </SubMenu>
             <MenuItemLink
                 to={`/orders`}

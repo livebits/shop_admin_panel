@@ -344,6 +344,29 @@ const customFarsiMessages: TranslationMessages = {
             errors: {
             },
         },
+        'product-offers': {
+            name: 'محصول ویژه |||| محصولات ویژه',
+            add: 'ثبت محصول ویژه',
+            fields: {
+                id: 'کد',
+                createdAt: 'تاریخ ثبت',
+                expireAt: 'تاریخ انقضا',
+                productId: 'کالا',
+                product: 'کالا',
+                productPriceId: 'رنگ (قیمت)',
+                productPrice: 'رنگ (قیمت)',
+                discountPercent: 'درصد تخفیف',
+                discountPrice: 'مبلغ با تخفیف',
+                totalQuantity: 'تعداد کل',
+                remainQuantity: 'تعداد باقی مانده',
+            },
+            filters: {
+            },
+            page: {
+            },
+            errors: {
+            },
+        },
         'user-addresses': {
             name: 'آدرس مشتری |||| آدرس های مشتری',
             fields: {
@@ -655,6 +678,7 @@ const customFarsiMessages: TranslationMessages = {
             username: 'نام کاربری تکراری می باشد',
             mobile: 'موبایل تکراری می باشد',
         },
+        duplicate_product_offer: 'این مورد قبلا اضافه شده است'
     }
 };
 

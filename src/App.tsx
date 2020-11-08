@@ -38,6 +38,7 @@ import tickets from './components/tickets';
 import banners from './components/banners';
 import transactions from './components/transactions';
 import onlinePayments from './components/onlinePayments';
+import productOffers from './components/productOffers';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'en') {
@@ -117,6 +118,7 @@ const App = () => {
                     <Resource name="online-payments" label="onlinePayments" {...onlinePayments} />,
                     <Resource name="messages" label="Messages" {...messages} />,
                     <Resource name="products" label="Products" {...products} />,
+                    <Resource name="product-offers" label="ProductsOffers" {...productOffers} />,
                     <Resource name="comments" {...reviews} />,
                     <Resource
                         name="orders"
@@ -125,6 +127,7 @@ const App = () => {
                     />,
                     <Resource name="user-addresses"/>,
                     <Resource name="category-fields" />,
+                    <Resource name="product-prices" />,
                     <Resource name="user-tenants" />,
                 ]}
                 
