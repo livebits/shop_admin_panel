@@ -95,6 +95,7 @@ const CategoryCreate = (props:any) => {
                             }
                         </FormDataConsumer>
                         <BooleanInput source="showInFilter"/>
+                        <BooleanInput source="isProperty" />
                         {/* <TextInput source="defaultValue"/> */}
                         {/* <BooleanInput source="isRequired"/> */}
                     </SimpleFormIterator>

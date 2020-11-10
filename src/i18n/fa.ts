@@ -400,7 +400,8 @@ const customFarsiMessages: TranslationMessages = {
                 isRequired: 'اجباری؟',
                 min: 'حداقل',
                 max: 'حداکثر',
-                showInFilter: 'نمایش در فیلتر',
+                showInFilter: 'نمایش در فیلتر؟',
+                isProperty: 'نمایش در ویژگی ها؟',
                 options: 'گزینه ها (در هر سطر یک مورد وارد کنید)',
             },
             filters: {

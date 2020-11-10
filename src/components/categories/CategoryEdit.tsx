@@ -173,6 +173,7 @@ const CategoryEdit = (props: any) => {
                         }
                     </FormDataConsumer>
                     <BooleanInput source="showInFilter"/>
+                    <BooleanInput source="isProperty" />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>

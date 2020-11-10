@@ -92,11 +92,13 @@ const ProductEdit: FC<EditComponentProps> = props => {
                 if (productCatField) {
                     catFields.push({
                         categoryFieldId: catFieldId,
+                        productId: id,
                         id: productCatField.id,
                         value: data[element],
                     })
                 } else {
                     catFields.push({
+                        productId: id,
                         categoryFieldId: catFieldId,
                         value: data[element],
                     })
