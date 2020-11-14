@@ -47,7 +47,7 @@ const ProductOfferEdit = (props: any) => {
                 disabled
                 validate={required()}
                 // filter={{ 'user.type||eq': 'customer' }}
-                filterToQuery={(searchText:any) => (searchText ? { 'user.name': searchText, 'user.caption': searchText } : {})}
+                filterToQuery={(searchText:any) => (searchText ? { 'name': searchText } : {})}
             >
                 <AutocompleteInput
                     optionText={optionRenderer}
