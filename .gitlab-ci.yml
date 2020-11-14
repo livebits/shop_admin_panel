@@ -1,3 +1,8 @@
+image: node:latest
+
+before_script:
+  - npm i yarn
+
 stages:
   - Build
   - Test
@@ -9,24 +14,27 @@ before_script:
 
 build:
   stage: Build
-  image: 'node:lts'
   before_script:
     - yarn install
   script:
-    - yarn run build
+    - yarn build
+  tags:
+    - build
 
 test:
   stage: Test
-  image: 'node:lts'
   before_script:
     - yarn install
   script:
     - yarn analyze
+  tags:
+    - test
 
 deploy:
   stage: Deploy
-  image: 'node:lts'
   before_script:
     - yarn install
   script:
     - yarn start
+  tags:
+    - deploy
