@@ -12,6 +12,10 @@ before_script:
   - echo "starting...""
   - node -v
 
+cache:
+  paths:
+    - node_modules/
+
 build:
   stage: Build
   before_script:
@@ -29,12 +33,3 @@ test:
     - yarn analyze
   tags:
     - test
-
-deploy:
-  stage: Deploy
-  before_script:
-    - yarn install
-  script:
-    - yarn start
-  tags:
-    - deploy

@@ -479,6 +479,7 @@ const customFarsiMessages: TranslationMessages = {
             },
             tabs: {
                 ordered: 'در حال بررسی',
+                ready_to_send: 'آماده ارسال',
                 posted: 'ارسال شده',
                 delivered: 'تحویل شده',
                 cancelled: 'کنسل شده',

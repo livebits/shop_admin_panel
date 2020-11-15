@@ -76,7 +76,8 @@ const useDatagridStyles = makeStyles({
 });
 
 const tabs = [
-    { id: 'ordered', name: 'resources.orders.tabs.ordered' },
+    { id: 'ordered,pending,accepted', name: 'resources.orders.tabs.ordered' },
+    { id: 'ready_to_send', name: 'resources.orders.tabs.ready_to_send' },
     { id: 'posted', name: 'resources.orders.tabs.posted' },
     { id: 'delivered', name: 'resources.orders.tabs.delivered' },
     { id: 'cancelled', name: 'resources.orders.tabs.cancelled' },
@@ -98,16 +99,20 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
         theme.breakpoints.down('xs')
     );
     const [ordered, setOrdered] = useState<Identifier[]>([]);
+    const [readyToSend, setReadyToSend] = useState<Identifier[]>([]);
     const [posted, setPosted] = useState<Identifier[]>([]);
     const [delivered, setDelivered] = useState<Identifier[]>([]);
     const [cancelled, setCancelled] = useState<Identifier[]>([]);
 
-    useEffect(() => {
-        let filterStatus = filterValues.status ? filterValues.status : filterValues['status||eq']
+    useEffect(() => {        
+        let filterStatus = filterValues.status ? filterValues.status : filterValues['status||in']
         if (ids && ids !== filterStatus) {
             switch (filterStatus) {
-                case 'ordered':
+                case 'ordered,pending,accepted':
                     setOrdered(ids);
+                    break;
+                case 'ready_to_send':
+                    setReadyToSend(ids);
                     break;
                 case 'posted':
                     setPosted(ids);
@@ -120,25 +125,29 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                     break;
             }
         }
-    }, [ids, filterValues['status||eq']]);
+    }, [ids, filterValues['status||in']]);
 
     const handleChange = useCallback(
         (event: React.ChangeEvent<{}>, value: any) => {
+            // if (value === 'ordered') {
+            //     value = 'ordered,pending,accepted,ready_to_send'
+            // }
+            
             setFilters &&
                 setFilters(
-                    { ...filterValues, 'status||eq': value },
-                    `${displayedFilters}||eq`
+                    { ...filterValues, 'status||in': value },
+                    `${displayedFilters}||in`
                 );
         },
-        [`${displayedFilters}||eq`, filterValues, setFilters]
+        [`${displayedFilters}||in`, filterValues, setFilters]
     );
 
     const selectedIds =
-        filterValues['status||eq'] === 'ordered'
+        filterValues['status||in'] === 'ordered,pending,accepted,ready_to_send'
             ? ordered
-            : filterValues['status||eq'] === 'posted'
+            : filterValues['status||in'] === 'posted'
             ? posted
-            : filterValues['status||eq'] === 'delivered'
+            : filterValues['status||in'] === 'delivered'
             ? delivered
             : cancelled;
 
@@ -147,7 +156,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
             <Tabs
                 variant="fullWidth"
                 centered
-                value={filterValues['status||eq']}
+                value={filterValues['status||in']}
                 indicatorColor="primary"
                 onChange={handleChange}
             >
@@ -162,10 +171,10 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
             <Divider />
             {
                 <div>
-                    {(filterValues['status||eq'] === 'ordered' || filterValues['status||eq'] === 'posted') && (
+                    {(filterValues['status||in'] === 'ordered,pending,accepted' || filterValues['status||in'] === 'ready_to_send' || filterValues['status||in'] === 'posted') && (
                         <Datagrid
                             {...rest}
-                            ids={filterValues['status||eq'] === 'ordered' ? ordered : posted}
+                            ids={filterValues['status||in'] === 'ordered,pending,accepted' ? ordered : filterValues['status||in'] === 'ready_to_send' ? readyToSend : posted}
                             optimized
                             rowClick="edit"
                         >
@@ -194,7 +203,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             />
                         </Datagrid>
                     )}
-                    {filterValues['status||eq'] === 'delivered' && (
+                    {filterValues['status||in'] === 'delivered' && (
                         <Datagrid {...rest} ids={delivered} rowClick="edit">
                             {/* <DateField source="createdAt" showTime /> */}
                             <FunctionField
@@ -222,7 +231,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = ({
                             <BooleanField source="returned" />
                         </Datagrid>
                     )}
-                    {filterValues['status||eq'] === 'cancelled' && (
+                    {filterValues['status||in'] === 'cancelled' && (
                         <Datagrid {...rest} ids={cancelled} rowClick="edit">
                             {/* <DateField source="createdAt" showTime /> */}
                             <FunctionField
@@ -261,7 +270,7 @@ const OrderList: FC<ListComponentProps> = props => {
 
     return <List
         {...props}
-        filterDefaultValues={{ 'status||eq': 'ordered' }}
+        filterDefaultValues={{ 'status||in': 'ordered,pending,accepted' }}
         sort={{ field: 'id', order: 'DESC' }}
         perPage={25}
         filters={<OrderFilter />}
