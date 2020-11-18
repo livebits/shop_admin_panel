@@ -5,9 +5,10 @@ import {
     ReferenceInput,
     SelectInput,
     FormDataConsumer,
-    ArrayInput,
+    BooleanInput,
     DateInput,
     SimpleFormIterator,
+    useTranslate,
     TextInput,
 } from 'react-admin';
 import { Query, Loading, LinearProgress, Error } from 'react-admin';
@@ -15,6 +16,7 @@ import { CustomDateInput } from '../commons/CustomDatePicker';
 
 export const ProductCategoryFields = ({ formData, ...rest }: { formData: any }) => {    
     const form = useForm();
+    const translate = useTranslate();
     const payload = {
         pagination: { page: 1, perPage: 1000 },
         sort: { field: 'priority', order: 'ASC' },
@@ -44,6 +46,20 @@ export const ProductCategoryFields = ({ formData, ...rest }: { formData: any }) 
                             source={'cf_' + item.id + "_" + item.categoryId} 
                             label={item.name} 
                             placeholder={item.defaultValue}
+                        />
+                    </div>
+                case 'boolean':
+                    return <div>
+                        <SelectInput 
+                            style={{width: 256}}
+                            key={index}
+                            source={'cf_' + item.id + "_" + item.categoryId}
+                            label={item.name}
+                            placeholder={item.defaultValue}
+                            choices={[
+                                { id: '1', name: translate('pos.booleanValues.true') },
+                                { id: '0', name: translate('pos.booleanValues.false') },
+                            ]} 
                         />
                     </div>
                 case 'option':

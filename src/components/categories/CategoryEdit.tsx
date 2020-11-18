@@ -135,9 +135,10 @@ const CategoryEdit = (props: any) => {
                     <TextInput source="hint" fullWidth/>
                     <SelectInput validate={required()} source="dataType" choices={[
                         { id: 'number', name: 'pos.dataType.number' },
+                        { id: 'boolean', name: 'pos.dataType.boolean' },
                         { id: 'string', name: 'pos.dataType.string' },
                         { id: 'text', name: 'pos.dataType.text' },
-                        { id: 'date', name: 'pos.dataType.date' },
+                        // { id: 'date', name: 'pos.dataType.date' },
                         { id: 'option', name: 'pos.dataType.option' },
                     ]} />
                     

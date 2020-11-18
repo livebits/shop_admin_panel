@@ -119,6 +119,7 @@ const ProductEdit: FC<EditComponentProps> = props => {
         delete requestBody.thumbnail;
         delete requestBody.attachments;
         delete requestBody.updatedAt;
+        delete requestBody.similars;
 
         return requestBody;
     };

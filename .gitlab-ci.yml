@@ -6,10 +6,10 @@ before_script:
 stages:
   - Build
   - Test
-  - Deploy
+  # - Deploy
 
 before_script:
-  - echo "starting...""
+  - echo "starting..."
   - node -v
 
 cache:
@@ -19,17 +19,21 @@ cache:
 build:
   stage: Build
   before_script:
-    - yarn install
-  script:
-    - yarn build
+    - echo "-------------- Building  -----------------"
+  # before_script:
+  #   - yarn install
+  # script:
+  #   - yarn build
   tags:
     - build
 
 test:
   stage: Test
   before_script:
-    - yarn install
-  script:
-    - yarn analyze
+    - echo "-------------- Testing  -----------------"
+  # before_script:
+  #   - yarn install
+  # script:
+  #   - yarn analyze
   tags:
     - test

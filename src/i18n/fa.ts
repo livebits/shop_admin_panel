@@ -53,10 +53,15 @@ const customFarsiMessages: TranslationMessages = {
         },
         dataType: {
             number: 'عددی',
+            boolean: 'سوئيچ',
             string: 'متنی',
             text: 'رشته ای',
             date: 'تاریخ',
             option: 'انتخابی',
+        },
+        booleanValues: {
+            true: 'بله',
+            false: 'خیر',
         },
         discountType: {
             percent: 'درصدی',
